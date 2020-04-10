@@ -1,0 +1,56 @@
+nav {
+  margin: 0px;
+  opacity: 40%;
+  position: absolute;
+  top: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  height: $navbar-height;
+  border-bottom: 1px solid white;
+  .navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  ul {
+    form {
+      background-color: white;
+      border-radius: 10px;
+      input {
+        border-radius: 10px;
+        padding-left: 10px;
+        border: none;
+        height: 32px;
+        width: 200px;
+      }
+      input:focus {
+        outline: none;
+      }
+      i {
+        background-color: white;
+        padding: 7px;
+        border: 0px;
+      }
+      button {
+        background-color: white;
+      }
+    }
+  }
+  .btn {
+    border-radius: 10px;
+  }
+  #upload-link {
+    color: $text-on-white-button;
+    text-decoration: none;
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  font-size: 1.35rem;
+  margin: 0;
+}

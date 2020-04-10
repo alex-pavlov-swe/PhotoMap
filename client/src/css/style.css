@@ -1,0 +1,147 @@
+@import 'config.css';
+
+html {
+  font-size: 1rem;
+  font-family: sans-serif;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Segoe UI Symbol';
+  min-height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'sans-serif';
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.profile-top {
+  color: white;
+  border-radius: 10%;
+}
+
+.profile-social-icon {
+  color: white;
+}
+
+.profile-social-icon :hover {
+  color: #707070;
+}
+
+.round-img {
+  border-radius: 50%;
+}
+
+.home {
+  position: relative;
+  background: url('../img/home5.jpg') no-repeat center center/cover;
+  height: 100vh;
+  margin: 0;
+}
+
+ul.main_page_choice_buttons {
+  list-style-type: none;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'sans-serif';
+}
+
+ul.main_page_choice_buttons .btn-home {
+  width: 400px;
+  font-size: 1.5rem;
+  margin: 5px;
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Segoe UI Symbol';
+}
+
+ul.main_page_choice_buttons {
+  margin: 10px;
+}
+
+i {
+  margin: 5px;
+}
+
+.app_header {
+  color: #eee;
+}
+
+form.create-profile,
+form.edit-profile {
+  width: 100%;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid #bbbbbb;
+}
+
+.alert {
+  background-color: green;
+  color: black;
+  font-size: 1em;
+}
+
+.alert-danger {
+  background-color: red;
+}
+
+.border {
+  border: 1px solid black;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.full-page {
+  min-height: 100vh;
+}
+
+.avatar-input {
+  visibility: hidden;
+  width: 10px;
+}
+
+.nav-item-lang-rus {
+  width: 25px;
+}
+
+.nav-item-lang-dash {
+  width: 10px;
+}
+
+.nav-item-lang-eng {
+  width: 35px;
+}
+
+.nav-item-lang-rus,
+.nav-item-lang-eng :hover {
+  cursor: pointer;
+}
+
+.before_choice_buttons {
+  height: 50px;
+}
