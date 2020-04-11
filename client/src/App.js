@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
 import Home from './components/layout/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -24,6 +23,7 @@ import { loadUser } from './actions/auth';
 import Map from './components/map/Map';
 import Upload from './components/upload/Upload';
 import UploadDetails from './components/upload/UploadDetails';
+import Feed from './components/feed/Feed';
 
 function App() {
   useEffect(() => {
@@ -43,6 +43,7 @@ function App() {
           <Route exact path="/profile/:id" component={Profile} />
           <Route exact path="/profile/review/:id" component={Review} />
           <Route exact path="/map" component={Map} />
+          <Route exact path="/feed" component={Feed} />
           <PrivateRoute exact path="/upload" component={Upload} />
           <PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
@@ -58,7 +59,6 @@ function App() {
             component={CreateCompany}
           />
         </Switch>
-        <Footer />
       </Router>
     </Provider>
   );
