@@ -1,12 +1,11 @@
 import {
-  GET_PHOTOS,
-  GET_PHOTOS_ERROR,
-  LOADING_COMPLETED,
-  CLEAR_FEED,
+  GET_CURRENT_PHOTO,
+  CURRENT_PHOTO_ERROR,
+  DELETE_PHOTO,
 } from '../actions/types';
 
 const initialState = {
-  photos: null,
+  photo: null,
   loading: true,
   error: {},
 };
@@ -15,26 +14,16 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_PHOTOS:
+    case GET_CURRENT_PHOTO:
       return {
         ...state,
-        photos: payload,
-      };
-    case LOADING_COMPLETED:
-      return {
-        ...state,
+        photo: payload,
         loading: false,
       };
-    case GET_PHOTOS_ERROR:
+    case CURRENT_PHOTO_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false,
-      };
-    case CLEAR_FEED:
-      return {
-        ...state,
-        photos: null,
         loading: false,
       };
     default:

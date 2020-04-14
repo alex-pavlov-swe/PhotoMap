@@ -8,6 +8,7 @@ import reviews from './reviews';
 // PHOTOMAP
 import photoUpload from './photoUpload';
 import photoScroll from './photoScroll';
+import currentPhoto from './currentPhoto';
 
 export default combineReducers({
   alert,
@@ -18,4 +19,5 @@ export default combineReducers({
   reviews,
   photoUpload,
   photoScroll,
+  currentPhoto,
 });

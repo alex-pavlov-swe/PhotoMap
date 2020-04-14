@@ -10,6 +10,7 @@ const PhotoSchema = new Schema({
     type: String,
     required: true,
   },
+  userName: String,
   title: String,
   description: String,
   camera: String,

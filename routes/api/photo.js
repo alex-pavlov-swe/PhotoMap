@@ -5,6 +5,19 @@ const Photo = require('../../models/Photo');
 const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
 
+// @route get api/photo/:id
+// @desc get selected photo
+// @access Public
+router.get('/:id', async (req, res) => {
+  try {
+    const photo = await Photo.find({ _id: req.params.id });
+    res.json(photo);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route get api/photo
 // @desc get photos for an infinite scroll
 // @access Public
@@ -34,6 +47,9 @@ router.post(
 
     const {
       url,
+      imageName,
+      name,
+      avatar,
       title,
       description,
       camera,
@@ -49,6 +65,9 @@ router.post(
     photoFields.user = req.user.id;
 
     if (url) photoFields.url = url;
+    if (imageName) photoFields.imageName = imageName;
+    if (name) photoFields.name = name;
+    if (avatar) photoFields.avatar = avatar;
     if (title) photoFields.title = title;
     if (description) photoFields.description = description;
     if (camera) photoFields.camera = camera;
@@ -82,5 +101,25 @@ router.post(
     }
   }
 );
+
+// @route   DELETE api/photo/:id
+// @desc    Delete a photo
+// @access  Private
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    photo = await Photo.findById(req.params.id);
+
+    if (photo.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User is not authorized' });
+    }
+
+    await photo.remove();
+
+    res.json({ msg: 'The photo has been removed' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+});
 
 module.exports = router;

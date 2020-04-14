@@ -24,6 +24,7 @@ import Map from './components/map/Map';
 import Upload from './components/upload/Upload';
 import UploadDetails from './components/upload/UploadDetails';
 import Feed from './components/feed/Feed';
+import ShowPhoto from './components/photo/ShowPhoto';
 
 function App() {
   useEffect(() => {
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/profile/review/:id" component={Review} />
           <Route exact path="/map" component={Map} />
           <Route exact path="/feed" component={Feed} />
+          <Route exact path="/photo/:id" component={ShowPhoto} />
           <PrivateRoute exact path="/upload" component={Upload} />
           <PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />

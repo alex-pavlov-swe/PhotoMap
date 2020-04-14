@@ -7,17 +7,17 @@ import { Redirect, Link } from 'react-router-dom';
 function Login({ login, isAuthenticated, lang: { lang } }) {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const { email, password } = formData;
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     login({ email, password });
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -30,7 +30,7 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
     <Fragment>
       <div className="row mt-4 mb-2 login-container full-page">
         <div className="col-md-6 offset-md-3 col-sm-12">
-          <form className="form" onSubmit={e => onSubmit(e)}>
+          <form className="form" onSubmit={(e) => onSubmit(e)}>
             <h3>
               <i className="fas fa-user" />
               {lang === 'rus' ? 'Войти в аккаунт' : 'Log in'}
@@ -41,7 +41,7 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
                 type="text"
                 name="email"
                 value={email}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 placeholder={
                   lang === 'rus' ? 'Введите e-mail' : 'Enter your email'
@@ -56,7 +56,7 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
                 type="text"
                 name="password"
                 value={password}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 placeholder={
                   lang === 'rus' ? 'Введите пароль' : 'Enter your password'
@@ -97,12 +97,12 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
 Login.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  language: PropTypes.object.isRequired
+  language: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  lang: state.lang
+  lang: state.lang,
 });
 
 export default connect(mapStateToProps, { login })(Login);

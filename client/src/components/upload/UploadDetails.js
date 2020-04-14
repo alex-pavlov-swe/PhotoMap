@@ -8,12 +8,14 @@ import Spinner from '../layout/Spinner';
 const UploadDetails = ({
   uploadPhotoMongo,
   photo: { photo, loading },
+  auth: { name, avatar },
   history,
 }) => {
   const [formData, setFormData] = useState({
     url: photo.url,
-    //url:
-    //  'https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/photos%2F52810384?alt=media',
+    imageName: photo.imageName,
+    name: name,
+    avatar: avatar,
     title: '',
     description: '',
     camera: '',
@@ -25,6 +27,7 @@ const UploadDetails = ({
 
   const {
     url,
+    imageName,
     title,
     description,
     camera,
@@ -43,17 +46,13 @@ const UploadDetails = ({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  return loading === null ? (
+  return loading === true ? (
     <Spinner />
   ) : (
     <div className="container-fluid" id="uploadDetails">
       <div className="row m-4">
         <div className="col-md-3 m-1 mr-auto text-center">
-          {/*<img src={photo.url} alt="" />*/}
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/photos%2F52810384?alt=media"
-            alt="preview of a new photo"
-          />
+          <img src={photo.url} alt="uploading a photo" />
         </div>
         <div className="col-md-8 m-1">
           <form>
@@ -112,12 +111,15 @@ const UploadDetails = ({
 };
 
 UploadDetails.propTypes = {
+  auth: PropTypes.object.isRequired,
   photo: PropTypes.object.isRequired,
   uploadPhotoMongo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   photo: state.photoUpload,
+  user: state.auth,
 });
 
 export default connect(mapStateToProps, { uploadPhotoMongo })(

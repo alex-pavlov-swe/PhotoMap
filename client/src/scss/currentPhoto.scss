@@ -1,0 +1,36 @@
+#currentPhoto {
+  margin: 0;
+  padding: 0;
+  img {
+    max-width: 80%;
+    padding-top: 0px;
+    margin-top: -15px;
+  }
+  i {
+    color: white;
+    padding: 0;
+    margin: 0;
+  }
+  i:hover {
+    color: #8a8c81;
+  }
+
+  #currentPhotoImg {
+    padding: 10px;
+    padding-bottom: 30px;
+  }
+
+  #deletePhoto:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+// For desktop size screens
+@media (min-width: #{$screen-lg-min}) {
+  #currentPhoto {
+    img {
+      max-width: 70%;
+    }
+  }
+}
