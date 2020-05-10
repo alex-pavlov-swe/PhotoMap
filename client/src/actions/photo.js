@@ -35,7 +35,7 @@ export const getPhotoById = (id) => async (dispatch) => {
 export const getPhotos = () => async (dispatch) => {
   try {
     const res = await axios.get('api/photo');
-
+    console.log('*** 2 ***');
     dispatch({
       type: GET_PHOTOS,
       payload: res,
@@ -58,11 +58,13 @@ export const loadingCompleted = () => async (dispatch) => {
   try {
     dispatch({
       LOADING_COMPLETED,
+      payload: null,
     });
   } catch (error) {
+    console.log('eRRor=', error);
     dispatch({
       type: GET_PHOTOS_ERROR,
-      payload: error,
+      payload: 'error while loading completed',
     });
   }
 };

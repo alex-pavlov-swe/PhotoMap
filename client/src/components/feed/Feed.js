@@ -17,31 +17,46 @@ const Feed = ({
   });
 
   useEffect(() => {
-    getPhotos();
+    let ignore = false;
 
-    if (photos) {
-      let initialPhotosCount = 3;
-      let initialPhotos = [];
+    async function fetchData() {
+      console.log('*** 1 ***');
+      await getPhotos();
+      console.log('*** 3 ***');
+      console.log('*** photos= ***', photos);
 
-      if (photos.data.length < 3) {
-        initialPhotosCount = photos.data.length;
+      // Load initial items to the Feed
+      if (photos) {
+        console.log('*** 4 ***');
+        let initialPhotosCount = 3;
+        let initialPhotos = [];
+
+        if (photos.data.length < 3) {
+          initialPhotosCount = photos.data.length;
+        }
+
+        for (let i = 0; i < initialPhotosCount; i++) {
+          initialPhotos.push(
+            <FeedPhotoItem
+              photo={photos.data[i]}
+              key={photos.data[i].imageName}
+            />
+          );
+        }
+        setState({
+          items: state.items.concat(initialPhotos),
+          next: initialPhotosCount,
+        });
       }
-
-      for (let i = 0; i < initialPhotosCount; i++) {
-        initialPhotos.push(
-          <FeedPhotoItem
-            photo={photos.data[i]}
-            key={photos.data[i].imageName}
-          />
-        );
-      }
-      setState({
-        items: state.items.concat(initialPhotos),
-        next: initialPhotosCount,
-      });
+      loadingCompleted();
     }
-    loadingCompleted();
-  }, [getPhotos]);
+
+    fetchData();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const fetchMoreData = () => {
     if (state.next < photos.data.length) {

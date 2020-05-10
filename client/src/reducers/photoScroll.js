@@ -19,6 +19,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         photos: payload,
+        loading: true,
       };
     case LOADING_COMPLETED:
       return {
