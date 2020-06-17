@@ -1,6 +1,5 @@
 node_modules/
 client/node_modules
 config/default.json
-images/
-client/src/img
+img/
 client/src/firebase/config
