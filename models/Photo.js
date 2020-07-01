@@ -11,6 +11,11 @@ const PhotoSchema = new Schema({
     required: true,
   },
   userName: String,
+  lngLat:
+    {
+      lat: Number,
+      lng: Number
+    },
   title: String,
   description: String,
   camera: String,

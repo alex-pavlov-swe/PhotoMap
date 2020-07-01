@@ -125,7 +125,39 @@ export const uploadPhotoMongo = (photo, history, edit = true) => async (
       setAlert(edit ? 'Photo data updated' : 'Photo data uploaded to MongoDB')
     );
 
-    history.push('/feed');
+    history.push(`/photo/${res.data._id}`);
+  } catch (error) {
+    dispatch({
+      type: UPLOAD_ERROR,
+      payload: error,
+    });
+  }
+};
+
+// Update information about photo in MongoDB
+export const updatePhotoMongo = (photo, history, edit = true) => async (
+  dispatch
+) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const body = JSON.stringify(photo);
+
+  try {
+    const res = await axios.put('/api/photo', body, config);
+
+    dispatch({
+      type: UPLOAD_PHOTO,
+      payload: res.data,
+    });
+
+    dispatch(
+      setAlert(edit ? 'Photo data updated' : 'Photo data uploaded to MongoDB')
+    );
+
+    history.push(`/photo/${res.data._id}`);
   } catch (error) {
     dispatch({
       type: UPLOAD_ERROR,

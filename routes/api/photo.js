@@ -48,6 +48,7 @@ router.post(
     const {
       url,
       imageName,
+      lngLat,
       name,
       avatar,
       title,
@@ -66,6 +67,7 @@ router.post(
 
     if (url) photoFields.url = url;
     if (imageName) photoFields.imageName = imageName;
+    if (lngLat) photoFields.lngLat = lngLat;
     if (name) photoFields.name = name;
     if (avatar) photoFields.avatar = avatar;
     if (title) photoFields.title = title;
@@ -77,7 +79,7 @@ router.post(
     if (keywords) photoFields.keywords = keywords;
 
     try {
-      /*
+
       let photo = await photo.findOne({ user: req.user.id });
       if (photo) {
         // Update existing photo
@@ -86,15 +88,15 @@ router.post(
           { $set: photoFields },
           { new: true }
         );
+      } else {
+        // Create a new one
+        let photo = new Photo(photoFields);
 
-        return res.json(photo);
+        await photo.save();
       }
-      */
-      let photo = new Photo(photoFields);
-
-      await photo.save();
 
       res.json(photo);
+
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server Error');

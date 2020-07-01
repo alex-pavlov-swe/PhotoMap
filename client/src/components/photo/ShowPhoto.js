@@ -53,11 +53,15 @@ const ShowPhoto = ({
               </span>
             </div>
           </div>
-          <div className="row mt-3">
-            <div className="col-md-10 text-center">
+          <div className="row mt-3 border border-primary">
+            <div className="col-md-12 text-center border border-warning">
               <h1>{photo[0].title}</h1>
               <p>{photo[0].description}</p>
-              <p>by {photo[0].userName}</p>
+              <p>by {photo[0].userName}</p>  
+              <div className="mapLink text-center align-middle">
+                <Link to="/map">Add this photo to the map</Link>
+              </div>
+              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <Fragment>
       <li className="nav-item">
         <Link className="nav-link" to="/map">
-          Map
+          Explore
         </Link>
       </li>
       <li className="nav-item">
