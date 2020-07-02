@@ -35,7 +35,7 @@ export const getPhotoById = (id) => async (dispatch) => {
 export const getPhotos = () => async (dispatch) => {
   try {
     const res = await axios.get('api/photo');
-    console.log('*** 2 ***');
+    
     dispatch({
       type: GET_PHOTOS,
       payload: res,
@@ -61,7 +61,7 @@ export const loadingCompleted = () => async (dispatch) => {
       payload: null,
     });
   } catch (error) {
-    console.log('eRRor=', error);
+    
     dispatch({
       type: GET_PHOTOS_ERROR,
       payload: 'error while loading completed',
@@ -146,7 +146,7 @@ export const updatePhotoMongo = (photo, history, edit = true) => async (
   const body = JSON.stringify(photo);
 
   try {
-    const res = await axios.put('/api/photo', body, config);
+    const res = await axios.put(`/api/photo/${photo.id}`, body, config);
 
     dispatch({
       type: UPLOAD_PHOTO,

@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
 });
 
 // @route   Post api/photo
-// @desc    Create or update user photo
+// @desc    Create user photo
 // @access  Private
 router.post(
   '/',
@@ -48,7 +48,6 @@ router.post(
     const {
       url,
       imageName,
-      lngLat,
       name,
       avatar,
       title,
@@ -67,7 +66,6 @@ router.post(
 
     if (url) photoFields.url = url;
     if (imageName) photoFields.imageName = imageName;
-    if (lngLat) photoFields.lngLat = lngLat;
     if (name) photoFields.name = name;
     if (avatar) photoFields.avatar = avatar;
     if (title) photoFields.title = title;
@@ -79,28 +77,60 @@ router.post(
     if (keywords) photoFields.keywords = keywords;
 
     try {
+      let photo = new Photo(photoFields);
+      await photo.save();
+      res.json(photo);
+      }
+      catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+  }
+);
 
-      let photo = await photo.findOne({ user: req.user.id });
+// @route   Put api/photo
+// @desc    update photo
+// @access  Private
+router.put(
+  '/:id',
+  auth,
+  async (req, res) => {
+
+    const photoFields = {};
+
+    if (req.body.url) photoFields.url = req.body.url;
+    if (req.body.imageName) photoFields.imageName = req.body.imageName;
+    if (req.body.lngLat) photoFields.lngLat = req.body.lngLat
+    if (req.body.name) photoFields.name = req.body.name;
+    if (req.body.avatar) photoFields.avatar = req.body.avatar;
+    if (req.body.title) photoFields.title = req.body.title;
+    if (req.body.description) photoFields.description = req.body.description;
+    if (req.body.camera) photoFields.camera = req.body.camera;
+    if (req.body.focalLength) photoFields.focalLength = req.body.focalLength;
+    if (req.body.shutterSpeed) photoFields.shutterSpeed = req.body.shutterSpeed;
+    if (req.body.ISO) photoFields.ISO = req.body.ISO;
+    if (req.body.keywords) photoFields.keywords = req.body.keywords;
+
+    try {
+      const photo = await Review.findById(req.params.id);
+      res.send(photo);
+      
       if (photo) {
         // Update existing photo
-        photo = await photo.findOneAndUpdate(
-          { user: req.user.id },
+        photo = await Photo.findOneAndUpdate(
+          { _id: req.params.id },
           { $set: photoFields },
           { new: true }
         );
-      } else {
-        // Create a new one
-        let photo = new Photo(photoFields);
-
-        await photo.save();
       }
-
+      await photo.save();
       res.json(photo);
-
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send('Server Error');
-    }
+      
+      }
+      catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+      }
   }
 );
 

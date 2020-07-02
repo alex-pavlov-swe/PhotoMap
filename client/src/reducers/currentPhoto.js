@@ -1,6 +1,7 @@
 import {
   GET_CURRENT_PHOTO,
   CURRENT_PHOTO_ERROR,
+  UPDATE_PHOTO,
   DELETE_PHOTO,
 } from '../actions/types';
 
@@ -15,6 +16,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_CURRENT_PHOTO:
+    case UPDATE_PHOTO:
       return {
         ...state,
         photo: payload,

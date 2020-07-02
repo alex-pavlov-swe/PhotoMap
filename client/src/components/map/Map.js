@@ -1,24 +1,36 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
 import '../../css/map.css';
+import { updatePhotoMongo } from '../../actions/photo';
 
-export class Map extends Component {
-    componentDidMount() {
+const Map = ({
+    currentPhoto: { photo, loading },
+    updatePhotoMongo,
+    history
+}) => {
+
+    var currentPosition = {
+        lat: 0,
+        lng: 0
+    };
+
+    var markers = [];
+
+    useEffect(() => {
         mapboxgl.accessToken = 'pk.eyJ1IjoiYWxleHZhbiIsImEiOiJja2JyZ3V5amcwZXA4MnNvZTExeXliY3MxIn0.h4MnIZmh1ANGwnAunqJe2Q';
 
-        var markers = [];
-
         var map = new mapboxgl.Map({
-            container: this.mapContainer,
+            container: document.getElementById("mapContainer"),
             style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
             center: [-74.5, 40], // starting position [lng, lat]
             zoom: 9 // starting zoom
         });
 
         map.on('click', function(e) {
-            console.log('A click event has occurred at ' + e.lngLat + ', ' + e.lngLat);
-            console.log(e);
-            console.log(e.lngLat.lat, typeof(e.lngLat.lng));
+            currentPosition.lat = e.lngLat.lat;
+            currentPosition.lng = e.lngLat.lng;
           
             var prevMarker = markers.pop();
             if (prevMarker) {
@@ -53,27 +65,31 @@ export class Map extends Component {
             markers.push(newMarker);
 
             document.getElementById('saveLocationButton').addEventListener("click", function() {
-                console.log('test', e.lngLat);
+                const formData = {};
+                formData.lngLat = currentPosition;
+                formData.id = photo[0]._id;
+                updatePhotoMongo(formData, history);
             })
           });
           
           var nav = new mapboxgl.NavigationControl();
           map.addControl(nav, 'top-left');
 
-          if (document.getElementById('saveLocationButton')) {
-            document.getElementById('saveLocationButton').addEventListener("click", function() {
-                console.log("Save Location!");
-            });
-          }
-    }
-
-    render() {
-        return (
-            <div>
-                <div ref={el => this.mapContainer = el} className="mapContainer" />
-            </div>
-        )
-    }
+    })
+    return (
+        <div>
+          <div id="mapContainer" className="mapContainer" />
+        </div>
+    )
 }
 
-export default Map
+Map.propTypes = {
+    currentPhoto: PropTypes.object.isRequired,
+    updatePhotoMongo: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    currentPhoto: state.currentPhoto
+})
+
+export default connect(mapStateToProps, {updatePhotoMongo})(Map);
