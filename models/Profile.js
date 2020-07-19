@@ -5,15 +5,9 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
-  // profession - guide, cook, translator, driver
-  profession: {
-    type: String,
-    required: true
-  },
-  // description - a field to describe persons' cv, like skills, bio
-  description: {
-    type: String
-  },
+  name: { type: String },
+  title: { type: String },
+  location: { type: String },
   experience: {
     type: String
   },

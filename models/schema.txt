@@ -1,0 +1,56 @@
+User
+    id
+    name
+    email
+    password
+    avatar
+    date_created
+    date_login
+
+
+Profile
+    id
+    user object
+    userName
+    userAvatar
+    title
+    location
+    social
+    followers
+    following
+    about
+        biography
+        web-site
+        gear
+    stats
+        photo_views
+        likes
+        comments
+
+photo
+    id
+    user
+    url
+    title
+    userName
+    userAvatar
+    location
+    date_taken
+    date_uploaded
+    description
+    category
+    lngLat
+    parameters
+        camera
+        lens
+        iso
+        shutter
+        aperture
+        focal
+    keywords
+    likes [user]
+    comments
+        user
+        userName
+        userAvatar
+        text
