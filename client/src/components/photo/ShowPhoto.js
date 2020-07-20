@@ -56,8 +56,9 @@ const ShowPhoto = ({
           <div className="row mt-3 border border-primary">
             <div className="col-md-12 text-center border border-warning">
               <h1>{photo[0].title}</h1>
-              <p>{photo[0].description}</p>
-              <p>by {photo[0].userName}</p>  
+              <p>Description: {photo[0].description}</p>
+              <p>by {photo[0].name}</p>
+              <img src={photo[0].avatar} className="avatar-show-photo"/>
               <div className="mapLink text-center align-middle">
                 <Link to="/map">Add this photo to the map</Link>
               </div>

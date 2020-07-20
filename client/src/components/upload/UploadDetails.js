@@ -8,14 +8,14 @@ import Spinner from '../layout/Spinner';
 const UploadDetails = ({
   uploadPhotoMongo,
   photo: { photo, loading },
-  auth: { name, avatar },
+  auth: { user },
   history,
 }) => {
   const [formData, setFormData] = useState({
     url: photo.url,
     imageName: photo.imageName,
-    name: name,
-    avatar: avatar,
+    name: user.name,
+    avatar: user.avatar,
     title: '',
     description: '',
     camera: '',
@@ -39,6 +39,8 @@ const UploadDetails = ({
 
   const uploadHandle = (e) => {
     e.preventDefault();
+    console.log("$$$ user=", user);
+    console.log("$$$ formData=", formData);
     uploadPhotoMongo(formData, history);
   };
 

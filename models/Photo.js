@@ -10,7 +10,8 @@ const PhotoSchema = new Schema({
     type: String,
     required: true,
   },
-  userName: String,
+  name: String,
+  avatar: String,
   lngLat:
     {
       lat: Number,
