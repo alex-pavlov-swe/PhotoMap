@@ -97,11 +97,14 @@ footer {
     padding-top: 0px;
     margin-top: -15px; }
   #currentPhoto i {
-    color: white;
+    color: black;
     padding: 0;
     margin: 0; }
   #currentPhoto i:hover {
-    color: #8a8c81; }
+    color: #8a8c81;
+    cursor: pointer; }
+  #currentPhoto .edit-icon {
+    padding: 10px; }
   #currentPhoto #currentPhotoImg {
     padding: 10px;
     padding-bottom: 30px; }

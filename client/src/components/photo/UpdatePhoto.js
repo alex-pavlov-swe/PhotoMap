@@ -9,7 +9,7 @@ import {
 } from '../../actions/photo';
 import Spinner from '../layout/Spinner';
 
-const ShowPhoto = ({
+const UpdatePhoto = ({
   currentPhoto: { photo, loading },
   getPhotoById,
   match,
@@ -48,13 +48,8 @@ const ShowPhoto = ({
           </div>
           <div className="row bg-light">
             <div className="col-md-10 offset-1 text-left">
-              <span>
-                <Link to={`/photo/update/${photo._id}`}>
-                  <i class="fas fa-pencil-alt edit-icon"></i>
-                </Link>
-              </span>
-              <span id="deletePhoto edit-icon" onClick={(e) => onDeletePhoto(e)}>
-                <i class="far fa-trash-alt"></i>
+              <span id="deletePhoto" onClick={(e) => onDeletePhoto(e)}>
+                delete!!!!!
               </span>
             </div>
           </div>
@@ -78,7 +73,7 @@ const ShowPhoto = ({
   );
 };
 
-ShowPhoto.propTypes = {
+UpdatePhoto.propTypes = {
   getPhotoById: PropTypes.func.isRequired,
   deletePhotoFromFirebase: PropTypes.func.isRequired,
   deletePhotoFromMongo: PropTypes.func.isRequired,
@@ -93,4 +88,4 @@ export default connect(mapStateToProps, {
   getPhotoById,
   deletePhotoFromFirebase,
   deletePhotoFromMongo,
-})(withRouter(ShowPhoto));
+})(withRouter(UpdatePhoto));

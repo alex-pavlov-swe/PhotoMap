@@ -7,12 +7,18 @@
     margin-top: -15px;
   }
   i {
-    color: white;
+    color: black;
     padding: 0;
     margin: 0;
   }
+  
   i:hover {
     color: #8a8c81;
+    cursor: pointer;
+  }
+
+  .edit-icon {
+    padding: 10px;;
   }
 
   #currentPhotoImg {
