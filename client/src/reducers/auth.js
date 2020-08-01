@@ -9,9 +9,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  //token: localStorage.getItem('token'),
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWRlMDNiOTllNWY3ZDQxMjc1ZjRjZGE5In0sImlhdCI6MTU3ODE5MzEzNiwiZXhwIjoxNTc4NTUzMTM2fQ.yf4pa5DtKiEovtsbi_KBteacBLA4jLeVBaPnqOyFQU4',
+  token: localStorage.getItem('token'),
   isAuthenticated: null,
   loading: true,
   user: null,

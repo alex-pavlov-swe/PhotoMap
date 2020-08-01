@@ -49,7 +49,7 @@ const ShowPhoto = ({
           <div className="row bg-light">
             <div className="col-md-10 offset-1 text-left">
               <span>
-                <Link to={`/photo/update/${photo._id}`}>
+                <Link to={`/photo/update/${photo[0]._id}`}>
                   <i class="fas fa-pencil-alt edit-icon"></i>
                 </Link>
               </span>
@@ -61,11 +61,11 @@ const ShowPhoto = ({
           <div className="row mt-3 border border-primary">
             <div className="col-md-12 text-center border border-warning">
               <h1>{photo[0].title}</h1>
-              <p>Description: {photo[0].description}</p>
               <p>
                 <span><img src={photo[0].avatar} className="avatar-show-photo"/></span>
                 <span>by {photo[0].name}</span>
               </p>
+              <p>{photo[0].description}</p>
               <div className="mapLink text-center align-middle">
                 <Link to="/map">Add this photo to the map</Link>
               </div>

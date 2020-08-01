@@ -47,8 +47,8 @@ function App() {
           <Route exact path="/profile/review/:id" component={Review} />
           <Route exact path="/map" component={Map} />
           <Route exact path="/feed" component={Feed} />
-          <Route exact path="/photo/:id" component={ShowPhoto} />
-          <Route exact path="/photo/update:id" component={UpdatePhoto} />
+          <PrivateRoute exact path="/photo/:id" component={ShowPhoto} />
+          <Route exact path="/photo/update/:id" component={UpdatePhoto} />
           <Route exact path="/auth" component={Auth} />
           <PrivateRoute exact path="/upload" component={Upload} />
           <PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
