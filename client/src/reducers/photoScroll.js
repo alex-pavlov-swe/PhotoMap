@@ -9,6 +9,7 @@ const initialState = {
   photos: null,
   loading: true,
   error: {},
+  test: 'test'
 };
 
 export default function (state = initialState, action) {
@@ -20,6 +21,7 @@ export default function (state = initialState, action) {
         ...state,
         photos: payload,
         loading: true,
+        test: 'test!!!!'
       };
     case LOADING_COMPLETED:
       return {
