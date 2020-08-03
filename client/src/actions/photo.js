@@ -38,7 +38,7 @@ export const getPhotos = () => async (dispatch) => {
     
     dispatch({
       type: GET_PHOTOS,
-      payload: res,
+      payload: res.data
     });
   } catch (error) {
     const errors = error.response.data.errors;
@@ -57,11 +57,10 @@ export const getPhotos = () => async (dispatch) => {
 export const loadingCompleted = () => async (dispatch) => {
   try {
     dispatch({
-      LOADING_COMPLETED,
-      payload: null,
+      type: LOADING_COMPLETED
     });
   } catch (error) {
-    
+    console.log(error);
     dispatch({
       type: GET_PHOTOS_ERROR,
       payload: 'error while loading completed',

@@ -2,7 +2,7 @@ import { UPLOAD_PHOTO, UPLOAD_ERROR, UPLOADING } from '../actions/types';
 
 const inititalState = {
   photo: null,
-  loading: true,
+  loading: false,
   error: {},
 };
 

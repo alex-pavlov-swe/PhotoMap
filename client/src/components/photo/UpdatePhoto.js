@@ -14,21 +14,21 @@ const UpdatePhoto = ({
   currentPhoto: { photo, loading },
   auth: { user },
   getPhotoById,
-  match,
   deletePhotoFromFirebase,
   deletePhotoFromMongo,
+  match,
   history,
 }) => {
   useEffect(() => {
     getPhotoById(match.params.id);
-  }, [getPhotoById]);
+  }, );
 
   const [formData, setFormData] = useState({
     url: photo.url,
-    imageName: photo.imageName,
-    name: user.name,
-    avatar: user.avatar,
-    title: photo.title,
+    imageName: '',//photo.imageName,
+    name: '',//user.name,
+    avatar: '',//user.avatar,
+    title: '',//photo.title,
     description: '',
     camera: '',
     focalLength: '',
@@ -126,18 +126,15 @@ const UpdatePhoto = ({
 
 UpdatePhoto.propTypes = {
   auth: PropTypes.object.isRequired,
-  photo: PropTypes.object.isRequired,
+  currentPhoto: PropTypes.object.isRequired,
   uploadPhotoMongo: PropTypes.func.isRequired,
   getPhotoById: PropTypes.func.isRequired,
   deletePhotoFromFirebase: PropTypes.func.isRequired,
   deletePhotoFromMongo: PropTypes.func.isRequired,
-  currentPhoto: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  photo: state.photoUpload,
-  user: state.auth,
   currentPhoto: state.currentPhoto
 });
 

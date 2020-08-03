@@ -17,56 +17,52 @@ const Feed = ({
   });
 
   useEffect(() => {
-    let ignore = false;
-
-    async function fetchData() {
-      console.log('*** 1 ***');
-      await getPhotos();
-      console.log('*** 3 ***');
-      console.log('*** photos= ***', photos);
-
-      // Load initial items to the Feed
-      if (photos) {
-        console.log('*** 4 ***');
-        let initialPhotosCount = 3;
-        let initialPhotos = [];
-
-        if (photos.data.length < 3) {
-          initialPhotosCount = photos.data.length;
-        }
-
-        for (let i = 0; i < initialPhotosCount; i++) {
-          initialPhotos.push(
-            <FeedPhotoItem
-              photo={photos.data[i]}
-              key={photos.data[i].imageName}
-            />
-          );
-        }
-        setState({
-          items: state.items.concat(initialPhotos),
-          next: initialPhotosCount,
-        });
-      }
-      loadingCompleted();
-    }
-
-    fetchData();
-
-    return () => {
-      ignore = true;
-    };
+    getPhotos()
+      .then(() => {
+        loadingCompleted()
+          .then(() => {
+            fetchInitialData();
+          })
+      });
+      
+    setTimeout(() => {
+      document.getElementById("btn1").click();
+    }, 500);
   }, []);
 
+  const fetchInitialData = () => {
+    let initialPhotosCount = 3;
+    let initialPhotos = [];
+
+    if (photos) {
+
+      if (photos.length < 3) {
+        initialPhotosCount = photos.length;
+      }
+
+      for (let i = 0; i < initialPhotosCount; i++) {
+        initialPhotos.push(
+          <FeedPhotoItem
+            photo={photos[i]}
+            key={photos[i].imageName}
+          />
+        );
+      }
+      setState({
+        items: state.items.concat(initialPhotos),
+        next: initialPhotosCount,
+      });
+    }
+  }
+
   const fetchMoreData = () => {
-    if (state.next < photos.data.length) {
+    if (state.next < photos.length) {
       setTimeout(() => {
-        console.log('!!!');
         setState({
           items: state.items.concat(
             <FeedPhotoItem
-              photo={photos.data[state.next]}
-              key={photos.data[state.next].imageName}
+              photo={photos[state.next]}
+              key={photos[state.next].imageName}
             />
           ),
           next: state.next + 1,
@@ -82,6 +78,7 @@ const Feed = ({
       <div className="row">
         <div className="col-md-12">
           <h2 className="mt-3 mb-4">Home feed</h2>
+          <button className="btn btn-primary" id="btn1" style={{visibility: "hidden"}} onClick={e => fetchInitialData()}>fetch</button>
         </div>
       </div>
       <InfiniteScroll

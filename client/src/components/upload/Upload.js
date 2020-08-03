@@ -19,13 +19,10 @@ const Upload = ({
     e.preventDefault();
     const file = e.target.files[0];
     const imageName = Math.round(Math.random() * 1000000000).toString();
-    console.log(file);
-    console.log(imageName);
     await uploadPhotoFirebase(file, imageName, history);
-    console.log('photo loaded to Firebase!');
   };
 
-  return loading === null ? (
+  return loading ? (
     <Spinner />
   ) : (
     <Fragment>
