@@ -8,8 +8,7 @@ import {
 const initialState = {
   photos: null,
   loading: true,
-  error: {},
-  test: 'test'
+  error: {}
 };
 
 export default function (state = initialState, action) {
@@ -20,8 +19,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         photos: payload,
-        loading: true,
-        test: 'test!!!!'
+        loading: true
       };
     case LOADING_COMPLETED:
       return {

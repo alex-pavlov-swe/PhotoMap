@@ -7,7 +7,7 @@ import FeedPhotoItem from '../feed/FeedPhotoItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Feed = ({
-  photoScroll: { photos, loading, test },
+  photoScroll: { photos, loading },
   getPhotos,
   loadingCompleted,
 }) => {
@@ -33,7 +33,7 @@ const Feed = ({
   const fetchInitialData = () => {
     let initialPhotosCount = 3;
     let initialPhotos = [];
-    
+
     if (photos) {
 
       if (photos.length < 3) {
