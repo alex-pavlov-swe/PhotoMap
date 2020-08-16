@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -21,15 +21,15 @@ const UpdatePhoto = ({
 }) => {
   useEffect(() => {
     getPhotoById(match.params.id);
-  }, );
+  }, [getPhotoById]);
 
   const [formData, setFormData] = useState({
-    url: photo.url,
-    imageName: '',//photo.imageName,
-    name: '',//user.name,
-    avatar: '',//user.avatar,
-    title: '',//photo.title,
-    description: '',
+    url: photo[0].url,
+    imageName: photo[0].imageName,
+    name: user.name,
+    avatar: user.avatar,
+    title: photo[0].title,
+    description: photo[0].description,
     camera: '',
     focalLength: '',
     shutterSpeed: '',
@@ -63,10 +63,10 @@ const UpdatePhoto = ({
   return loading === true ? (
     <Spinner />
   ) : (
-    <div className="container-fluid" id="UpdatePhoto">
+    <div className="container-fluid" id="updatePhoto">
       <div className="row m-4">
         <div className="col-md-3 m-1 mr-auto text-center">
-          <img src={photo.url} alt="uploading a photo" />
+          <img src={url} alt="uploading a photo" className="width-10" />
         </div>
         <div className="col-md-8 m-1">
           <form>
@@ -111,11 +111,11 @@ const UpdatePhoto = ({
                 type="button"
                 onClick={(e) => uploadHandle(e)}
               >
-                Upload
+                Update
               </button>
-              <button className="btn btn-light" type="button">
+              <Link to={`/photo/${photo._id}`} className="btn btn-light" type="button">
                 Cancel
-              </button>
+              </Link>
             </div>
           </form>
         </div>

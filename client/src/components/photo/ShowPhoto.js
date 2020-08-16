@@ -50,11 +50,11 @@ const ShowPhoto = ({
             <div className="col-md-10 offset-1 text-left">
               <span>
                 <Link to={`/photo/update/${photo[0]._id}`}>
-                  <i class="fas fa-pencil-alt edit-icon"></i>
+                  <i className="fas fa-pencil-alt edit-icon"></i>
                 </Link>
               </span>
               <span id="deletePhoto edit-icon" onClick={(e) => onDeletePhoto(e)}>
-                <i class="far fa-trash-alt"></i>
+                <i className="far fa-trash-alt"></i>
               </span>
             </div>
           </div>

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import '../../css/map.css';
 import { updatePhotoMongo } from '../../actions/photo';
 
@@ -24,9 +26,17 @@ const Map = ({
         var map = new mapboxgl.Map({
             container: document.getElementById("mapContainer"),
             style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
-            center: [-74.5, 40], // starting position [lng, lat]
+            center: [-122.7, 49.2], // starting position [lng, lat]
             zoom: 9 // starting zoom
         });
+
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl,
+                zoom: 10
+            })
+        );
 
         map.on('click', function(e) {
             currentPosition.lat = e.lngLat.lat;
