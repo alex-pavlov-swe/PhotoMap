@@ -113,7 +113,7 @@ export const uploadPhotoMongo = (photo, history, edit = true) => async (
   const body = JSON.stringify(photo);
 
   try {
-    const res = await axios.post('/api/photo', body, config);
+    const res = await axios.put(`/api/photo/${photo.id}`, body, config);
 
     dispatch({
       type: UPLOAD_PHOTO,
@@ -145,7 +145,12 @@ export const updatePhotoMongo = (photo, history, edit = true) => async (
   const body = JSON.stringify(photo);
 
   try {
-    const res = await axios.put(`/api/photo/${photo.id}`, body, config);
+    let res = null;
+    if (edit) {
+      res = await axios.post(`/api/photo/${photo.id}`, body, config);
+    } else {
+      res = await axios.post('/api/photo', body, config);
+    }
 
     dispatch({
       type: UPLOAD_PHOTO,

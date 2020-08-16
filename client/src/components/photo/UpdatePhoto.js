@@ -14,6 +14,7 @@ const UpdatePhoto = ({
   currentPhoto: { photo, loading },
   auth: { user },
   getPhotoById,
+  uploadPhotoMongo,
   deletePhotoFromFirebase,
   deletePhotoFromMongo,
   match,
@@ -24,6 +25,7 @@ const UpdatePhoto = ({
   }, [getPhotoById]);
 
   const [formData, setFormData] = useState({
+    id: photo[0]._id,
     url: photo[0].url,
     imageName: photo[0].imageName,
     name: user.name,
@@ -38,6 +40,7 @@ const UpdatePhoto = ({
   });
 
   const {
+    id,
     url,
     imageName,
     title,
@@ -51,9 +54,7 @@ const UpdatePhoto = ({
 
   const uploadHandle = (e) => {
     e.preventDefault();
-    console.log("$$$ user=", user);
-    console.log("$$$ formData=", formData);
-    uploadPhotoMongo(formData, history);
+    uploadPhotoMongo(formData, history, true);
   };
 
   const onChange = (e) => {
