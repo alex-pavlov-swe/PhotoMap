@@ -5,9 +5,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
-import EditProfile from './components/profile-forms/EditProfile';
-import CreateProfile from './components/profile-forms/CreateProfile';
-import CreateCompany from './components/profile-forms/CreateCompany';
+import UpdateProfile from './components/profile-forms/UpdateProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Review from './components/reviews/Review';
@@ -53,16 +51,10 @@ function App() {
           <PrivateRoute exact path="/upload" component={Upload} />
           <PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/edit_profile" component={EditProfile} />
           <PrivateRoute
             exact
-            path="/create_profile"
-            component={CreateProfile}
-          />
-          <PrivateRoute
-            exact
-            path="/create_company"
-            component={CreateCompany}
+            path="/update_profile"
+            component={UpdateProfile}
           />
         </Switch>
       </Router>

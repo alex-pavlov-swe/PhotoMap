@@ -23,7 +23,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         </a>
       </li>
       <li>
-        {user && (<span><Link to="/profile"><img src={user.avatar} className="avatar-show-photo"/></Link></span>) }
+        {user && (<span><Link to="/dashboard"><img src={user.avatar} className="avatar-show-photo"/></Link></span>) }
       </li>
       <li>
         <Link className="btn btn-light" to="/upload" id="upload-link">

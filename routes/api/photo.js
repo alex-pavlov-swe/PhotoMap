@@ -96,24 +96,39 @@ router.put(
   auth,
   async (req, res) => {
 
+    const {
+      url,
+      imageName,
+      name,
+      avatar,
+      title,
+      description,
+      camera,
+      focalLength,
+      shutterSpeed,
+      ISO,
+      keywords,
+    } = req.body;
+
+    // Build photo object
     const photoFields = {};
 
-    if (req.body.url) photoFields.url = req.body.url;
-    if (req.body.imageName) photoFields.imageName = req.body.imageName;
-    if (req.body.lngLat) photoFields.lngLat = req.body.lngLat
-    if (req.body.name) photoFields.name = req.body.name;
-    if (req.body.avatar) photoFields.avatar = req.body.avatar;
-    if (req.body.title) photoFields.title = req.body.title;
-    if (req.body.description) photoFields.description = req.body.description;
-    if (req.body.camera) photoFields.camera = req.body.camera;
-    if (req.body.focalLength) photoFields.focalLength = req.body.focalLength;
-    if (req.body.shutterSpeed) photoFields.shutterSpeed = req.body.shutterSpeed;
-    if (req.body.ISO) photoFields.ISO = req.body.ISO;
-    if (req.body.keywords) photoFields.keywords = req.body.keywords;
+    photoFields.user = req.user.id;
+
+    if (url) photoFields.url = url;
+    if (imageName) photoFields.imageName = imageName;
+    if (name) photoFields.name = name;
+    if (avatar) photoFields.avatar = avatar;
+    if (title) photoFields.title = title;
+    if (description) photoFields.description = description;
+    if (camera) photoFields.camera = camera;
+    if (focalLength) photoFields.focalLength = focalLength;
+    if (shutterSpeed) photoFields.shutterSpeed = shutterSpeed;
+    if (ISO) photoFields.ISO = ISO;
+    if (keywords) photoFields.keywords = keywords;
 
     try {
       const photo = await Review.findById(req.params.id);
-      res.send(photo);
       
       if (photo) {
         // Update existing photo
@@ -129,7 +144,7 @@ router.put(
       }
       catch (error) {
         console.error(error.message);
-        res.status(500).send('Server Error');
+        res.stats(500).send('Server Error');
       }
   }
 );
