@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
 router.get('/user/:user_id', async (req, res) => {
   try {
     const profiles = await Profile.findOne({
-      user: req.params.user_id
+      user: req.params.user_id,
     }).populate('user', ['name', 'email']);
 
     res.json(profiles);
@@ -59,82 +59,60 @@ router.get('/user/:user_id', async (req, res) => {
 // @route   Post api/profile
 // @desc    Create or update user profile
 // @access  Private
-router.post(
-  '/',
-  [
-    auth,
-    [
-      check('profession', 'Profession is required')
-        .not()
-        .isEmpty()
-    ]
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(500).json({ errors: errors.array() });
-    }
-
-    const {
-      profession,
-      description,
-      experience,
-      regions,
-      education,
-      location,
-      age,
-      facebook,
-      vk,
-      instagram,
-      youtube,
-      avatar,
-      phone
-    } = req.body;
-
-    // Build Profile object
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (profession) profileFields.profession = profession;
-    if (description) profileFields.description = description;
-    if (experience) profileFields.experience = experience;
-    if (regions) profileFields.regions = regions;
-    if (education) profileFields.education = education;
-    if (location) profileFields.location = location;
-    if (age) profileFields.age = age;
-    if (avatar) profileFields.avatar = avatar;
-    if (phone) profileFields.phone = phone;
-
-    // Build Social object
-    profileFields.social = {};
-    profileFields.social.facebook = facebook ? facebook : '';
-    if (vk) profileFields.social.vk = vk;
-    if (instagram) profileFields.social.instagram = instagram;
-    if (youtube) profileFields.social.youtube = youtube;
-
-    try {
-      let profile = await Profile.findOne({ user: req.user.id });
-
-      if (profile) {
-        // Update existing Profile
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-
-        return res.json(profile);
-      }
-
-      profile = new Profile(profileFields);
-
-      await profile.save();
-
-      res.json(profile);
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send('Server Error');
-    }
+router.post('/', [auth], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(500).json({ errors: errors.array() });
   }
-);
+
+  const {
+    name,
+    location,
+    description,
+    facebook,
+    instagram,
+    youtube,
+    web,
+    avatar,
+  } = req.body;
+
+  // Build Profile object
+  const profileFields = {};
+  profileFields.user = req.user.id;
+  if (name) profileFields.name = name;
+  if (location) profileFields.location = location;
+  if (description) profileFields.description = description;
+  if (avatar) profileFields.avatar = avatar;
+
+  // Build Social object
+  profileFields.social = {};
+  profileFields.social.facebook = facebook ? facebook : '';
+  profileFields.social.instagram = instagram ? instagram : '';
+  profileFields.social.youtube = youtube ? youtube : '';
+
+  try {
+    let profile = await Profile.findOne({ user: req.user.id });
+
+    if (profile) {
+      // Update existing Profile
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      );
+
+      return res.json(profile);
+    }
+
+    profile = new Profile(profileFields);
+
+    await profile.save();
+
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

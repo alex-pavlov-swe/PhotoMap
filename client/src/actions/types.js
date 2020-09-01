@@ -51,6 +51,7 @@ export const UPLOADING = 'UPLOADING';
 
 export const GET_CURRENT_PHOTO = 'GET_CURRENT_PHOTO';
 export const UPDATE_PHOTO = 'UPDATE_PHOTO';
+export const UPDATE_ERROR = 'UPDATE_ERROR';
 export const CURRENT_PHOTO_ERROR = 'ERROR_GETTING_PHOTO';
 
 export const DELETE_PHOTO = 'DELETE_PHOTO';
