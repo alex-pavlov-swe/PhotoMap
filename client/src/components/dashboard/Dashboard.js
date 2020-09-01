@@ -60,9 +60,9 @@ const Dashboard = ({
 
               <Link
                 className="btn btn-primary mr-2 mt-2 mb-3"
-                to="/edit_profile"
+                to="/update_profile"
               >
-                {lang === 'rus' ? 'Редактировать профиль' : 'Update Profile'}
+                Update Profile
               </Link>
             </Fragment>
           ) : (

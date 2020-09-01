@@ -1,4 +1,4 @@
-import { UPLOAD_PHOTO, UPLOAD_ERROR, UPLOADING } from '../actions/types';
+import { UPLOAD_PHOTO, UPLOAD_ERROR, UPLOADING, UPDATE_PHOTO, UPDATE_ERROR } from '../actions/types';
 
 const inititalState = {
   photo: null,
@@ -11,12 +11,14 @@ export default function (state = inititalState, action) {
 
   switch (type) {
     case UPLOAD_PHOTO:
+    case UPDATE_PHOTO:
       return {
         ...state,
         photo: payload,
         loading: false,
       };
     case UPLOAD_ERROR:
+    case UPDATE_ERROR:
       return {
         ...state,
         error: payload,

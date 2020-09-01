@@ -9,12 +9,11 @@ const UpdateProfile = ({
   updateProfile,
   getCurrentProfile,
   profile: { profile, loading },
-  lang: { lang },
   history,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
-    location: '',
+    location: profile.location,
     description: '',
     facebook: '',
     instagram: '',
@@ -135,11 +134,9 @@ UpdateProfile.propTypes = {
   udpateProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  lang: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   profile: state.profile,
-  lang: state.lang,
 });
 
 export default connect(mapStateToProps, { updateProfile, getCurrentProfile })(
