@@ -58,6 +58,7 @@ router.post(
 			shutterSpeed,
 			ISO,
 			keywords,
+			lngLat
 		} = req.body;
 
 		// Build photo object
@@ -76,6 +77,7 @@ router.post(
 		if (shutterSpeed) photoFields.shutterSpeed = shutterSpeed;
 		if (ISO) photoFields.ISO = ISO;
 		if (keywords) photoFields.keywords = keywords;
+		if (lngLat) photoFields.lngLat = lngLat;
 		
 		try {
 			let photo = await Photo.find({ _id: req.body.id });

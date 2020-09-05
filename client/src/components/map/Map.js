@@ -100,6 +100,11 @@ const Map = ({
 		var nav = new mapboxgl.NavigationControl();
 		map.addControl(nav, 'top-left');
 	});
+
+	const fetchPhotos = (center, zoom) => {
+
+	}
+
 	return (
 		<div>
 			<div id="mapContainer" className="mapContainer" />

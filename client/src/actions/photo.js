@@ -148,7 +148,7 @@ export const updatePhotoMongo = (photo, history) => async (dispatch) => {
 		});
 
 		dispatch(setAlert('Photo data updated in MongoDB'));
-		history.push(`/photo/${res.data[0]._id}`);
+		history.push(`/photo/${res.data._id}`);
 	} catch (error) {
 		dispatch({
 			type: UPDATE_ERROR,
