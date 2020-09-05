@@ -6,10 +6,12 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import '../../css/map.css';
 import { updatePhotoMongo } from '../../actions/photo';
+import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
 
 const Map = ({
 	currentPhoto: { photo, loading },
 	updatePhotoMongo,
+	fetchPhotosOverview,
 	history,
 }) => {
 	var currentPosition = {
@@ -100,6 +102,7 @@ const Map = ({
 		var nav = new mapboxgl.NavigationControl();
 		map.addControl(nav, 'top-left');
 	});
+
 	return (
 		<div>
 			<div id="mapContainer" className="mapContainer" />
@@ -110,10 +113,11 @@ const Map = ({
 Map.propTypes = {
 	currentPhoto: PropTypes.object.isRequired,
 	updatePhotoMongo: PropTypes.func.isRequired,
+	fetchPhotosOverview: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
 	currentPhoto: state.currentPhoto,
 });
 
-export default connect(mapStateToProps, { updatePhotoMongo })(Map);
+export default connect(mapStateToProps, { updatePhotoMongo, fetchPhotosOverview })(Map);
