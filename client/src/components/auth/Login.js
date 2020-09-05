@@ -30,7 +30,7 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/feed" />;
   }
 
   return (
