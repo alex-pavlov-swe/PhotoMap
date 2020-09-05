@@ -67,7 +67,7 @@ const ShowPhoto = ({
               </p>
               <p>{photo[0].description}</p>
               <div className="mapLink text-center align-middle">
-                <Link to="/map">Add this photo to the map</Link>
+                <Link to="/mapAddPhoto">Add this photo to the map</Link>
               </div>
               <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </div>

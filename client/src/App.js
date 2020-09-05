@@ -14,17 +14,19 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
-
 import { loadUser } from './actions/auth';
 
 // Photomap
-import Map from './components/map/Map';
 import Upload from './components/upload/Upload';
 import UploadDetails from './components/upload/UploadDetails';
 import Feed from './components/feed/Feed';
 import ShowPhoto from './components/photo/ShowPhoto';
 import UpdatePhoto from './components/photo/UpdatePhoto';
 import Auth from './components/auth/Auth';
+
+// Photomap MAP
+import Map from './components/map/Map';
+import MapAddPhoto from './components/map/MapAddPhoto';
 
 function App() {
   useEffect(() => {
@@ -44,6 +46,7 @@ function App() {
           <Route exact path="/profile/:id" component={Profile} />
           <Route exact path="/profile/review/:id" component={Review} />
           <Route exact path="/map" component={Map} />
+          <Route exact path="/mapAddPhoto" component={MapAddPhoto} />
           <Route exact path="/feed" component={Feed} />
           <PrivateRoute exact path="/photo/:id" component={ShowPhoto} />
           <Route exact path="/photo/update/:id" component={UpdatePhoto} />

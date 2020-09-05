@@ -9,6 +9,7 @@ import reviews from './reviews';
 import photoUpload from './photoUpload';
 import photoScroll from './photoScroll';
 import currentPhoto from './currentPhoto';
+import mapState from './mapState'
 
 export default combineReducers({
   alert,
@@ -20,4 +21,5 @@ export default combineReducers({
   photoUpload,
   photoScroll,
   currentPhoto,
+  mapState
 });
