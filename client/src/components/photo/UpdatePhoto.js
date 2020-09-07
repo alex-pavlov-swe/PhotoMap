@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-	updatePhotoMongo,
-	getPhotoById,
-	deletePhotoFromFirebase,
-	deletePhotoFromMongo,
-} from '../../actions/photo';
+import { getPhotoById } from '../../actions/photo/currentPhotoGET';
+import { deletePhotoFromFirebase } from '../../actions/photoUpload/photoDeleteFirebase';
+import { deletePhotoFromMongo } from '../../actions/photoUpload/photoDeleteMongo';
+import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import Spinner from '../layout/Spinner';
 
 const UpdatePhoto = ({
@@ -25,13 +23,13 @@ const UpdatePhoto = ({
 	}, [getPhotoById]);
 
 	const [formData, setFormData] = useState({
-		id: photo[0]._id,
-		url: photo[0].url,
-		imageName: photo[0].imageName,
+		id: photo._id,
+		url: photo.url,
+		imageName: photo.imageName,
 		name: user.name,
 		avatar: user.avatar,
-		title: photo[0].title,
-		description: photo[0].description,
+		title: photo.title,
+		description: photo.description,
 		camera: '',
 		focalLength: '',
 		shutterSpeed: '',
