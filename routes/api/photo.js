@@ -11,7 +11,7 @@ const { restart } = require('nodemon');
 // @access Public
 router.get('/:id', async (req, res) => {
 	try {
-		const photo = await Photo.find({ _id: req.params.id });
+		const photo = await Photo.findById({ _id: req.params.id });
 		res.json(photo);
 	} catch (error) {
 		console.error(error.message);
@@ -22,7 +22,6 @@ router.get('/:id', async (req, res) => {
 // @route get api/photo
 // @desc get photos for an infinite scroll
 // @access Public
-
 router.get('/', async (req, res) => {
 	try {
 		const photos = await Photo.find();
@@ -37,49 +36,47 @@ router.get('/', async (req, res) => {
 // @route   Post api/photo
 // @desc    Create user photo
 // @access  Private
-router.post(
-	'/',
-	[auth],
-	async (req, res) => {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(500).json({ errors: errors.array() });
-		}
+router.post('/', [auth], async (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(500).json({ errors: errors.array() });
+	}
 
-		const {
-			url,
-			imageName,
-			name,
-			avatar,
-			title,
-			description,
-			camera,
-			focalLength,
-			shutterSpeed,
-			ISO,
-			keywords,
-			lngLat
-		} = req.body;
+	const {
+		url,
+		imageName,
+		name,
+		avatar,
+		title,
+		description,
+		camera,
+		focalLength,
+		shutterSpeed,
+		ISO,
+		keywords,
+		lngLat,
+	} = req.body;
 
-		// Build photo object
-		const photoFields = {};
+	// Build photo object
+	const photoFields = {};
 
-		photoFields.user = req.user.id;
+	photoFields.user = req.user.id;
 
-		if (url) photoFields.url = url;
-		if (imageName) photoFields.imageName = imageName;
-		if (name) photoFields.name = name;
-		if (avatar) photoFields.avatar = avatar;
-		if (title) photoFields.title = title;
-		if (description) photoFields.description = description;
-		if (camera) photoFields.camera = camera;
-		if (focalLength) photoFields.focalLength = focalLength;
-		if (shutterSpeed) photoFields.shutterSpeed = shutterSpeed;
-		if (ISO) photoFields.ISO = ISO;
-		if (keywords) photoFields.keywords = keywords;
-		if (lngLat) photoFields.lngLat = lngLat;
-		
-		try {
+	if (url) photoFields.url = url;
+	if (imageName) photoFields.imageName = imageName;
+	if (name) photoFields.name = name;
+	if (avatar) photoFields.avatar = avatar;
+	if (title) photoFields.title = title;
+	if (description) photoFields.description = description;
+	if (camera) photoFields.camera = camera;
+	if (focalLength) photoFields.focalLength = focalLength;
+	if (shutterSpeed) photoFields.shutterSpeed = shutterSpeed;
+	if (ISO) photoFields.ISO = ISO;
+	if (keywords) photoFields.keywords = keywords;
+	if (lngLat) photoFields.lngLat = lngLat;
+
+	try {
+		if (req.body.id) {
 			let photo = await Photo.find({ _id: req.body.id });
 
 			if (photo) {
@@ -89,20 +86,20 @@ router.post(
 					{ $set: photoFields },
 					{ new: true }
 				);
-		
+
 				res.status(200).json(photo);
-			} else {
-				// Create a new photo
-				photo = new Photo(photoFields);
-				await photo.save();
 			}
-			res.json(photo);
-		} catch (error) {
-			console.error(error.message);
-			res.status(500).send('Server Error');
+		} else {
+			// Create a new photo
+			photo = new Photo(photoFields);
+			await photo.save();
 		}
+		res.json(photo);
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send('Server Error');
 	}
-);
+});
 
 // @route   DELETE api/photo/:id
 // @desc    Delete a photo

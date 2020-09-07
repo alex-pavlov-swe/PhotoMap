@@ -5,16 +5,16 @@ import {
 } from '../../actions/types';
 
 // Fetch photos from Mongo to show on a map overview
-export const fetchPhotosOverview = (params, history) => async (dispatch) => {
+export const fetchPhotosOverview = (bounds) => async (dispatch) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	};
-	const body = JSON.stringify(params);
+    const body = JSON.stringify({ bounds });
 
 	try {
-		const res = await axios.get('/api/map/photos/overview', body, config);
+		const res = await axios.post(`/api/map/photos/overview`, body, config);
 		
 		dispatch({
 			type: MAP_PHOTOS_OVERVIEW_LOADED,
