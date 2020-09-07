@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,6 +8,7 @@ import Footer from '../layout/Footer';
 
 const Upload = ({
 	photo: { photo, loading },
+	auth: { user },
 	uploadPhotoFirebase,
 	history,
 }) => {
@@ -19,7 +20,7 @@ const Upload = ({
 		e.preventDefault();
 		const file = e.target.files[0];
 		const imageName = Math.round(Math.random() * 1000000000).toString();
-		await uploadPhotoFirebase(file, imageName, history);
+		await uploadPhotoFirebase(file, imageName, user._id, history);
 	};
 
 	return loading ? (
@@ -63,10 +64,12 @@ const Upload = ({
 Upload.propTypes = {
 	uploadPhotoFirebase: PropTypes.func.isRequired,
 	photo: PropTypes.object.isRequired,
+	auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	photo: state.photoUpload,
+	auth: state.auth,
 });
 
 export default connect(mapStateToProps, { uploadPhotoFirebase })(
