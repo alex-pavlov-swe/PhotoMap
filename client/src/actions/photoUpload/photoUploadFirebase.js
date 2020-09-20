@@ -7,7 +7,7 @@ import {
 } from '../../actions/types';
 
 // Upload photo to Firebase
-export const uploadPhotoFirebase = (file, imageName, history) => async (
+export const uploadPhotoFirebase = (file, imageName, userId, history) => async (
 	dispatch
 ) => {
 	try {
@@ -15,11 +15,13 @@ export const uploadPhotoFirebase = (file, imageName, history) => async (
 			type: FIREBASE_PHOTO_UPLOADING,
 		});
 
-		const storageRef = firebase.storage().ref('photos/' + imageName);
+		const storageRef = firebase
+			.storage()
+			.ref('photos/' + userId + '/' + imageName);
 		await storageRef.put(file);
 
 		const photo = {
-			url: `https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/photos%2F${imageName}?alt=media`,
+			url: `https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/photos%2F${userId}%2F${imageName}?alt=media`,
 			imageName: imageName,
 		};
 

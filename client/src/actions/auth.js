@@ -9,9 +9,11 @@ import {
 	LOGIN_FAIL,
 	LOGOUT,
 	FEED_CLEARED,
+	UPDATE_PROFILE,
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 import { toggleSignIn } from '../firebase/auth';
+import { getCurrentProfile } from './profile';
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -51,6 +53,19 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 			payload: res.data,
 		});
 		dispatch(loadUser());
+
+		const body_profile = {
+			user: res.data._id,
+			name: res.name,
+		};
+
+		const res_profile = await axios.post('/api/profile/', body_profile, config);
+
+		dispatch({
+			type: UPDATE_PROFILE,
+			payload: res_profile.data,
+		});
+
 		dispatch(setAlert('You are now registered and logged in', 'success'));
 	} catch (error) {
 		const errors = error.response.data.errors;
@@ -81,7 +96,10 @@ export const login = ({ email, password }) => async (dispatch) => {
 			type: LOGIN_SUCCESS,
 			payload: res.data,
 		});
-		dispatch(loadUser());
+
+		dispatch(loadUser()).then(() => {
+			dispatch(getCurrentProfile());
+		});
 	} catch (error) {
 		console.log(error);
 		const errors = error.response.data.errors;
