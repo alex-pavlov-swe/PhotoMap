@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
+import { getCurrentProfile } from './actions/profile';
 
 // Photomap
 import Upload from './components/upload/Upload';
@@ -29,40 +30,42 @@ import Map from './components/map/Map';
 import MapAddPhoto from './components/map/MapAddPhoto';
 
 function App() {
-  useEffect(() => {
-    store.dispatch(loadUser());
-  }, []);
+	useEffect(() => {
+		store.dispatch(loadUser()).then(() => {
+			store.dispatch(getCurrentProfile());
+		});
+	}, []);
 
-  return (
-    <Provider store={store}>
-      <Router>
-        <Navbar />
-        <Route exact path="/" component={Home} />
-        <Alert />
-        <Switch>
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/profiles" component={Profiles} />
-          <Route exact path="/profile/:id" component={Profile} />
-          <Route exact path="/profile/review/:id" component={Review} />
-          <Route exact path="/map" component={Map} />
-          <Route exact path="/mapAddPhoto" component={MapAddPhoto} />
-          <Route exact path="/feed" component={Feed} />
-          <PrivateRoute exact path="/photo/:id" component={ShowPhoto} />
-          <Route exact path="/photo/update/:id" component={UpdatePhoto} />
-          <Route exact path="/auth" component={Auth} />
-          <PrivateRoute exact path="/upload" component={Upload} />
-          <PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute
-            exact
-            path="/update_profile"
-            component={UpdateProfile}
-          />
-        </Switch>
-      </Router>
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<Router>
+				<Navbar />
+				<Route exact path="/" component={Home} />
+				<Alert />
+				<Switch>
+					<Route exact path="/register" component={Register} />
+					<Route exact path="/login" component={Login} />
+					<Route exact path="/profiles" component={Profiles} />
+					<Route exact path="/profile/:id" component={Profile} />
+					<Route exact path="/profile/review/:id" component={Review} />
+					<Route exact path="/map" component={Map} />
+					<Route exact path="/mapAddPhoto" component={MapAddPhoto} />
+					<Route exact path="/feed" component={Feed} />
+					<PrivateRoute exact path="/photo/:id" component={ShowPhoto} />
+					<Route exact path="/photo/update/:id" component={UpdatePhoto} />
+					<Route exact path="/auth" component={Auth} />
+					<PrivateRoute exact path="/upload" component={Upload} />
+					<PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
+					<PrivateRoute exact path="/dashboard" component={Dashboard} />
+					<PrivateRoute
+						exact
+						path="/update_profile"
+						component={UpdateProfile}
+					/>
+				</Switch>
+			</Router>
+		</Provider>
+	);
 }
 
 export default App;

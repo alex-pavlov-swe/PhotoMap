@@ -19,13 +19,13 @@ const UpdateProfile = ({
 }) => {
 	const [formData, setFormData] = useState({
 		name: user.name,
-		location: profile.location,
-		description: profile.description,
-		youtube: profile.social.youtube,
-		facebook: profile.social.facebook,
-		instagram: profile.social.instagram,
-		web: profile.social.web,
-		avatar: profile.avatar,
+		location: profile ? profile.location : '',
+		description: profile ? profile.description : '',
+		youtube: profile ? profile.social.youtube : '',
+		facebook: profile ? profile.social.facebook : '',
+		instagram: profile ? profile.social.instagram : '',
+		web: profile ? profile.social.web : '',
+		avatar: profile ? profile.avatar : '',
 	});
 
 	//const [displaySocialInputs, toggleSocialInputs] = useState(false);
@@ -175,7 +175,7 @@ const UpdateProfile = ({
 };
 
 UpdateProfile.propTypes = {
-	udpateProfile: PropTypes.func.isRequired,
+	updateProfile: PropTypes.func.isRequired,
 	getCurrentProfile: PropTypes.func.isRequired,
 	uploadAvatar: PropTypes.func.isRequired,
 	profile: PropTypes.object.isRequired,

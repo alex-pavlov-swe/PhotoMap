@@ -20,6 +20,7 @@ const Upload = ({
 		e.preventDefault();
 		const file = e.target.files[0];
 		const imageName = Math.round(Math.random() * 1000000000).toString();
+
 		await uploadPhotoFirebase(file, imageName, user._id, history);
 	};
 
