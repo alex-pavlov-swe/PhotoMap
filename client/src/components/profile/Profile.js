@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { getProfileById } from '../../actions/profile';
 import Spinner from '../../components/layout/Spinner';
 import ProfileTop from './ProfileTop';
-import ProfileAddReview from '../reviews/ProfileAddReview';
-import Reviews from '../reviews/Reviews';
+import PhotosAllByProfile from './PhotosAllByProfile';
+//import ProfileAddReview from '../reviews/ProfileAddReview';
+//import Reviews from '../reviews/Reviews';
 
 const Profile = ({
 	getProfileById,
@@ -43,14 +44,15 @@ const Profile = ({
 								<strong>Location:</strong>
 								{profile.location}
 							</p>
+							<PhotosAllByProfile />
 							{/*
-              <Reviews
-                lang={lang}
-                profileId={match.params.id}
-                profileName={profile.user.name}
-              />
-              <ProfileAddReview lang={lang} profileId={match.params.id} />
-              */}
+								<Reviews
+									lang={lang}
+									profileId={match.params.id}
+									profileName={profile.user.name}
+								/>
+								<ProfileAddReview lang={lang} profileId={match.params.id} />
+							*/}
 						</div>
 					</div>
 				</Fragment>
