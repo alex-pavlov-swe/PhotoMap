@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
@@ -9,7 +10,9 @@ const PhotosPreview = ({ mapState: { photosOverview, loading } }) => {
 	) : (
 		<div className="photos-preview">
 			{photosOverview.map((photo) => (
-				<img src={photo.url} alt="photo" />
+				<Link to={`/photo/${photo._id}`} photo={photo.title}>
+					<img src={photo.url} alt="photo"/>
+				</Link>
 			))}
 		</div>
 	);

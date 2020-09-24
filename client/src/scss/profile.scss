@@ -22,3 +22,14 @@
 .round-img {
 	border-radius: 50%;
 }
+
+.profile-photo-items-container {
+	display: flex;
+	flex-direction: row;
+	img {
+		width: 200px;
+		margin: 10px;
+		border-radius: 5px;
+		border: 1px solid grey;
+	}
+}
