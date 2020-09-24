@@ -22,18 +22,19 @@ const PhotosAllByProfile = ({
 			) : (
 				<Fragment>
 					<h3>All Photos by {auth.user ? auth.user.name : ''}</h3>
-					{profile.photos.length > 0 ? (
-						profile.photos
-							.map((photo) => (
-								<ProfilePhotoItem
-									key={photo._id}
-									url={photo.url}
-									title={photo.title}
-								/>
-							))
-					) : (
-						<div>You are no authorized or don't have any photos yet</div>
-					)}
+					<div className="profile-photo-items-container">
+						{profile.photos.length > 0 ? (
+							profile.photos
+								.map((photo) => (
+									<ProfilePhotoItem
+										key={photo._id}
+										photo={photo}
+									/>
+								))
+						) : (
+							<div>You are not authorized or don't have any photos yet</div>
+						)}
+					</div>
 				</Fragment>
 			)}
 		</Fragment>

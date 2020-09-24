@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ProfilePhotoItem = ({ url, title}) => {
+const ProfilePhotoItem = ({ photo: photo }) => {
     return (
-        <div>
-            <img src={url} width="200"/>
-        </div>
+        <Link to={`/photo/${photo._id}`} photo={photo.title}>
+            <img src={photo.url} alt="photo"/>
+        </Link>
     )
 }
 
