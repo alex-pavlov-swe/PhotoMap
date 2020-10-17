@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPhotos, loadingCompleted } from '../../actions/photo/feedPhotosGET';
 import Spinner from '../layout/Spinner';
-import FeedPhotoItem from '../feed/FeedPhotoItem';
+import FeedPhotoItem from '../FeedPhotoItem/FeedPhotoItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Feed = ({
@@ -24,8 +24,9 @@ const Feed = ({
 		});
 
 		setTimeout(() => {
-			document.getElementById('btn1').click();
-		}, 1000);
+            document.getElementById('btn1').click();
+        }, 2000);
+
 	}, []);
 
 	const fetchInitialData = () => {

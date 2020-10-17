@@ -3,27 +3,32 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
+import PhotosPreviewItem from './PhotosPreviewItem';
 
-const PhotosPreview = ({ mapState: { photosOverview, loading } }) => {
-	return loading ? (
-		<Spinner />
-	) : (
-		<div className="photos-preview">
-			{photosOverview.map((photo) => (
-				<Link to={`/photo/${photo._id}`} photo={photo.title}>
-					<img src={photo.url} alt="photo"/>
-				</Link>
-			))}
-		</div>
-	);
-};
+export class PhotosPreview extends React.Component {
+    render () {
+        const { photosOverview, loading } = this.props;
+        if (loading) {
+            return (<Spinner/>)
+        } else {
+            return (
+                <div className="photos-preview" onClick={this.open}>
+                    {photosOverview.map((photo) => (
+                        <PhotosPreviewItem photo={photo} />
+                    ))}
+                </div>
+            )
+        }
+    }
+}
 
-Map.propTypes = {
+PhotosPreview.propTypes = {
 	mapState: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-	mapState: state.mapState,
+    loading: state.mapState.loading,
+    photosOverview: state.mapState.photosOverview
 });
 
 export default connect(mapStateToProps)(PhotosPreview);

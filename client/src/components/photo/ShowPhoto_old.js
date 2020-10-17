@@ -13,11 +13,10 @@ const ShowPhoto = ({
 	match,
 	deletePhotoFromFirebase,
 	deletePhotoFromMongo,
-    history,
-    photoId
+	history,
 }) => {
 	useEffect(() => {
-		getPhotoById(photoId);
+		getPhotoById(match.params.id);
 	}, [getPhotoById]);
 
 	const onDeletePhoto = (e) => {
@@ -27,11 +26,19 @@ const ShowPhoto = ({
 
 	return (
 		<Fragment>
-            <br></br>
 			{loading ? (
 				<Spinner />
 			) : (
 				<div className="container-fluid" id="currentPhoto">
+					<div className="row bg-dark">
+						<div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
+							<Link to="/feed">
+								<div id="asd">
+									<i className="fas fa-times fa-2x"></i>
+								</div>
+							</Link>
+						</div>
+					</div>
 					<div className="row bg-dark" id="currentPhotoImg">
 						<div className="col-md-10 offset-md-1 text-center">
 							<img src={photo.url} />
@@ -80,7 +87,7 @@ const ShowPhoto = ({
 						</div>
 					</div>
 				</div>
-            )}
+			)}
 		</Fragment>
 	);
 };
