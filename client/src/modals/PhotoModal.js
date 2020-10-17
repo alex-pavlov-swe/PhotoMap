@@ -2,28 +2,39 @@ import React, { useEffect, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPhotoById } from '../../actions/photo/currentPhotoGET';
-import { deletePhotoFromFirebase } from '../../actions/photoUpload/photoDeleteFirebase';
-import { deletePhotoFromMongo } from '../../actions/photoUpload/photoDeleteMongo';
-import Spinner from '../layout/Spinner';
+import { getPhotoById } from '../actions/photo/currentPhotoGET';
+import { currentPhotoClose } from '../actions/photo/currentPhotoClose';
+import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
+import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
+import Spinner from '../components/layout/Spinner';
 
-const ShowPhoto = ({
+const PhotoModal = ({
 	currentPhoto: { photo, loading },
-	getPhotoById,
+    getPhotoById,
+    currentPhotoClose,
 	match,
 	deletePhotoFromFirebase,
 	deletePhotoFromMongo,
     history,
-    photoId
+    photoId,
+    close
 }) => {
 	useEffect(() => {
-		getPhotoById(photoId);
+        getPhotoById(photoId);
+
+        return () => {
+            currentPhotoClose();
+        }
 	}, [getPhotoById]);
 
 	const onDeletePhoto = (e) => {
 		deletePhotoFromFirebase(photo.imageName);
 		deletePhotoFromMongo(match.params.id, history);
-	};
+    };
+    
+    const closeModal = () => {
+        close();
+    }
 
 	return (
 		<Fragment>
@@ -32,6 +43,13 @@ const ShowPhoto = ({
 				<Spinner />
 			) : (
 				<div className="container-fluid" id="currentPhoto">
+                    <div className="row bg-dark">
+						<div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
+								<div id="asd" onClick={close}>
+									<i className="fas fa-times fa-2x"></i>
+								</div>
+						</div>
+					</div>
 					<div className="row bg-dark" id="currentPhotoImg">
 						<div className="col-md-10 offset-md-1 text-center">
 							<img src={photo.url} />
@@ -85,8 +103,9 @@ const ShowPhoto = ({
 	);
 };
 
-ShowPhoto.propTypes = {
-	getPhotoById: PropTypes.func.isRequired,
+PhotoModal.propTypes = {
+    getPhotoById: PropTypes.func.isRequired,
+    currentPhotoClose: PropTypes.func.isRequired,
 	deletePhotoFromFirebase: PropTypes.func.isRequired,
 	deletePhotoFromMongo: PropTypes.func.isRequired,
 	currentPhoto: PropTypes.object.isRequired,
@@ -97,7 +116,8 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-	getPhotoById,
+    getPhotoById,
+    currentPhotoClose,
 	deletePhotoFromFirebase,
 	deletePhotoFromMongo,
-})(withRouter(ShowPhoto));
+})(withRouter(PhotoModal));

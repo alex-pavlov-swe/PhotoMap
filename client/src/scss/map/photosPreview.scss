@@ -1,5 +1,11 @@
 .photos-preview {
+    display: flex;
+    flex-direction: row;
 	img {
-		max-height: 75px;
-	}
+        flex: 1;
+		max-height: 150px;
+    }
+    img:hover {
+        cursor: pointer;
+    }
 }

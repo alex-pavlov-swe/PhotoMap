@@ -21,7 +21,6 @@ import { getCurrentProfile } from './actions/profile';
 import Upload from './components/upload/Upload';
 import UploadDetails from './components/upload/UploadDetails';
 import Feed from './components/feed/Feed';
-import ShowPhoto from './components/photo/ShowPhoto';
 import UpdatePhoto from './components/photo/UpdatePhoto';
 import Auth from './components/auth/Auth';
 
@@ -51,7 +50,6 @@ function App() {
 					<Route exact path="/map" component={Map} />
 					<Route exact path="/mapAddPhoto" component={MapAddPhoto} />
 					<Route exact path="/feed" component={Feed} />
-					<PrivateRoute exact path="/photo/:id" component={ShowPhoto} />
 					<Route exact path="/photo/update/:id" component={UpdatePhoto} />
 					<Route exact path="/auth" component={Auth} />
 					<PrivateRoute exact path="/upload" component={Upload} />

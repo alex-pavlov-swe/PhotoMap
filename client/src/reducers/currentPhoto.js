@@ -6,7 +6,8 @@ import {
 	MONGO_PHOTO_DELETED,
 	MONGO_PHOTO_DELETING_ERROR,
 	FIREBASE_PHOTO_DELETED,
-	FIREBASE_PHOTO_DELETING_ERROR,
+    FIREBASE_PHOTO_DELETING_ERROR,
+    CURRENT_PHOTO_CLOSED
 } from '../actions/types';
 
 const initialState = {
@@ -40,7 +41,13 @@ export default function (state = initialState, action) {
 				...state,
 				photo: null,
 				loading: false,
-			};
+            };
+        case CURRENT_PHOTO_CLOSED:
+            return {
+                ...state,
+                photo: null,
+                loading: true,
+            };
 		case FIREBASE_PHOTO_DELETED:
 			return {
 				...state,
