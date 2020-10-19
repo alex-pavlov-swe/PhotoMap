@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 	try {
 		
 		const output = [];
-		const bounds = req.body.bounds;
+        const bounds = req.body.bounds;
 
 		const photos = await Photo.find();
 		

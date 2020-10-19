@@ -6,7 +6,7 @@ import {
 } from '../../actions/types';
 
 // Delete photo from MongoDb
-export const deletePhotoFromMongo = (photoId, imageName, history) => async (
+export const deletePhotoFromMongo = (photoId, imageName) => async (
 	dispatch
 ) => {
 	try {
@@ -15,7 +15,6 @@ export const deletePhotoFromMongo = (photoId, imageName, history) => async (
 			type: MONGO_PHOTO_DELETED,
 			payload: photoId,
 		});
-		history.push('/feed');
 	} catch (error) {
 		dispatch({
 			type: MONGO_PHOTO_DELETING_ERROR,

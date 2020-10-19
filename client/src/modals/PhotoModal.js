@@ -12,10 +12,8 @@ const PhotoModal = ({
 	currentPhoto: { photo, loading },
     getPhotoById,
     currentPhotoClose,
-	match,
 	deletePhotoFromFirebase,
 	deletePhotoFromMongo,
-    history,
     photoId,
     close
 }) => {
@@ -28,10 +26,13 @@ const PhotoModal = ({
 	}, [getPhotoById]);
 
 	const onDeletePhoto = (e) => {
-		deletePhotoFromFirebase(photo.imageName);
-		deletePhotoFromMongo(match.params.id, history);
+        closeModal();
+        deletePhotoFromFirebase(photo.user, photo.imageName)
+            .then(() => {
+                deletePhotoFromMongo(photo._id);
+            });
     };
-    
+
     const closeModal = () => {
         close();
     }

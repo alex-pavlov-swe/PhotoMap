@@ -6,9 +6,9 @@ import {
 } from '../../actions/types';
 
 // Delete photo from Firebase
-export const deletePhotoFromFirebase = (imageName) => async (dispatch) => {
+export const deletePhotoFromFirebase = (userId, imageName) => async (dispatch) => {
 	try {
-		const storageRef = firebase.storage().ref('photos/' + imageName);
+		const storageRef = firebase.storage().ref('photos/' + userId + '/' + imageName);
 		await storageRef.delete();
 
 		dispatch({

@@ -88,19 +88,19 @@ const Map = ({
 		map.on('moveend', function () {
 			currentZoom = map.getZoom();
 			currentPosition = map.getCenter();
-
 			fetchPhotos();
 		});
 
 		fetchPhotos();
 	};
 
-	const fetchPhotos = async (center, zoom) => {
-		await fetchPhotosOverview(map.getBounds());
-
-		photosOverview.forEach((photo) => {
-			showMarker(photo.lngLat);
-		});
+	const fetchPhotos = (center, zoom) => {
+        fetchPhotosOverview(map.getBounds())
+            .then(function(res) {
+                    photosOverview.forEach((photo) => {
+                        showMarker(photo.lngLat);
+                    });
+            });
 	};
 
 	return (
