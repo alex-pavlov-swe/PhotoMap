@@ -25,9 +25,7 @@ export class PhotosPreviewItem extends React.Component {
     render() {
         return (
             <Fragment>
-                <div onClick={this.open} className="text-center" id="feedPhotoItem">
-                    <img src={this.props.photo.url} alt="photo"/>
-                </div>
+                    <img onClick={this.open} src={this.props.photo.url} alt="photo"/>
                 <Modal
                     isOpen={this.state.showModal}
                     contentLabel="Minimal Modal Example"
