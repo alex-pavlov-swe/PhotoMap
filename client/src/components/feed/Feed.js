@@ -33,7 +33,6 @@ export class Feed extends React.Component {
     }
 
 	fetchInitialData() {
-        console.log("hello", this.props);
         const { photos } = this.props.photoScroll;
         loadingCompleted();
 		let initialPhotosCount = 3;

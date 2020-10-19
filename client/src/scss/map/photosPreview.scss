@@ -5,14 +5,14 @@
     flex-direction: row;
     //background-color: $COLOR_GREY_300;
     img {
-        border: 2px solid #eee;
+        border: 5px solid #eee;
         margin: 10px;
         max-height: 150px;
         border-radius: 25px;
-        box-shadow: 10px 10px 5px $COLOR_GREY_300;
+        box-shadow: 2px 2px 5px $COLOR_GREY_300;
     }
     img:hover {
         cursor: pointer;
-        box-shadow: 0 0 2px 3px rgba(0, 140, 186, 0.5);
+        box-shadow: 0 0 5px 5px rgba(0, 140, 186, 0.5);
     }
 }
