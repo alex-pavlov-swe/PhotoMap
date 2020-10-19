@@ -10,12 +10,12 @@ export const fetchPhotosOverview = (bounds) => async (dispatch) => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-	};
+    };
     const body = JSON.stringify({ bounds });
 
 	try {
 		const res = await axios.post(`/api/map/photos/overview`, body, config);
-		
+
 		dispatch({
 			type: MAP_PHOTOS_OVERVIEW_LOADED,
 			payload: res.data,
@@ -25,5 +25,5 @@ export const fetchPhotosOverview = (bounds) => async (dispatch) => {
 			type: MAP_PHOTOS_OVERVIEW_LOADING_ERROR,
 			payload: error,
 		});
-	}
+    }
 };

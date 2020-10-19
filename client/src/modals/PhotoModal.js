@@ -7,15 +7,14 @@ import { currentPhotoClose } from '../actions/photo/currentPhotoClose';
 import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import Spinner from '../components/layout/Spinner';
+import './styles.css';
 
 const PhotoModal = ({
 	currentPhoto: { photo, loading },
     getPhotoById,
     currentPhotoClose,
-	match,
 	deletePhotoFromFirebase,
 	deletePhotoFromMongo,
-    history,
     photoId,
     close
 }) => {
@@ -28,21 +27,24 @@ const PhotoModal = ({
 	}, [getPhotoById]);
 
 	const onDeletePhoto = (e) => {
-		deletePhotoFromFirebase(photo.imageName);
-		deletePhotoFromMongo(match.params.id, history);
+        closeModal();
+        deletePhotoFromFirebase(photo.user, photo.imageName)
+            .then(() => {
+                deletePhotoFromMongo(photo._id);
+            });
     };
-    
+
     const closeModal = () => {
         close();
     }
 
 	return (
-		<Fragment>
+		<Fragment id="photoModal">
             <br></br>
 			{loading ? (
 				<Spinner />
 			) : (
-				<div className="container-fluid" id="currentPhoto">
+				<div class="modal d-block full-screen-popup container-fluid" id="currentPhoto">
                     <div className="row bg-dark">
 						<div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
 								<div id="asd" onClick={close}>
@@ -52,7 +54,7 @@ const PhotoModal = ({
 					</div>
 					<div className="row bg-dark" id="currentPhotoImg">
 						<div className="col-md-10 offset-md-1 text-center">
-							<img src={photo.url} />
+							<img src={photo.url} class="modal-img"/>
 						</div>
 					</div>
 					<div className="row bg-light">

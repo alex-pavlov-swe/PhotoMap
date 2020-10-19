@@ -6,30 +6,35 @@ import Spinner from '../layout/Spinner';
 import FeedPhotoItem from '../FeedPhotoItem/FeedPhotoItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const Feed = ({
-	photoScroll: { photos, loading },
-	getPhotos,
-	loadingCompleted,
-}) => {
-	const [state, setState] = useState({
-		items: [],
-		next: 0,
-	});
+const mapStateToProps = (state) => ({
+    photoScroll: state.photoScroll
+});
 
-	useEffect(() => {
-		getPhotos().then(() => {
-			loadingCompleted().then(() => {
-				fetchInitialData();
+const mapDispatchToProps = (dispatch) => ({
+    getPhotos: () => dispatch(getPhotos()),
+    loadingCompleted: () => dispatch(loadingCompleted()),
+});
+
+export class Feed extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [],
+            next: 0
+        }
+    }
+
+    componentDidMount() {
+        this.props.getPhotos().then(() => {
+			this.props.loadingCompleted().then(() => {
+				this.fetchInitialData();
 			});
 		});
+    }
 
-		setTimeout(() => {
-            document.getElementById('btn1').click();
-        }, 2000);
-
-	}, []);
-
-	const fetchInitialData = () => {
+	fetchInitialData() {
+        const { photos } = this.props.photoScroll;
+        loadingCompleted();
 		let initialPhotosCount = 3;
 		let initialPhotos = [];
 
@@ -43,61 +48,57 @@ const Feed = ({
 					<FeedPhotoItem photo={photos[i]} key={photos[i].imageName} />
 				);
 			}
-			setState({
-				items: state.items.concat(initialPhotos),
+			this.setState({
+				items: this.state.items.concat(initialPhotos),
 				next: initialPhotosCount,
 			});
 		}
 	};
 
-	const fetchMoreData = () => {
-		if (state.next < photos.length) {
+	fetchMoreData(props) {
+        const { photos } = props;
+		if (this.state.next < photos.length) {
 			setTimeout(() => {
-				setState({
-					items: state.items.concat(
+				this.setState({
+					items: this.state.items.concat(
 						<FeedPhotoItem
-							photo={photos[state.next]}
-							key={photos[state.next].imageName}
+							photo={photos[this.state.next]}
+							key={photos[this.state.next].imageName}
 						/>
 					),
-					next: state.next + 1,
+					next: this.state.next + 1,
 				});
 			}, 500);
 		}
 	};
 
-	return loading ? (
-		<Spinner />
-	) : (
-		<div className="container">
-			<div className="row">
-				<div className="col-md-12">
-					<h2 className="mt-3 mb-4">Home feed</h2>
-					<button
-						className="btn btn-primary"
-						id="btn1"
-						style={{ visibility: 'hidden' }}
-						onClick={(e) => fetchInitialData()}
-					>
-						fetch
-					</button>
-				</div>
-			</div>
-			<InfiniteScroll
-				dataLength={state.items.length}
-				next={fetchMoreData}
-				hasMore={true}
-				loader={<h4>Loading...</h4>}
-				endMessage={
-					<p style={{ textAlign: 'center' }}>
-						<b>Yay! You have seen it all</b>
-					</p>
-				}
-			>
-				{state.items}
-			</InfiniteScroll>
-		</div>
-	);
+    render() {
+        const { loading } = this.props.photoScroll;
+        return (loading || !this.state.items.length) ? (
+            <Spinner />
+        ) : (
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <h2 className="mt-3 mb-4">Home feed</h2>
+                    </div>
+                </div>
+                <InfiniteScroll
+                    dataLength={this.state.items.length}
+                    next={this.fetchMoreData(this.props.photoScroll)}
+                    hasMore={true}
+                    loader={<h4>Loading...</h4>}
+                    endMessage={
+                        <p style={{ textAlign: 'center' }}>
+                            <b>Yay! You have seen it all</b>
+                        </p>
+                    }
+                >
+                    {this.state.items}
+                </InfiniteScroll>
+            </div>
+        );
+    }
 };
 
 Feed.propTypes = {
@@ -106,8 +107,4 @@ Feed.propTypes = {
 	photoScroll: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-	photoScroll: state.photoScroll,
-});
-
-export default connect(mapStateToProps, { getPhotos, loadingCompleted })(Feed);
+export default connect(mapStateToProps, mapDispatchToProps)(Feed);

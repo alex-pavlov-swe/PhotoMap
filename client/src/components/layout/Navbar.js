@@ -53,16 +53,13 @@ const Navbar = ({
 			</li>
 			<li className="nav-item">
 				<a className="nav-link" href="/register">
-					Register
+					Sign Up
 				</a>
 			</li>
 			<li className="nav-item mr-4">
 				<a className="nav-link" href="/login">
-					Login
+					Log In
 				</a>
-			</li>
-			<li>
-				<button className="btn btn-light">Upload</button>
 			</li>
 		</Fragment>
 	);

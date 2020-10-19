@@ -15,15 +15,9 @@ function Home({ auth: { isAuthenticated, loading } }) {
 							<h4>
 								Find the exact locations where amazing photos have been taken
 							</h4>
-							{!loading && isAuthenticated ? (
-								<Link className="btn btn-light mt-3" to="/map">
-									Exlore
-								</Link>
-							) : (
-								<Link className="btn btn-light mt-3" to="/login">
-									Join for free
-								</Link>
-							)}
+                            <Link className="btn btn-light mt-3" to="/map">
+								Explore
+							</Link>
 						</span>
 					</div>
 				</div>

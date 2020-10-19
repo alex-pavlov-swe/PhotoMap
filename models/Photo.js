@@ -9,7 +9,8 @@ const PhotoSchema = new Schema({
 	url: {
 		type: String,
 		required: true,
-	},
+    },
+    imageName: String,
 	name: String,
 	avatar: String,
 	lngLat: {
