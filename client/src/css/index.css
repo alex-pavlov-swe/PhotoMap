@@ -1,8 +1,6 @@
 nav {
   margin: 0px;
-  opacity: 40%;
-  position: absolute;
-  top: 0;
+  position: relative;
   font-family: 'Lato', sans-serif;
   font-weight: bold;
   font-size: 1rem;
@@ -34,6 +32,10 @@ nav {
   nav #upload-link {
     color: black;
     text-decoration: none; }
+  nav .avatar-show-photo {
+    width: 30px;
+    border-radius: 25px;
+    margin: 10px; }
 
 footer {
   position: absolute;
@@ -61,13 +63,31 @@ footer {
     font-size: 1.2rem;
     padding: 12px; }
 
-#map-container {
+#mapContainer {
   margin: 0;
   padding: 0;
-  border: 1px solid black; }
-  #map-container Map {
-    margin: 0;
-    padding: 0; }
+  border: 1px solid black;
+  height: 70vh; }
+
+Map {
+  position: absolute;
+  z-index: -1;
+  margin: 0;
+  padding: 0; }
+
+.photos-preview {
+  display: flex;
+  flex-direction: row;
+  background-color: #E0E0E0; }
+  .photos-preview img {
+    border: 5px solid #eee;
+    margin: 10px;
+    max-height: 150px;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px #E0E0E0; }
+  .photos-preview img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 5px rgba(0, 140, 186, 0.5); }
 
 #upload-container {
   width: 100%;
@@ -80,11 +100,19 @@ footer {
 #uploadDetails img {
   max-width: 200px; }
 
+#updatePhoto img {
+  max-width: 200px; }
+
 #feedPhotoItem {
   border-top: 2px solid #eee;
   padding-top: 15px; }
   #feedPhotoItem img {
-    max-width: 75%; }
+    max-width: 75%;
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #E0E0E0; }
+  #feedPhotoItem img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 2px 3px rgba(0, 140, 186, 0.5); }
   @media (min-width: 992px) {
     #feedPhotoItem img {
       max-width: 40%; } }
@@ -127,7 +155,8 @@ footer {
     font-weight: 800; }
   #currentPhoto .avatar-show-photo {
     width: 40px;
-    border-radius: 25px; }
+    border-radius: 25px;
+    margin: 10px; }
 
 @media (min-width: 992px) {
   #currentPhoto img {
@@ -136,6 +165,7 @@ footer {
 #login {
   height: 100vh;
   background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fauth.jpg?alt=media&token=ec226eb0-e2bf-4862-9441-60afdb64f937");
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,3 +222,30 @@ footer {
     -webkit-transition: opacity 0.5s linear;
     -moz-transition: opacity 0.5s linear;
     -o-transition: opacity 0.5s linear; }
+
+#update-profile-container input,
+#update-profile-container textarea {
+  width: 100%;
+  padding: 10px; }
+
+.profile-top {
+  color: white;
+  border-radius: 10%; }
+
+.profile-social-icon {
+  color: white; }
+
+.profile-social-icon :hover {
+  color: #707070; }
+
+.round-img {
+  border-radius: 50%; }
+
+.profile-photo-items-container {
+  display: flex;
+  flex-direction: row; }
+  .profile-photo-items-container img {
+    width: 200px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid grey; }
