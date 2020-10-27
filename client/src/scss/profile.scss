@@ -1,0 +1,35 @@
+#update-profile-container {
+	input,
+	textarea {
+		width: 100%;
+		padding: 10px;
+	}
+}
+
+.profile-top {
+	color: white;
+	border-radius: 10%;
+}
+
+.profile-social-icon {
+	color: white;
+}
+
+.profile-social-icon :hover {
+	color: #707070;
+}
+
+.round-img {
+	border-radius: 50%;
+}
+
+.profile-photo-items-container {
+	display: flex;
+	flex-direction: row;
+	img {
+		width: 200px;
+		margin: 10px;
+		border-radius: 5px;
+		border: 1px solid grey;
+	}
+}

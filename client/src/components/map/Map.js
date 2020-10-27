@@ -1,95 +1,127 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import '../../css/map.css';
-import { updatePhotoMongo } from '../../actions/photo';
+import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
+import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
+import { mapboxConfig } from '../../firebase/config';
+import PhotosPreview from './PhotosPreview';
 
 const Map = ({
-    currentPhoto: { photo, loading },
+    mapState: { photosOverview, loading },
     updatePhotoMongo,
-    history
+    fetchPhotosOverview,
+    history,
 }) => {
-
-    var currentPosition = {
-        lat: 0,
-        lng: 0
-    };
+    var currentPosition = [-122.7, 49.2];
+    var currentZoom = 9;
 
     var markers = [];
+    var map;
 
     useEffect(() => {
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYWxleHZhbiIsImEiOiJja2JyZ3V5amcwZXA4MnNvZTExeXliY3MxIn0.h4MnIZmh1ANGwnAunqJe2Q';
+        initMap();
+    }, []);
 
-        var map = new mapboxgl.Map({
-            container: document.getElementById("mapContainer"),
+    const showMarker = function (lngLat) {
+        var markerHeight = 50,
+            markerRadius = 10,
+            linearOffset = 25;
+
+        var popupOffsets = {
+            top: [0, 0],
+            'top-left': [0, 0],
+            'top-right': [0, 0],
+            bottom: [0, -markerHeight],
+            'bottom-left': [
+                linearOffset,
+                (markerHeight - markerRadius + linearOffset) * -1,
+            ],
+            'bottom-right': [
+                -linearOffset,
+                (markerHeight - markerRadius + linearOffset) * -1,
+            ],
+            left: [markerRadius, (markerHeight - markerRadius) * -1],
+            right: [-markerRadius, (markerHeight - markerRadius) * -1],
+        };
+
+        var popup = new mapboxgl.Popup({
+            offset: popupOffsets,
+            className: 'my-class',
+            closeButton: false,
+        })
+            .setMaxWidth('300px')
+            .addTo(map);
+
+        var newMarker = new mapboxgl.Marker({ draggable: true })
+            .setLngLat(lngLat)
+            .addTo(map)
+            .setPopup(popup);
+
+        markers.push(newMarker);
+    };
+
+    const initMap = function () {
+        mapboxgl.accessToken = mapboxConfig.accessToken;
+
+        map = new mapboxgl.Map({
+            container: document.getElementById('mapContainer'),
             style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
-            center: [-74.5, 40], // starting position [lng, lat]
-            zoom: 9 // starting zoom
+            center: currentPosition, // starting position [lng, lat]
+            zoom: currentZoom, // starting zoom
         });
 
-        map.on('click', function(e) {
-            currentPosition.lat = e.lngLat.lat;
-            currentPosition.lng = e.lngLat.lng;
-          
-            var prevMarker = markers.pop();
-            if (prevMarker) {
-                prevMarker.remove();
-            }
-
-            var markerHeight = 50, markerRadius = 10, linearOffset = 25;
-
-            var popupOffsets = {
-                'top': [0, 0],
-                'top-left': [0,0],
-                'top-right': [0,0],
-                'bottom': [0, -markerHeight],
-                'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-                'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-                'left': [markerRadius, (markerHeight - markerRadius) * -1],
-                'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-            };
-
-            const saveLocationButton = "<div class='text-center'><button class='btn btn-warning' id='saveLocationButton'>Save Location</button><div>Drag the marker to change location</div></div>";
-
-            var popup = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class', closeButton: false})
-                .setHTML(saveLocationButton)
-                .setMaxWidth("300px")
-                .addTo(map)
-            
-            var newMarker = new mapboxgl.Marker({draggable: true})
-                .setLngLat(e.lngLat)
-                .addTo(map)
-                .setPopup(popup);
-
-            markers.push(newMarker);
-
-            document.getElementById('saveLocationButton').addEventListener("click", function() {
-                const formData = {};
-                formData.lngLat = currentPosition;
-                formData.id = photo[0]._id;
-                updatePhotoMongo(formData, history);
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl,
+                zoom: 10,
             })
-          });
-          
-          var nav = new mapboxgl.NavigationControl();
-          map.addControl(nav, 'top-left');
+        );
 
-    })
+        var nav = new mapboxgl.NavigationControl();
+        map.addControl(nav, 'top-left');
+
+        map.on('moveend', function () {
+            currentZoom = map.getZoom();
+            currentPosition = map.getCenter();
+            fetchPhotos();
+        });
+
+        fetchPhotos();
+    };
+
+    const fetchPhotos = (center, zoom) => {
+        fetchPhotosOverview(map.getBounds())
+            .then(function (res) {
+                photosOverview.forEach((photo) => {
+                    showMarker(photo.lngLat);
+                });
+            });
+    };
+
     return (
-        <div>
-          <div id="mapContainer" className="mapContainer" />
-        </div>
-    )
-}
+        <Fragment className="mapWrapper">
+            <div id="mapContainer" className="mapContainer" />
+            <PhotosPreview />
+        </Fragment>
+    );
+};
 
 Map.propTypes = {
-    currentPhoto: PropTypes.object.isRequired,
-    updatePhotoMongo: PropTypes.func.isRequired
-}
+    mapState: PropTypes.object.isRequired,
+    updatePhotoMongo: PropTypes.func.isRequired,
+    fetchPhotosOverview: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
-    currentPhoto: state.currentPhoto
-})
+    mapState: state.mapState,
+});
 
-export default connect(mapStateToProps, {updatePhotoMongo})(Map);
+export default connect(mapStateToProps, {
+    updatePhotoMongo,
+    fetchPhotosOverview,
+})(Map);

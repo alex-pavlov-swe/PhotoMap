@@ -1,8 +1,9 @@
 nav {
   margin: 0px;
-  opacity: 40%;
-  position: absolute;
-  top: 0;
+  //opacity: 40%;
+  //position: absolute;
+  //top: 0;
+  position: relative;
   font-family: 'Lato', sans-serif;
   font-weight: bold;
   font-size: 1rem;
@@ -43,6 +44,11 @@ nav {
   #upload-link {
     color: $text-on-white-button;
     text-decoration: none;
+  }
+  .avatar-show-photo {
+    width: 30px;
+    border-radius: 25px;
+    margin: 10px;
   }
 }
 
