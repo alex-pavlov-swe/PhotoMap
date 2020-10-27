@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, profile, logout }) => {
     const authLinks = (
         <Fragment>
             <li className="nav-item">
@@ -21,6 +21,15 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 <Link className="nav-link" onClick={logout} to="/">
                     Logout
                 </Link>
+            </li>
+            <li>
+                {user && profile.profile && (
+                    <span>
+                        <Link to={`/profile/${profile.profile.user._id}`}>
+                            <img src={user.avatar} className="avatar-show-photo" />
+                        </Link>
+                    </span>
+                )}
             </li>
             <li>
                 <Link className="btn btn-light" to="/upload" id="upload-link">
@@ -120,6 +129,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
+    profile: state.profile
 });
 
 export default connect(mapStateToProps, {
