@@ -4,56 +4,56 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const authLinks = (
-    <Fragment>
-        <li className="nav-item">
-            <Link className="nav-link" to="/map">
-                Explore
-                </Link>
-        </li>
-        <li className="nav-item">
-            <Link className="nav-link" to="/feed">
-                Feed
-                </Link>
-        </li>
-        <li className="nav-item mr-4">
-            <Link className="nav-link" onClick={logout} to="/">
-                Logout
-                </Link>
-        </li>
-        <li>
-            <Link className="btn btn-light" to="/upload" id="upload-link">
-                <i className="fas fa-arrow-up"></i>
-                    Upload
-                </Link>
-        </li>
-    </Fragment>
-);
-
-const guestLinks = (
-    <Fragment>
-        <li className="nav-item">
-            <Link className="nav-link" to="/map">
-                Map
-                </Link>
-        </li>
-        <li className="nav-item">
-            <Link className="nav-link" to="/register">
-                Register
-                </Link>
-        </li>
-        <li className="nav-item mr-4">
-            <Link className="nav-link" to="/login">
-                Login
-                </Link>
-        </li>
-        <li>
-            <button className="btn btn-light">Upload</button>
-        </li>
-    </Fragment>
-);
-
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+    const authLinks = (
+        <Fragment>
+            <li className="nav-item">
+                <Link className="nav-link" to="/map">
+                    Explore
+                    </Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/feed">
+                    Feed
+                    </Link>
+            </li>
+            <li className="nav-item mr-4">
+                <Link className="nav-link" onClick={logout} to="/">
+                    Logout
+                </Link>
+            </li>
+            <li>
+                <Link className="btn btn-light" to="/upload" id="upload-link">
+                    <i className="fas fa-arrow-up"></i>
+                        Upload
+                    </Link>
+            </li>
+        </Fragment>
+    );
+
+    const guestLinks = (
+        <Fragment>
+            <li className="nav-item">
+                <Link className="nav-link" to="/map">
+                    Map
+                    </Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/register">
+                    Register
+                    </Link>
+            </li>
+            <li className="nav-item mr-4">
+                <Link className="nav-link" to="/login">
+                    Login
+                    </Link>
+            </li>
+            <li>
+                <button className="btn btn-light">Upload</button>
+            </li>
+        </Fragment>
+    );
+
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-0">
             <Link className="navbar-brand" to="/">
