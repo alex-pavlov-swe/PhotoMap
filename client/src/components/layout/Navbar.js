@@ -17,14 +17,14 @@ const authLinks = (
                 </Link>
         </li>
         <li className="nav-item mr-4">
-            <Link className="nav-link" onClick={logout} href="/">
+            <Link className="nav-link" onClick={logout} to="/">
                 Logout
                 </Link>
         </li>
         <li>
             <Link className="btn btn-light" to="/upload" id="upload-link">
                 <i className="fas fa-arrow-up"></i>
-          Upload
+                    Upload
                 </Link>
         </li>
     </Fragment>
@@ -38,12 +38,12 @@ const guestLinks = (
                 </Link>
         </li>
         <li className="nav-item">
-            <Link className="nav-link" href="/register">
+            <Link className="nav-link" to="/register">
                 Register
                 </Link>
         </li>
         <li className="nav-item mr-4">
-            <Link className="nav-link" href="/login">
+            <Link className="nav-link" to="/login">
                 Login
                 </Link>
         </li>
