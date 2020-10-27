@@ -1,6 +1,7 @@
 node_modules/
 client/node_modules
 config/default.json
+config/nginx
 img/
 client/src/firebase/config.js
 /client/build
