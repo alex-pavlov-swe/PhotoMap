@@ -1,0 +1,4 @@
+img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 5px rgba(0, 140, 186, 0.5);;
+}
