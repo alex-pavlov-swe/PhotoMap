@@ -44,7 +44,7 @@ const PhotosAllByProfile = ({
 PhotosAllByProfile.propTypes = {
 	photosAllByProfileGET: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
-	profil: PropTypes.object.isRequired
+	profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
