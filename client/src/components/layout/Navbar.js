@@ -48,6 +48,11 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile, logout }) =
                     </Link>
             </li>
             <li className="nav-item">
+                <Link className="nav-link" to="/feed">
+                    Feed
+                    </Link>
+            </li>
+            <li className="nav-item">
                 <Link className="nav-link" to="/register">
                     Register
                     </Link>
