@@ -107,7 +107,6 @@ const Map = ({
     const fetchPhotos = (center, zoom) => {
         fetchPhotosOverview(map.getBounds())
             .then(function (res) {
-                console.log(res.data);
                 res.data.forEach((photo) => {
                     showMarker(photo.lngLat, photo.url);
                 });
