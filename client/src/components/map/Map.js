@@ -9,6 +9,7 @@ import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
 import { mapboxConfig } from '../../firebase/config';
 import PhotosPreview from './PhotosPreview';
+import PopupItem from './PopupItem';
 
 const Map = ({
     mapState: { photosOverview, loading },
@@ -32,7 +33,7 @@ const Map = ({
         });
     }
 
-    const showMarker = function (lngLat, url) {
+    const showMarker = function (lngLat, url, photoId) {
         var markerHeight = 50,
             markerRadius = 10,
             linearOffset = 25;
@@ -54,15 +55,18 @@ const Map = ({
             right: [-markerRadius, (markerHeight - markerRadius) * -1],
         };
 
-        const popupIcon =
+        const popupItem =
 			`<div class='text-center'><img src=${url} width="100" /></div>`;
-
+/*
+        const popupItem =
+            `<PopupItem />`;
+*/
         var popup = new mapboxgl.Popup({
             offset: popupOffsets,
             className: 'my-class',
             closeButton: false,
         })
-            .setHTML(popupIcon)
+            .setHTML(popupItem)
             .setMaxWidth('300px')
             .addTo(map);
 
@@ -108,7 +112,7 @@ const Map = ({
         fetchPhotosOverview(map.getBounds())
             .then(function (res) {
                 res.data.forEach((photo) => {
-                    showMarker(photo.lngLat, photo.url);
+                    showMarker(photo.lngLat, photo.url, photo._id);
                 });
             });
     };
