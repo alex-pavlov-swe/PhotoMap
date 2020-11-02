@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
@@ -19,12 +19,18 @@ const Map = ({
     var currentPosition = [-122.7, 49.2];
     var currentZoom = 9;
 
-    var markers = [];
     var map;
+    var markers = [];
 
     useEffect(() => {
         initMap();
     }, []);
+
+    const showAllMarkers = function() {
+        photosOverview.forEach((photo) => {
+            showMarker(photo.lngLat);
+        });
+    }
 
     const showMarker = function (lngLat) {
         var markerHeight = 50,
@@ -91,20 +97,20 @@ const Map = ({
             fetchPhotos();
         });
 
-        fetchPhotos();
+        fetchPhotos()
     };
 
     const fetchPhotos = (center, zoom) => {
         fetchPhotosOverview(map.getBounds())
             .then(function (res) {
-                photosOverview.forEach((photo) => {
+                res.data.forEach((photo) => {
                     showMarker(photo.lngLat);
                 });
             });
     };
 
     return (
-        <Fragment className="mapWrapper">
+        <Fragment>
             <div id="mapContainer" className="mapContainer" />
             <PhotosPreview />
         </Fragment>

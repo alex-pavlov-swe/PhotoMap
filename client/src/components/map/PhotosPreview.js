@@ -6,6 +6,10 @@ import Spinner from '../layout/Spinner';
 import PhotosPreviewItem from './PhotosPreviewItem';
 
 export class PhotosPreview extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         const { photosOverview, loading } = this.props;
         if (loading) {
@@ -14,7 +18,7 @@ export class PhotosPreview extends React.Component {
             return (
                 <div className="photos-preview" onClick={this.open}>
                     {photosOverview.map((photo) => (
-                        <PhotosPreviewItem photo={photo} />
+                        <PhotosPreviewItem photo={photo} key={photo._id}/>
                     ))}
                 </div>
             )
@@ -27,7 +31,7 @@ PhotosPreview.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    loading: state.mapState.loading,
+    mapState: state.mapState,
     photosOverview: state.mapState.photosOverview
 });
 

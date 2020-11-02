@@ -19,7 +19,9 @@ export const fetchPhotosOverview = (bounds) => async (dispatch) => {
 		dispatch({
 			type: MAP_PHOTOS_OVERVIEW_LOADED,
 			payload: res.data,
-		});
+        });
+
+        return res;
 	} catch (error) {
 		dispatch({
 			type: MAP_PHOTOS_OVERVIEW_LOADING_ERROR,

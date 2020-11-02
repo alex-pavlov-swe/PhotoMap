@@ -50,12 +50,12 @@ export class PhotoModal extends React.Component {
 	render() {
         const { photo, loading } = this.props.currentPhoto;
         return (
-            <Fragment id="photoModal">
+            <Fragment>
                 <br></br>
                 {loading ? (
                     <Spinner/>
                 ) : (
-                    <div class="modal d-block full-screen-popup container-fluid" id="currentPhoto">
+                    <div className="modal d-block full-screen-popup container-fluid" id="currentPhoto">
                         <div className="row bg-dark">
                             <div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
                                     <div id="asd" onClick={this.closeModal}>
@@ -65,7 +65,7 @@ export class PhotoModal extends React.Component {
                         </div>
                         <div className="row bg-dark" id="currentPhotoImg">
                             <div className="col-md-10 offset-md-1 text-center">
-                                <img src={photo.url} class="modal-img"/>
+                                <img src={photo.url} className="modal-img"/>
                             </div>
                         </div>
                         <div className="row bg-light">
