@@ -32,7 +32,7 @@ const Map = ({
         });
     }
 
-    const showMarker = function (lngLat) {
+    const showMarker = function (lngLat, url) {
         var markerHeight = 50,
             markerRadius = 10,
             linearOffset = 25;
@@ -54,15 +54,19 @@ const Map = ({
             right: [-markerRadius, (markerHeight - markerRadius) * -1],
         };
 
+        const popupIcon =
+			`<div class='text-center'><img src=${url} width="100" /></div>`;
+
         var popup = new mapboxgl.Popup({
             offset: popupOffsets,
             className: 'my-class',
             closeButton: false,
         })
+            .setHTML(popupIcon)
             .setMaxWidth('300px')
             .addTo(map);
 
-        var newMarker = new mapboxgl.Marker({ draggable: true })
+        var newMarker = new mapboxgl.Marker({ draggable: false })
             .setLngLat(lngLat)
             .addTo(map)
             .setPopup(popup);
@@ -103,8 +107,9 @@ const Map = ({
     const fetchPhotos = (center, zoom) => {
         fetchPhotosOverview(map.getBounds())
             .then(function (res) {
+                console.log(res.data);
                 res.data.forEach((photo) => {
-                    showMarker(photo.lngLat);
+                    showMarker(photo.lngLat, photo.url);
                 });
             });
     };
