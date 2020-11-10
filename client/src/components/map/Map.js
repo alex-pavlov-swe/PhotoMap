@@ -57,14 +57,12 @@ const Map = ({
 
         const popupItem =
 			`<div class='text-center'><img src=${url} width="100" /></div>`;
-/*
-        const popupItem =
-            `<PopupItem />`;
-*/
+
         var popup = new mapboxgl.Popup({
             offset: popupOffsets,
             className: 'my-class',
             closeButton: false,
+            closeOnMove: true
         })
             .setHTML(popupItem)
             .setMaxWidth('300px')
@@ -72,8 +70,13 @@ const Map = ({
 
         var newMarker = new mapboxgl.Marker({ draggable: false })
             .setLngLat(lngLat)
-            .addTo(map)
-            .setPopup(popup);
+            .setPopup(popup)
+
+        newMarker.getElement().addEventListener('click', () => {
+            //newMarker.togglePopup();
+        });
+
+        newMarker.addTo(map);
 
         markers.push(newMarker);
     };
