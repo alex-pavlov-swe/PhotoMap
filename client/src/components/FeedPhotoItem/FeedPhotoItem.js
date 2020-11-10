@@ -30,7 +30,7 @@ export class FeedPhotoItem extends Component {
                         <img src={this.props.photo.url} alt="photo"/>
                         <h1>{this.props.photo.title}</h1>
                         <p>{this.props.photo.description}</p>
-                        <p>by {this.props.photo.userName}</p>
+                        <p>by {this.props.photo.name}</p>
                     </div>
                 </div>
                 <Modal
