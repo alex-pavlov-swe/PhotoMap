@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import '../../css/map.css';
 import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import { mapboxConfig } from '../../firebase/config';
 

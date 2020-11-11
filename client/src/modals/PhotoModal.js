@@ -7,7 +7,6 @@ import { currentPhotoClose } from '../actions/photo/currentPhotoClose';
 import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import Spinner from '../components/layout/Spinner';
-import './styles.css';
 
 const mapStateToProps = (state) => ({
 	currentPhoto: state.currentPhoto,

@@ -1,0 +1,267 @@
+#login {
+  height: 100vh;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fauth.jpg?alt=media&token=ec226eb0-e2bf-4862-9441-60afdb64f937");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -80px; }
+  #login .form {
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+    padding: 20px; }
+    #login .form input {
+      border-radius: 5px;
+      padding: 5px; }
+    #login .form button {
+      width: 100%; }
+  #login .hide {
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    -webkit-transition: opacity 0.5s linear;
+    -moz-transition: opacity 0.5s linear;
+    -o-transition: opacity 0.5s linear; }
+  #login .show {
+    opacity: 1;
+    transition: opacity 0.5s linear;
+    -webkit-transition: opacity 0.5s linear;
+    -moz-transition: opacity 0.5s linear;
+    -o-transition: opacity 0.5s linear; }
+
+#register {
+  height: 100vh;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fauth.jpg?alt=media&token=ec226eb0-e2bf-4862-9441-60afdb64f937");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -80px; }
+  #register .form {
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+    padding: 20px; }
+    #register .form input {
+      border-radius: 5px;
+      padding: 5px; }
+    #register .form button {
+      width: 100%; }
+  #register .hide {
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    -webkit-transition: opacity 0.5s linear;
+    -moz-transition: opacity 0.5s linear;
+    -o-transition: opacity 0.5s linear; }
+  #register .show {
+    opacity: 1;
+    transition: opacity 0.5s linear;
+    -webkit-transition: opacity 0.5s linear;
+    -moz-transition: opacity 0.5s linear;
+    -o-transition: opacity 0.5s linear; }
+
+#feedPhotoItem {
+  border-top: 2px solid #eee;
+  padding-top: 15px; }
+  #feedPhotoItem img {
+    max-width: 75%;
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #E0E0E0; }
+  #feedPhotoItem img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 2px 3px rgba(0, 140, 186, 0.5); }
+  @media (min-width: 992px) {
+    #feedPhotoItem img {
+      max-width: 40%; } }
+
+#homeImage {
+  color: white;
+  background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page.jpg?alt=media&token=3dc44167-b4f4-4e04-8970-b96aaacf460f");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  margin-top: -80px;
+  display: flex;
+  align-items: center; }
+  #homeImage span h1 {
+    font-size: 4rem; }
+  #homeImage span .btn {
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 12px; }
+
+#mapContainer {
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+  height: 70vh; }
+
+Map {
+  position: absolute;
+  z-index: -1;
+  margin: 0;
+  padding: 0; }
+
+.photos-preview {
+  display: flex;
+  flex-direction: row;
+  background-color: #E0E0E0;
+  max-width: 100%;
+  scroll-behavior: auto;
+  overflow-x: scroll; }
+  .photos-preview img {
+    border: 5px solid #eee;
+    margin: 10px;
+    max-height: 150px;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px #E0E0E0; }
+  .photos-preview img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 5px rgba(0, 140, 186, 0.5); }
+
+nav {
+  margin: 0px;
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  height: 80px;
+  border-bottom: 1px solid white; }
+  nav .navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem; }
+  nav ul form {
+    background-color: white;
+    border-radius: 10px; }
+    nav ul form input {
+      border-radius: 10px;
+      padding-left: 10px;
+      border: none;
+      height: 32px;
+      width: 200px; }
+    nav ul form input:focus {
+      outline: none; }
+    nav ul form i {
+      background-color: white;
+      padding: 7px;
+      border: 0px; }
+    nav ul form button {
+      background-color: white; }
+  nav .btn {
+    border-radius: 10px; }
+  nav #upload-link {
+    color: black;
+    text-decoration: none; }
+  nav .avatar-show-photo {
+    width: 30px;
+    border-radius: 25px;
+    margin: 10px; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  font-size: 1.35rem;
+  margin: 0; }
+
+#update-profile-container input,
+#update-profile-container textarea {
+  width: 100%;
+  padding: 10px; }
+
+.profile-top {
+  color: white;
+  border-radius: 10%; }
+
+.profile-social-icon {
+  color: white; }
+
+.profile-social-icon :hover {
+  color: #707070; }
+
+.round-img {
+  border-radius: 50%; }
+
+.profile-photo-items-container {
+  display: flex;
+  flex-direction: row; }
+  .profile-photo-items-container img {
+    width: 200px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid grey; }
+
+#upload-container {
+  width: 100%;
+  position: absolute;
+  top: 20;
+  margin-top: -1px; }
+  #upload-container .btn {
+    font-size: 1.5rem; }
+
+#uploadDetails img {
+  max-width: 200px; }
+
+#updatePhoto img {
+  max-width: 200px; }
+
+#mapContainer {
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+  height: 70vh; }
+
+Map {
+  position: absolute;
+  z-index: -1;
+  margin: 0;
+  padding: 0; }
+
+#currentPhoto {
+  margin: 0;
+  padding: 0; }
+  #currentPhoto img {
+    max-width: 80%;
+    padding-top: 0px;
+    margin-top: -15px; }
+  #currentPhoto i {
+    color: black;
+    padding: 0;
+    margin: 0; }
+  #currentPhoto i:hover {
+    color: #8a8c81;
+    cursor: pointer; }
+  #currentPhoto .edit-icon {
+    padding: 10px; }
+  #currentPhoto #currentPhotoImg {
+    padding: 10px;
+    padding-bottom: 30px; }
+  #currentPhoto #deletePhoto:hover {
+    text-decoration: underline;
+    cursor: pointer; }
+  #currentPhoto .mapLink {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2FmapLink.png?alt=media&token=cdc6e859-63ca-4f42-bb0e-2a9e5f5c14f5");
+    width: 300px;
+    height: 150px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 50%;
+    font-size: 20px;
+    color: black;
+    font-weight: 800; }
+  #currentPhoto .avatar-show-photo {
+    width: 40px;
+    border-radius: 25px;
+    margin: 10px; }
+
+@media (min-width: 992px) {
+  #currentPhoto img {
+    max-width: 70%; } }
