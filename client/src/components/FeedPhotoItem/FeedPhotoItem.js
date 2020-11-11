@@ -41,10 +41,7 @@ export class FeedPhotoItem extends React.Component {
                 </div>
                 <Modal
                     isOpen={this.state.showModal}
-<<<<<<< HEAD
-=======
                     className="photo-modal d-block"
->>>>>>> 2d23d22e7e3371dbe828a80e6ba2e01bdb80f6e4
                 >
                     <PhotoModal photoId={this.props.photo._id} close={this.close}></PhotoModal>
                 </Modal>
