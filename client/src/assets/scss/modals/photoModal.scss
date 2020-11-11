@@ -1,5 +1,21 @@
 @import '../constants/screenSizes.scss';
 
+.d-block {
+    display: block!important;
+}
+
+.photo-modal {
+    height: 100vh;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    outline: 0;
+}
+
 #currentPhoto {
     margin: 0;
     padding: 0;

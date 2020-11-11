@@ -163,7 +163,7 @@ const Map = ({
             <PhotosPreview />
             <Modal
                     isOpen={showModal}
-                    className="modal d-block"
+                    className="photo-modal d-block"
                 >
                     <PhotoModal photoId={photoId} close={closeModal}></PhotoModal>
                 </Modal>

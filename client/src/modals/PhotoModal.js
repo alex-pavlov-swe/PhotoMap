@@ -54,7 +54,7 @@ export class PhotoModal extends React.Component {
                 {loading ? (
                     <Spinner/>
                 ) : (
-                    <div className="modal d-block full-screen-popup container-fluid" id="currentPhoto">
+                    <div className="photo-modal d-block full-screen-popup container-fluid" id="currentPhoto">
                         <div className="row bg-dark">
                             <div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
                                     <div id="asd" onClick={this.closeModal}>
