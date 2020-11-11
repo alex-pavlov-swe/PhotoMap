@@ -76,7 +76,7 @@
 
 #homeImage {
   color: white;
-  background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page.jpg?alt=media&token=3dc44167-b4f4-4e04-8970-b96aaacf460f");
+  background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page2.jpg?alt=media&token=e93707c5-4ac6-4feb-91aa-f7758171bf6a");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -91,6 +91,12 @@
     font-weight: bold;
     font-size: 1.2rem;
     padding: 12px; }
+  @media (max-width: 576px) {
+    #homeImage {
+      background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page.jpg?alt=media&token=3dc44167-b4f4-4e04-8970-b96aaacf460f");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover; } }
 
 #mapContainer {
   margin: 0;
@@ -123,6 +129,7 @@ Map {
 
 nav {
   margin: 0px;
+  opacity: 70%;
   position: relative;
   font-family: 'Lato', sans-serif;
   font-weight: bold;
@@ -147,9 +154,13 @@ nav {
     nav ul form i {
       background-color: white;
       padding: 7px;
-      border: 0px; }
+      border: 0px;
+      border-radius: 10px; }
     nav ul form button {
       background-color: white; }
+    @media (max-width: 656px) {
+      nav ul form {
+        visibility: hidden; } }
   nav .btn {
     border-radius: 10px; }
   nav #upload-link {
@@ -159,6 +170,11 @@ nav {
     width: 30px;
     border-radius: 25px;
     margin: 10px; }
+
+@media (max-width: 576px) {
+  .navbar-nav {
+    background-color: #343A40;
+    padding: 10px; } }
 
 footer {
   position: absolute;
