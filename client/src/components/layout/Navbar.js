@@ -62,9 +62,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile, logout }) =
                     Login
                     </Link>
             </li>
-            <li>
-                <button className="btn btn-light">Upload</button>
-            </li>
         </Fragment>
     );
 
@@ -88,7 +85,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile, logout }) =
             <div className="collapse navbar-collapse" id="navbarMain">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <form className="mr-4">
+                        <form className="mr-4 searchContainer">
                             <i className="fas fa-search"></i>
                             <input type="text" placeholder="Enter a place" />
                         </form>

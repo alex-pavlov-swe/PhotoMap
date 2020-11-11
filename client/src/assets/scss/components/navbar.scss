@@ -1,6 +1,6 @@
 nav {
   margin: 0px;
-  //opacity: 40%;
+  opacity: 70%;
   //position: absolute;
   //top: 0;
   position: relative;
@@ -32,9 +32,13 @@ nav {
         background-color: white;
         padding: 7px;
         border: 0px;
+        border-radius: 10px;
       }
       button {
         background-color: white;
+      }
+      @media (max-width: #{$screen-sm-min-search}) {
+        visibility: hidden;
       }
     }
   }
@@ -51,6 +55,14 @@ nav {
     margin: 10px;
   }
 }
+
+
+@media (max-width: #{$screen-sm-min}) {
+    .navbar-nav {
+        background-color: #343A40;
+        padding: 10px;
+    }
+  }
 
 footer {
   position: absolute;
