@@ -36,11 +36,6 @@ export class FeedPhotoItem extends Component {
                 </div>
                 <Modal
                     isOpen={this.state.showModal}
-<<<<<<< HEAD
-=======
-                    contentLabel="Minimal Modal Example"
-                    className="modal"
->>>>>>> c9c7fa980b289650c4c129c67ab8e375154fda28
                 >
                     <PhotoModal photoId={this.props.photo._id} close={this.close}></PhotoModal>
                 </Modal>
