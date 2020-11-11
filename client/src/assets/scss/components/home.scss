@@ -1,0 +1,28 @@
+#homeImage {
+  color: white;
+  background: url('https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page2.jpg?alt=media&token=e93707c5-4ac6-4feb-91aa-f7758171bf6a');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  margin-top: -$navbar-height;
+  display: flex;
+  align-items: center; // vertical alignment
+  span {
+    h1 {
+      font-size: 4rem;
+    }
+    .btn {
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 12px;
+    }
+  }
+  @media (max-width: #{$screen-sm-min}) {
+    background: url('https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page.jpg?alt=media&token=3dc44167-b4f4-4e04-8970-b96aaacf460f');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}

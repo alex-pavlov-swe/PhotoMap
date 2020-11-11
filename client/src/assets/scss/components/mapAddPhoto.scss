@@ -1,0 +1,11 @@
+#mapContainer {
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    height: 70vh; }
+
+  Map {
+    position: absolute;
+    z-index: -1;
+    margin: 0;
+    padding: 0; }

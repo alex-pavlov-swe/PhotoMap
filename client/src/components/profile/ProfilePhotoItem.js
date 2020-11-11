@@ -28,8 +28,7 @@ export class ProfilePhotoItem extends React.Component {
                 <img onClick={this.open} src={this.props.photo.url} alt="photo"/>
                 <Modal
                     isOpen={this.state.showModal}
-                    contentLabel="Minimal Modal Example"
-                    className="modal d-block"
+                    className="photo-modal d-block"
                 >
                     <PhotoModal photoId={this.props.photo._id} close={this.close}></PhotoModal>
                 </Modal>

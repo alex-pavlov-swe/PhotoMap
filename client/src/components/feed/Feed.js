@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPhotos, loadingCompleted } from '../../actions/photo/feedPhotosGET';
 import Spinner from '../layout/Spinner';
-import FeedPhotoItem from '../FeedPhotoItem/FeedPhotoItem';
+import FeedPhotoItem from '../feedPhotoItem/FeedPhotoItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const mapStateToProps = (state) => ({

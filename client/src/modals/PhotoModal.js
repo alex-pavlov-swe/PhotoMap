@@ -7,7 +7,6 @@ import { currentPhotoClose } from '../actions/photo/currentPhotoClose';
 import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import Spinner from '../components/layout/Spinner';
-import './styles.css';
 
 const mapStateToProps = (state) => ({
 	currentPhoto: state.currentPhoto,
@@ -55,7 +54,7 @@ export class PhotoModal extends React.Component {
                 {loading ? (
                     <Spinner/>
                 ) : (
-                    <div className="modal d-block full-screen-popup container-fluid" id="currentPhoto">
+                    <div className="photo-modal d-block full-screen-popup container-fluid" id="currentPhoto">
                         <div className="row bg-dark">
                             <div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
                                     <div id="asd" onClick={this.closeModal}>
