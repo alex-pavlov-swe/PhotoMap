@@ -1,75 +1,61 @@
-@import '../constants/screenSizes.scss';
-
 #login {
   height: 100vh;
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fauth.jpg?alt=media&token=ec226eb0-e2bf-4862-9441-60afdb64f937');
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fauth.jpg?alt=media&token=ec226eb0-e2bf-4862-9441-60afdb64f937");
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -$navbar-height;
-  .form {
+  margin-top: -80px; }
+  #login .form {
     background-color: white;
     border-radius: 5px;
     width: 300px;
-    padding: 20px;
-    input {
+    padding: 20px; }
+    #login .form input {
       border-radius: 5px;
-      padding: 5px;
-    }
-    button {
-      width: 100%;
-    }
-  }
-  .hide {
+      padding: 5px; }
+    #login .form button {
+      width: 100%; }
+  #login .hide {
     opacity: 0;
     transition: opacity 0.5s linear;
     -webkit-transition: opacity 0.5s linear;
     -moz-transition: opacity 0.5s linear;
-    -o-transition: opacity 0.5s linear;
-  }
-  .show {
+    -o-transition: opacity 0.5s linear; }
+  #login .show {
     opacity: 1;
     transition: opacity 0.5s linear;
     -webkit-transition: opacity 0.5s linear;
     -moz-transition: opacity 0.5s linear;
-    -o-transition: opacity 0.5s linear;
-  }
-}
+    -o-transition: opacity 0.5s linear; }
 
 #register {
   height: 100vh;
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fauth.jpg?alt=media&token=ec226eb0-e2bf-4862-9441-60afdb64f937');
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fauth.jpg?alt=media&token=ec226eb0-e2bf-4862-9441-60afdb64f937");
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -$navbar-height;
-  .form {
+  margin-top: -80px; }
+  #register .form {
     background-color: white;
     border-radius: 5px;
     width: 300px;
-    padding: 20px;
-    input {
+    padding: 20px; }
+    #register .form input {
       border-radius: 5px;
-      padding: 5px;
-    }
-    button {
-      width: 100%;
-    }
-  }
-  .hide {
+      padding: 5px; }
+    #register .form button {
+      width: 100%; }
+  #register .hide {
     opacity: 0;
     transition: opacity 0.5s linear;
     -webkit-transition: opacity 0.5s linear;
     -moz-transition: opacity 0.5s linear;
-    -o-transition: opacity 0.5s linear;
-  }
-  .show {
+    -o-transition: opacity 0.5s linear; }
+  #register .show {
     opacity: 1;
     transition: opacity 0.5s linear;
     -webkit-transition: opacity 0.5s linear;
     -moz-transition: opacity 0.5s linear;
-    -o-transition: opacity 0.5s linear;
-  }
-}
+    -o-transition: opacity 0.5s linear; }
