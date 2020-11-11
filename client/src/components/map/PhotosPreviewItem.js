@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal';
 import PhotoModal from '../../modals/PhotoModal';
-import './styles.css';
 
 export class PhotosPreviewItem extends React.Component {
     constructor(props) {
@@ -36,8 +35,7 @@ export class PhotosPreviewItem extends React.Component {
                 <img onClick={this.open} src={this.props.photo.url} alt="photo"/>
                 <Modal
                     isOpen={this.state.showModal}
-                    contentLabel="Minimal Modal Example"
-                    className="modal d-block"
+                    className="photo-modal d-block"
                 >
                     <PhotoModal photoId={this.props.photo._id} close={this.close}></PhotoModal>
                 </Modal>

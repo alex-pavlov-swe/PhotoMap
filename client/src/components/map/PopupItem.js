@@ -39,7 +39,7 @@ export class PopupItem extends React.Component {
                 <Modal
                     isOpen={this.state.showModal}
                     contentLabel="Minimal Modal Example"
-                    className="modal d-block"
+                    className="photo-modal d-block"
                 >
                     <PhotoModal photoId={this.props.photoId} close={this.close}></PhotoModal>
                 </Modal>
