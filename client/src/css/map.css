@@ -13,7 +13,10 @@ Map {
 .photos-preview {
   display: flex;
   flex-direction: row;
-  background-color: #E0E0E0; }
+  background-color: #E0E0E0;
+  max-width: 100%;
+  scroll-behavior: auto;
+  overflow-x: scroll; }
   .photos-preview img {
     border: 5px solid #eee;
     margin: 10px;

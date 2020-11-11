@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
@@ -9,6 +9,8 @@ import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
 import { mapboxConfig } from '../../firebase/config';
 import PhotosPreview from './PhotosPreview';
+import Modal from 'react-modal';
+import PhotoModal from '../../modals/PhotoModal';
 
 const Map = ({
     mapState: { photosOverview, loading },
@@ -19,14 +21,40 @@ const Map = ({
     var currentPosition = [-122.7, 49.2];
     var currentZoom = 9;
 
-    var markers = [];
     var map;
+    var markers = [];
 
     useEffect(() => {
         initMap();
     }, []);
 
-    const showMarker = function (lngLat) {
+    const [showModal, setShowModal] = useState(false);
+    const [photoId, setPhotoId] = useState(null);
+
+    const openModal = (id) => {
+        setPhotoId(id);
+        setShowModal(true);
+        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
+        for (let i = 0; i < itemsToHide.length; i++) {
+            itemsToHide[i].style.display = 'none';
+        }
+    }
+
+    const closeModal = () => {
+        setShowModal(false);
+        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
+        for (let i = 0; i < itemsToHide.length; i++) {
+            itemsToHide[i].style.display = 'block';
+        }
+    }
+
+    const showAllMarkers = function() {
+        photosOverview.forEach((photo) => {
+            showMarker(photo.lngLat);
+        });
+    }
+
+    const showMarker = function (lngLat, url, photoId) {
         var markerHeight = 50,
             markerRadius = 10,
             linearOffset = 25;
@@ -48,18 +76,45 @@ const Map = ({
             right: [-markerRadius, (markerHeight - markerRadius) * -1],
         };
 
+        const popupItem =
+            `<div class='text-center'><img src=${url} width="100" id=${photoId}></div>`;
+
+        function htmlPopup(){
+            var html = "";
+            html += "<div class='text-center'>";
+            html += "<img src=" + url;
+            html += " id='" + photoId + "'";
+            html += " width='100'/></div>";
+            //html += "<p>" + feature.properties.description + "</p>";
+            return html;
+        }
+
         var popup = new mapboxgl.Popup({
             offset: popupOffsets,
             className: 'my-class',
             closeButton: false,
+            closeOnMove: true
         })
+            .setHTML(htmlPopup())
             .setMaxWidth('300px')
             .addTo(map);
 
-        var newMarker = new mapboxgl.Marker({ draggable: true })
+        var newMarker = new mapboxgl.Marker({ draggable: false })
             .setLngLat(lngLat)
-            .addTo(map)
-            .setPopup(popup);
+            .setPopup(popup)
+
+        newMarker.getElement().addEventListener("click", () => {
+            //newMarker.togglePopup();
+            setTimeout(() => {
+                if (popup.getElement()) {
+                    popup.getElement().addEventListener("click", () => {
+                        openModal(photoId);
+                    })
+                }
+            }, 300);
+        });
+
+        newMarker.addTo(map);
 
         markers.push(newMarker);
     };
@@ -91,22 +146,28 @@ const Map = ({
             fetchPhotos();
         });
 
-        fetchPhotos();
+        fetchPhotos()
     };
 
     const fetchPhotos = (center, zoom) => {
         fetchPhotosOverview(map.getBounds())
             .then(function (res) {
-                photosOverview.forEach((photo) => {
-                    showMarker(photo.lngLat);
+                res.data.forEach((photo) => {
+                    showMarker(photo.lngLat, photo.url, photo._id);
                 });
             });
     };
 
     return (
-        <Fragment className="mapWrapper">
+        <Fragment>
             <div id="mapContainer" className="mapContainer" />
             <PhotosPreview />
+            <Modal
+                    isOpen={showModal}
+                    className="modal d-block"
+                >
+                    <PhotoModal photoId={photoId} close={closeModal}></PhotoModal>
+                </Modal>
         </Fragment>
     );
 };

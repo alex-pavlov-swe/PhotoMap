@@ -17,6 +17,9 @@ Map {
     display: flex;
     flex-direction: row;
     background-color: $COLOR_GREY_300;
+    max-width: 100%;
+    scroll-behavior: auto;
+    overflow-x: scroll;
     img {
         border: 5px solid #eee;
         margin: 10px;

@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import PhotoModal from '../../modals/PhotoModal';
 import './styles.css';
 
-export class PhotosPreviewItem extends React.Component {
+export class PopupItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,17 +33,20 @@ export class PhotosPreviewItem extends React.Component {
     render() {
         return (
             <Fragment>
-                <img onClick={this.open} src={this.props.photo.url} alt="photo"/>
+                Test
+                {/*
+                <img onClick={this.open} src={this.props.url} alt="photo"/>
                 <Modal
                     isOpen={this.state.showModal}
                     contentLabel="Minimal Modal Example"
                     className="modal d-block"
                 >
-                    <PhotoModal photoId={this.props.photo._id} close={this.close}></PhotoModal>
+                    <PhotoModal photoId={this.props.photoId} close={this.close}></PhotoModal>
                 </Modal>
+                */}
             </Fragment>
         );
     }
 }
 
-export default PhotosPreviewItem
+export default PopupItem
