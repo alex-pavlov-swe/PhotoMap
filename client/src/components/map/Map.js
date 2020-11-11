@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
@@ -9,7 +9,8 @@ import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
 import { mapboxConfig } from '../../firebase/config';
 import PhotosPreview from './PhotosPreview';
-import PopupItem from './PopupItem';
+import Modal from 'react-modal';
+import PhotoModal from '../../modals/PhotoModal';
 
 const Map = ({
     mapState: { photosOverview, loading },
@@ -26,6 +27,26 @@ const Map = ({
     useEffect(() => {
         initMap();
     }, []);
+
+    const [showModal, setShowModal] = useState(false);
+    const [photoId, setPhotoId] = useState(null);
+
+    const openModal = (id) => {
+        setPhotoId(id);
+        setShowModal(true);
+        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
+        for (let i = 0; i < itemsToHide.length; i++) {
+            itemsToHide[i].style.display = 'none';
+        }
+    }
+
+    const closeModal = () => {
+        setShowModal(false);
+        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
+        for (let i = 0; i < itemsToHide.length; i++) {
+            itemsToHide[i].style.display = 'block';
+        }
+    }
 
     const showAllMarkers = function() {
         photosOverview.forEach((photo) => {
@@ -56,7 +77,17 @@ const Map = ({
         };
 
         const popupItem =
-			`<div class='text-center'><img src=${url} width="100" /></div>`;
+            `<div class='text-center'><img src=${url} width="100" id=${photoId}></div>`;
+
+        function htmlPopup(){
+            var html = "";
+            html += "<div class='text-center'>";
+            html += "<img src=" + url;
+            html += " id='" + photoId + "'";
+            html += " width='100'/></div>";
+            //html += "<p>" + feature.properties.description + "</p>";
+            return html;
+        }
 
         var popup = new mapboxgl.Popup({
             offset: popupOffsets,
@@ -64,7 +95,7 @@ const Map = ({
             closeButton: false,
             closeOnMove: true
         })
-            .setHTML(popupItem)
+            .setHTML(htmlPopup())
             .setMaxWidth('300px')
             .addTo(map);
 
@@ -72,8 +103,15 @@ const Map = ({
             .setLngLat(lngLat)
             .setPopup(popup)
 
-        newMarker.getElement().addEventListener('click', () => {
+        newMarker.getElement().addEventListener("click", () => {
             //newMarker.togglePopup();
+            setTimeout(() => {
+                if (popup.getElement()) {
+                    popup.getElement().addEventListener("click", () => {
+                        openModal(photoId);
+                    })
+                }
+            }, 300);
         });
 
         newMarker.addTo(map);
@@ -124,6 +162,12 @@ const Map = ({
         <Fragment>
             <div id="mapContainer" className="mapContainer" />
             <PhotosPreview />
+            <Modal
+                    isOpen={showModal}
+                    className="modal d-block"
+                >
+                    <PhotoModal photoId={photoId} close={closeModal}></PhotoModal>
+                </Modal>
         </Fragment>
     );
 };
