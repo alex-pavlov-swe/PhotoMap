@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal';
 import PhotoModal from '../../modals/PhotoModal';
+import './styles.css';
 
 export class FeedPhotoItem extends Component {
     constructor() {
@@ -36,6 +37,7 @@ export class FeedPhotoItem extends Component {
                 <Modal
                     isOpen={this.state.showModal}
                     contentLabel="Minimal Modal Example"
+                    className="modal"
                 >
                     <PhotoModal photoId={this.props.photo._id} close={this.close}></PhotoModal>
                 </Modal>
