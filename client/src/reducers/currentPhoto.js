@@ -1,6 +1,8 @@
 import {
 	CURRENT_PHOTO_FETCHED,
-	CURRENT_PHOTO_FETCHING_ERROR,
+    CURRENT_PHOTO_FETCHING_ERROR,
+    CURRENT_PHOTO_PROFILE_FETCHED,
+	CURRENT_PHOTO_PROFILE_FETCHING_ERROR,
 	MONGO_PHOTO_UPDATED,
 	MONGO_PHOTO_UPDATING_ERROR,
 	MONGO_PHOTO_DELETED,
@@ -11,7 +13,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-	photo: null,
+    photo: null,
+    profile: null,
 	loading: true,
 	error: {},
 };
@@ -26,11 +29,18 @@ export default function (state = initialState, action) {
 				...state,
 				photo: payload,
 				loading: false,
-			};
+            };
+        case CURRENT_PHOTO_PROFILE_FETCHED:
+            return {
+                ...state,
+                profile: payload,
+                loading: false,
+            }
 		case CURRENT_PHOTO_FETCHING_ERROR:
 		case MONGO_PHOTO_DELETING_ERROR:
 		case FIREBASE_PHOTO_DELETING_ERROR:
 		case MONGO_PHOTO_UPDATING_ERROR:
+	    case CURRENT_PHOTO_PROFILE_FETCHING_ERROR:
 			return {
 				...state,
 				error: payload,

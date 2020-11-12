@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPhotoById } from '../actions/photo/currentPhotoGET';
+import { currentPhotoProfileGET } from '../actions/photo/currentPhotoProfileGET';
 import { currentPhotoClose } from '../actions/photo/currentPhotoClose';
 import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import Spinner from '../components/layout/Spinner';
+import { NO_AVATAR } from '../constants/links';
 
 const mapStateToProps = (state) => ({
 	currentPhoto: state.currentPhoto,
@@ -16,7 +18,8 @@ const mapDispatchToProps = (dispatch) => ({
     getPhotoById: (id) => dispatch(getPhotoById(id)),
     currentPhotoClose: () => dispatch(currentPhotoClose()),
 	deletePhotoFromFirebase: (user, imageName) => dispatch(deletePhotoFromFirebase(user, imageName)),
-	deletePhotoFromMongo: (id) => dispatch(deletePhotoFromMongo(id))
+    deletePhotoFromMongo: (id) => dispatch(deletePhotoFromMongo(id)),
+    currentPhotoProfileGET: (id) => dispatch(currentPhotoProfileGET(id))
 });
 
 export class PhotoModal extends React.Component {
@@ -25,7 +28,10 @@ export class PhotoModal extends React.Component {
         this.closeModal = this.closeModal.bind(this);
     }
 	componentDidMount() {
-        this.props.getPhotoById(this.props.photoId);
+        this.props.getPhotoById(this.props.photoId)
+        .then(() => {
+            this.props.currentPhotoProfileGET(this.props.currentPhoto && this.props.currentPhoto.photo ? this.props.currentPhoto.photo.user : null);
+        });
     };
 
     componenWillUnmount() {
@@ -37,7 +43,7 @@ export class PhotoModal extends React.Component {
         this.closeModal();
         this.props.deletePhotoFromFirebase(photo.user, photo.imageName)
             .then(() => {
-                deletePhotoFromMongo(photo._id);
+                this.props.deletePhotoFromMongo(photo._id);
             });
     };
 
@@ -47,7 +53,7 @@ export class PhotoModal extends React.Component {
     }
 
 	render() {
-        const { photo, loading } = this.props.currentPhoto;
+        const { photo, profile, loading } = this.props.currentPhoto;
         return (
             <Fragment>
                 <br></br>
@@ -87,9 +93,15 @@ export class PhotoModal extends React.Component {
                                 <h1>{photo.title}</h1>
                                 <p>
                                     <span>
-                                        <img src={photo.avatar} className="avatar-show-photo" />
+                                        <Link to={`/profile/${profile ? profile.user._id : ''}`}>
+                                            <img src={profile && profile.avatar ? profile.avatar : NO_AVATAR } className="avatar-show-photo" />
+                                        </Link>
                                     </span>
-                                    <span>by {photo.name}</span>
+                                    <span>
+                                        <Link to={`/profile/${profile ? profile.user._id : ''}`}>
+                                            {photo.name}
+                                        </Link>
+                                        </span>
                                 </p>
                                 <p>{photo.description}</p>
                                 <div className="mapLink text-center align-middle">
@@ -118,10 +130,12 @@ export class PhotoModal extends React.Component {
 
 PhotoModal.propTypes = {
     getPhotoById: PropTypes.func.isRequired,
+    currentPhotoProfileGET: PropTypes.func.isRequired,
     currentPhotoClose: PropTypes.func.isRequired,
 	deletePhotoFromFirebase: PropTypes.func.isRequired,
-	deletePhotoFromMongo: PropTypes.func.isRequired,
-	currentPhoto: PropTypes.object.isRequired,
+    deletePhotoFromMongo: PropTypes.func.isRequired,
+    getPhotoById: PropTypes.func.isRequired,
+    currentPhoto: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhotoModal);

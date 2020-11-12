@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated, loading, user }, profile, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }, logout }) => {
     const authLinks = (
         <Fragment>
             <li className="nav-item">
@@ -23,10 +23,10 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile, logout }) =
                 </Link>
             </li>
             <li>
-                {user && profile.profile && (
+                {user && profile && (
                     <span>
-                        <Link to={`/profile/${profile.profile.user._id}`}>
-                            <img src={user.avatar} className="avatar-show-photo" />
+                        <Link to={`/profile/${profile.user._id}`}>
+                            <img src={profile.avatar ? profile.avatar : user.avatar} className="avatar-show-photo" />
                         </Link>
                     </span>
                 )}

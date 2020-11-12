@@ -18,7 +18,7 @@ const Map = ({
     history,
 }) => {
     var currentPosition = [-122.7, 49.2];
-    var currentZoom = 9;
+    var currentZoom = 2;
 
     var map;
     var markers = [];

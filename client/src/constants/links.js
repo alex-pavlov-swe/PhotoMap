@@ -1,0 +1,1 @@
+export const NO_AVATAR = 'https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/avatars%2Fnoimage.png?alt=media&token=bc7439de-bd4f-4f1c-a413-db562b735a62';
