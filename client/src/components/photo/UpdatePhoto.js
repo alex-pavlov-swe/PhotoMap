@@ -104,6 +104,9 @@ const UpdatePhoto = ({
 								onChange={(e) => onChange(e)}
 							/>
 						</div>
+                        <div className="mapLink text-center align-middle">
+                            <Link to="/mapAddPhoto">Add this photo to the map</Link>
+                        </div>
 						<div className="form-group">
 							<button
 								className="btn btn-primary mr-2"

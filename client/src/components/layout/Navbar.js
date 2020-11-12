@@ -7,6 +7,15 @@ import { logout } from '../../actions/auth';
 const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }, logout }) => {
     const authLinks = (
         <Fragment>
+            <li>
+                {user && profile && (
+                    <span>
+                        <Link to={`/profile/${profile.user._id}`}>
+                            <img src={profile.avatar ? profile.avatar : user.avatar} className="avatar-show-photo" />
+                        </Link>
+                    </span>
+                )}
+            </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/map">
                     Explore
@@ -21,15 +30,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
                 <Link className="nav-link" onClick={logout} to="/">
                     Logout
                 </Link>
-            </li>
-            <li>
-                {user && profile && (
-                    <span>
-                        <Link to={`/profile/${profile.user._id}`}>
-                            <img src={profile.avatar ? profile.avatar : user.avatar} className="avatar-show-photo" />
-                        </Link>
-                    </span>
-                )}
             </li>
             <li>
                 <Link className="btn btn-light" to="/upload" id="upload-link">
@@ -85,35 +85,10 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
             <div className="collapse navbar-collapse" id="navbarMain">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <form className="mr-4 searchContainer">
+                        <form className="mr-4 mt-2 searchContainer">
                             <i className="fas fa-search"></i>
                             <input type="text" placeholder="Enter a place" />
                         </form>
-                    </li>
-                    <li className="nav-item dropdown" hidden>
-                        <a
-                            className="nav-link dropdown-toggle"
-                            href="#"
-                            id="navbarDropdown"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            Dropdown
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href="#">
-                                Action
-                        </a>
-                            <a className="dropdown-item" href="#">
-                                Another action
-                        </a>
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">
-                                Something else here
-                        </a>
-                        </div>
                     </li>
                     {!loading && (
                         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

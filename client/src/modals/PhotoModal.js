@@ -9,9 +9,12 @@ import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFireb
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import Spinner from '../components/layout/Spinner';
 import { NO_AVATAR } from '../constants/links';
+import Modal from 'react-modal';
+import { UpdatePhotoModal } from './UpdatePhotoModal';
 
 const mapStateToProps = (state) => ({
-	currentPhoto: state.currentPhoto,
+    currentPhoto: state.currentPhoto,
+    auth: state.auth
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -26,7 +29,13 @@ export class PhotoModal extends React.Component {
     constructor(props) {
         super(props);
         this.closeModal = this.closeModal.bind(this);
+        this.state = {
+            showUpdateModal: false
+        };
+        this.openUpdateModal = this.openUpdateModal.bind(this);
+        this.closeUpdateModal = this.closeUpdateModal.bind(this);
     }
+
 	componentDidMount() {
         this.props.getPhotoById(this.props.photoId)
         .then(() => {
@@ -40,11 +49,14 @@ export class PhotoModal extends React.Component {
 
 	onDeletePhoto (e) {
         const { photo } = this.props.currentPhoto;
-        this.closeModal();
-        this.props.deletePhotoFromFirebase(photo.user, photo.imageName)
-            .then(() => {
-                this.props.deletePhotoFromMongo(photo._id);
-            });
+
+        if (window.confirm('Are you sure you want to delete this photo?')) {
+            this.closeModal();
+            this.props.deletePhotoFromFirebase(photo.user, photo.imageName)
+                .then(() => {
+                    this.props.deletePhotoFromMongo(photo._id);
+                });
+        }
     };
 
     closeModal() {
@@ -52,8 +64,17 @@ export class PhotoModal extends React.Component {
         this.props.currentPhotoClose();
     }
 
+    openUpdateModal() {
+        this.setState({ showUpdateModal: true });
+    }
+
+    closeUpdateModal() {
+        this.setState({ showUpdateModal: false });
+    }
+
 	render() {
         const { photo, profile, loading } = this.props.currentPhoto;
+        const { user } = this.props.auth;
         return (
             <Fragment>
                 <br></br>
@@ -63,9 +84,9 @@ export class PhotoModal extends React.Component {
                     <div className="photo-modal d-block full-screen-popup container-fluid" id="currentPhoto">
                         <div className="row bg-dark">
                             <div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
-                                    <div id="asd" onClick={this.closeModal}>
-                                        <i className="fas fa-times fa-2x"></i>
-                                    </div>
+                                <div id="asd" onClick={this.closeModal}>
+                                    <i className="fas fa-times fa-2x"></i>
+                                </div>
                             </div>
                         </div>
                         <div className="row bg-dark" id="currentPhotoImg">
@@ -73,21 +94,25 @@ export class PhotoModal extends React.Component {
                                 <img src={photo.url} className="modal-img"/>
                             </div>
                         </div>
-                        <div className="row bg-light">
-                            <div className="col-md-10 offset-1 text-left">
-                                <span>
-                                    <Link to={`/photo/update/${photo._id}`}>
-                                        <i className="fas fa-pencil-alt edit-icon"></i>
-                                    </Link>
-                                </span>
-                                <span
-                                    id="deletePhoto edit-icon"
-                                    onClick={(e) => this.onDeletePhoto(e)}
-                                >
-                                    <i className="far fa-trash-alt"></i>
-                                </span>
+                        {user && user._id === photo.user ? (
+                            <div className="row bg-light">
+                                <div className="col-md-10 offset-1 text-left">
+                                    <span>
+                                        <Link to={`/photo/update/${photo._id}`}>
+                                            <i className="fas fa-pencil-alt edit-icon"></i>
+                                        </Link>
+                                    </span>
+                                    <span
+                                        id="deletePhoto edit-icon"
+                                        onClick={(e) => this.onDeletePhoto(e)}
+                                    >
+                                        <i className="far fa-trash-alt"></i>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            null
+                        )}
                         <div className="row bg-light border border-primary">
                             <div className="col-md-12 text-center border border-warning">
                                 <h1>{photo.title}</h1>

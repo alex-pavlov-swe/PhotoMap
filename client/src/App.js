@@ -50,7 +50,7 @@ function App() {
                     <Route exact path="/map" component={Map} />
                     <Route exact path="/mapAddPhoto" component={MapAddPhoto} />
                     <Route exact path="/feed" component={Feed} />
-                    <Route exact path="/photo/update/:id" component={UpdatePhoto} />
+                    <PrivateRoute exact path="/photo/update/:id" component={UpdatePhoto} />
                     <Route exact path="/auth" component={Auth} />
                     <PrivateRoute exact path="/upload" component={Upload} />
                     <PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
