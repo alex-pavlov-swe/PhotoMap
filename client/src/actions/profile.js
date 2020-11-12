@@ -62,7 +62,7 @@ export const getProfileById = (id) => async (dispatch) => {
 };
 
 // Update or Create Profile
-export const updateProfile = (profile, history, edit = true) => async (
+export const updateProfile = (profile, edit = true) => async (
   dispatch
 ) => {
   console.log('updating profile...');
@@ -82,8 +82,6 @@ export const updateProfile = (profile, history, edit = true) => async (
     });
 
     dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created'));
-
-    history.push('/dashboard');
   } catch (error) {
     const errors = error.response.data.errors;
 

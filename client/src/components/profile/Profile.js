@@ -30,7 +30,7 @@ const Profile = ({
 						<div className="col-sm-10 offset-1">
 							<Link className="btn btn-info mb-4" to="/profiles">
 								{lang === 'rus' ? 'Назад к списку' : 'Back to Profiles'}
-							</Link>
+                            </Link>
 							{auth.isAuthenticated &&
 								auth.loading === false &&
 								auth.user._id === profile.user._id && (

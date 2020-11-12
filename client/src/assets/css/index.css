@@ -203,7 +203,8 @@ footer {
 
 .profile-photo-items-container {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  flex-wrap: wrap; }
   .profile-photo-items-container img {
     width: 200px;
     margin: 10px;

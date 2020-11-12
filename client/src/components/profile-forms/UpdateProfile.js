@@ -44,9 +44,10 @@ const UpdateProfile = ({
 	const onChange = (e) =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
-		updateProfile(formData, history, false);
+        await updateProfile(formData, history, false);
+        history.push(`/profile/${profile ? profile.user._id : ''}`);
 	};
 
 	useEffect(() => {
@@ -163,7 +164,7 @@ const UpdateProfile = ({
 							<button type="submit" className="btn btn-primary mt-2 mr-2">
 								Save Changes
 							</button>
-							<Link className="btn btn-secondary mt-2" to="/dashboard">
+							<Link className="btn btn-secondary mt-2" to={`/profile/${profile ? profile.user._id : ''}`}>
 								Cancel
 							</Link>
 						</form>

@@ -20,28 +20,28 @@ const ProfileTop = ({
 			<div className="icons d-flex justify-content-center">
 				{social && social.facebook && (
 					<a href={social.facebook} target="_blank" rel="noopener noreferrer">
-						<div className="profile-social-icon mb-2">
+						<div className="profile-social-icon m-2">
 							<i className="fab fa-facebook fa-2x profile-social-icon" />
 						</div>
 					</a>
 				)}
 				{social && social.youtube && (
 					<a href={social.youtube} target="_blank" rel="noopener noreferrer">
-						<div className="profile-social-icon mb-2">
+						<div className="profile-social-icon m-2">
 							<i className="fab fa-youtube fa-2x profile-social-icon" />
 						</div>
 					</a>
 				)}
 				{social && social.instagram && (
 					<a href={social.instagram} target="_blank" rel="noopener noreferrer">
-						<div className="profile-social-icon mb-2">
+						<div className="profile-social-icon m-2">
 							<i className="fab fa-instagram fa-2x profile-social-icon" />
 						</div>
 					</a>
 				)}
 				{social && social.vk && (
 					<a href={social.vk} target="_blank" rel="noopener noreferrer">
-						<div className="profile-social-icon mb-2">
+						<div className="profile-social-icon m-2">
 							<i className="fab fa-vk fa-2x profile-social-icon" />
 						</div>
 					</a>
