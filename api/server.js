@@ -18,7 +18,8 @@ app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/reviews', require('./routes/api/reviews'));
 app.use('/api/photo', require('./routes/api/photo'));
 app.use('/api/map/photos/overview', require('./routes/api/map/photos.overview.GET'));
-app.use('/api/photos', require('./routes/api/photo/allByProfile.GET'));
+app.use('/api/photos', require('./routes/api/photos/allByProfile.GET'));
+app.use('/api/photos', require('./routes/api/photos/getNextSample.GET'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
