@@ -27,6 +27,28 @@ export const getPhotos = () => async (dispatch) => {
 	}
 };
 
+// get next random photos from Mongo for the Feed
+export const getPhotosNext = () => async (dispatch) => {
+	try {
+		const res = await axios.get('api/photo/next');
+
+		dispatch({
+			type: FEED_PHOTOS_FETCHED,
+			payload: res.data,
+		});
+	} catch (error) {
+		const errors = error.response.data.errors;
+
+		if (errors) {
+			errors.forEach((error) => console.error(error));
+		}
+		dispatch({
+			type: FEED_PHOTOS_FETCHING_ERROR,
+			payload: errors,
+		});
+	}
+};
+
 // Getting photos to photoScroll is complete
 export const loadingCompleted = () => async (dispatch) => {
 	try {

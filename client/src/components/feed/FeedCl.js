@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPhotos } from '../../actions/photo';
+import { getPhotosNext } from '../../actions/photo/feedPhotosGET';
 
 const mapStateToProps = (state) => ({
     photoScroll: state.photoScroll
@@ -13,7 +13,7 @@ export class FeedCl extends Component {
     }
 
     fetchPhotos() {
-        this.props.getPhotos();
+        this.props.getPhotosNext();
     }
 
     render() {
@@ -25,4 +25,4 @@ export class FeedCl extends Component {
     }
 }
 
-export default connect(mapStateToProps, { getPhotos })(FeedCl);
+export default connect(mapStateToProps, { getPhotosNext })(FeedCl);

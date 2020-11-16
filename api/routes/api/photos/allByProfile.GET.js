@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../../../middleware/auth');
 const Photo = require('../../../models/Photo');
-const User = require('../../../models/User');
-const { check, validationResult } = require('express-validator');
-const { restart } = require('nodemon');
 
 // @route get api/photos/:user_id
 // @desc get all the photos if one user

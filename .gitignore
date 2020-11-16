@@ -1,10 +1,11 @@
-node_modules/
 client/node_modules
-config/default.json
-config/nginx
-img/
 client/src/firebase/config.js
 /client/build
-
 /client/assets/css
 !/client/assets/css/index.css
+
+api/node_modules/
+api/config/default.json
+api/config/nginx
+
+img/
