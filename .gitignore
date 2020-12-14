@@ -1,11 +1,13 @@
 client/node_modules
 client/src/firebase/config.js
-/client/build
-/client/assets/css
+client/build
+client/assets/css
+client/package-lock.json
 !/client/assets/css/index.css
 
 api/node_modules/
 api/config/default.json
 api/config/nginx
+api/package-lock.json
 
 img/
