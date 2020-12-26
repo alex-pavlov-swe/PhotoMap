@@ -1,29 +1,29 @@
 @import '../constants/colors.scss';
 
-#mapContainer {
-    margin: 0;
-    padding: 0;
-    border: 1px solid black;
-    height: 70vh;
+.mapWrapper {
+    display: flex;
+    flex-direction: row;
 }
-Map {
-    position: absolute;
-    z-index: -1;
+
+#mapViewContainer {
+    flex: 1;
     margin: 0;
     padding: 0;
+    border: 10px solid black;
+    height: 90vh;
 }
 
 .photos-preview {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: $COLOR_GREY_300;
-    max-width: 100%;
     scroll-behavior: auto;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    height: 90vh;
     img {
         border: 5px solid #eee;
         margin: 10px;
-        max-height: 150px;
+        width: 180px;
         border-radius: 25px;
         box-shadow: 2px 2px 5px $COLOR_GREY_300;
     }

@@ -17,7 +17,8 @@ const Map = ({
     fetchPhotosOverview,
     history,
 }) => {
-    var currentPosition = [-122.7, 49.2];
+    //var currentPosition = [-122.7, 49.2];
+    var currentPosition = [0, 0];
     var currentZoom = 2;
 
     var map;
@@ -47,7 +48,7 @@ const Map = ({
         }
     }
 
-    const showAllMarkers = function() {
+    const showAllMarkers = function () {
         photosOverview.forEach((photo) => {
             showMarker(photo.lngLat);
         });
@@ -75,14 +76,23 @@ const Map = ({
             right: [-markerRadius, (markerHeight - markerRadius) * -1],
         };
 
-        const popupItem =
-            `<div class='text-center'><img src=${url} width="100" id=${photoId}></div>`;
-
-        function htmlPopup(){
+        function htmlPopup() {
             var html = "";
             html += "<div class='text-center'>";
             html += "<img src=" + url;
             html += " id='" + photoId + "'";
+            html += " width='100'/></div>";
+            //html += "<p>" + feature.properties.description + "</p>";
+            return html;
+        }
+
+
+        function htmlMarker() {
+            var html = "";
+            html += "<div class='text-center'>";
+            html += "<img src=" + url;
+            html += " id='" + photoId + "' ";
+            html += " style='background-image: url('https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/photos%2F5fac80a1c8bdf22cf26ce876%2F609580504?alt=media');'";
             html += " width='100'/></div>";
             //html += "<p>" + feature.properties.description + "</p>";
             return html;
@@ -100,7 +110,7 @@ const Map = ({
 
         var newMarker = new mapboxgl.Marker({ draggable: false })
             .setLngLat(lngLat)
-            .setPopup(popup)
+            .setPopup(popup);
 
         newMarker.getElement().addEventListener("click", () => {
             //newMarker.togglePopup();
@@ -122,7 +132,7 @@ const Map = ({
         mapboxgl.accessToken = mapboxConfig.accessToken;
 
         map = new mapboxgl.Map({
-            container: document.getElementById('mapContainer'),
+            container: document.getElementById('mapViewContainer'),
             style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
             center: currentPosition, // starting position [lng, lat]
             zoom: currentZoom, // starting zoom
@@ -158,16 +168,16 @@ const Map = ({
     };
 
     return (
-        <Fragment>
-            <div id="mapContainer" className="mapContainer" />
+        <div className="mapWrapper">
+            <div id="mapViewContainer" />
             <PhotosPreview />
             <Modal
-                    isOpen={showModal}
-                    className="photo-modal d-block"
-                >
-                    <PhotoModal photoId={photoId} close={closeModal}></PhotoModal>
-                </Modal>
-        </Fragment>
+                isOpen={showModal}
+                className="photo-modal d-block"
+            >
+                <PhotoModal photoId={photoId} close={closeModal}></PhotoModal>
+            </Modal>
+        </div>
     );
 };
 
