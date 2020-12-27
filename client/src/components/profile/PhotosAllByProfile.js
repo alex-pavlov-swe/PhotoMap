@@ -11,7 +11,7 @@ const PhotosAllByProfile = ({
 	profile
 }) => {
 	useEffect(() => {
-			photosAllByProfileGET(profile.profile.user._id);
+		photosAllByProfileGET(profile.profile.user._id);
 	}, [photosAllByProfileGET])
 	return (
 		<Fragment>

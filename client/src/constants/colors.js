@@ -1,0 +1,1 @@
+export const RED_LIKE = '#ba364e';

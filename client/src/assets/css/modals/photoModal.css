@@ -16,7 +16,7 @@
   margin: 0;
   padding: 0; }
   #currentPhoto img {
-    max-width: 85%;
+    max-width: 70%;
     padding-top: 0px;
     margin-top: -15px; }
   #currentPhoto i {
@@ -26,8 +26,21 @@
   #currentPhoto i:hover {
     color: #8a8c81;
     cursor: pointer; }
-  #currentPhoto .edit-icon {
-    padding: 10px; }
+  #currentPhoto .iconsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px; }
+    #currentPhoto .iconsWrapper .editIconWrapper .editIcon {
+      padding: 10px; }
+    #currentPhoto .iconsWrapper .likeIconWrapper {
+      width: 50px; }
+      #currentPhoto .iconsWrapper .likeIconWrapper .likeIcon {
+        padding: 5px;
+        border-radius: 25px; }
+      #currentPhoto .iconsWrapper .likeIconWrapper .likeIcon:hover {
+        background-color: #eee; }
   #currentPhoto #currentPhotoImg {
     padding: 10px;
     padding-bottom: 30px; }
@@ -55,4 +68,4 @@
 
 @media (min-width: 992px) {
   #currentPhoto img {
-    max-width: 85%; } }
+    max-width: 70%; } }

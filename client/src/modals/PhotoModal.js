@@ -7,10 +7,12 @@ import { currentPhotoProfileGET } from '../actions/photo/currentPhotoProfileGET'
 import { currentPhotoClose } from '../actions/photo/currentPhotoClose';
 import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
+import { updatePhotoMongo } from '../actions/photoUpload/photoUpdateMongo';
 import Spinner from '../components/layout/Spinner';
 import { NO_AVATAR } from '../constants/links';
 import Modal from 'react-modal';
 import { UpdatePhotoModal } from './UpdatePhotoModal';
+import { RED_LIKE } from '../constants/colors';
 
 const mapStateToProps = (state) => ({
     currentPhoto: state.currentPhoto,
@@ -22,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
     currentPhotoClose: () => dispatch(currentPhotoClose()),
     deletePhotoFromFirebase: (user, imageName) => dispatch(deletePhotoFromFirebase(user, imageName)),
     deletePhotoFromMongo: (id) => dispatch(deletePhotoFromMongo(id)),
+    updatePhotoMongo: (data) => dispatch(updatePhotoMongo(data)),
     currentPhotoProfileGET: (id) => dispatch(currentPhotoProfileGET(id))
 });
 
@@ -76,6 +79,15 @@ export class PhotoModal extends React.Component {
         this.setState({ showUpdateModal: false });
     }
 
+    like() {
+        const data = {
+            id: this.props.currentPhoto.photo._id,
+            likeUserId: this.props.auth.user._id
+        };
+
+        this.props.updatePhotoMongo(data);
+    }
+
     render() {
         const { photo, profile, loading } = this.props.currentPhoto;
         const { user } = this.props.auth;
@@ -100,18 +112,25 @@ export class PhotoModal extends React.Component {
                             </div>
                             {user && user._id === photo.user ? (
                                 <div className="row bg-light">
-                                    <div className="col-md-10 offset-1 text-left">
-                                        <span>
-                                            <Link to={`/photo/update/${photo._id}`}>
-                                                <i className="fas fa-pencil-alt edit-icon"></i>
-                                            </Link>
-                                        </span>
-                                        <span
-                                            id="deletePhoto edit-icon"
-                                            onClick={(e) => this.onDeletePhoto(e)}
-                                        >
-                                            <i className="far fa-trash-alt"></i>
-                                        </span>
+                                    <div className="col-md-10 offset-1 text-center iconsWrapper">
+                                        <div className="likeIconWrapper">
+                                            <span className="" onClick={() => this.like()}>
+                                                <i className="fas fa-heart fa-2x likeIcon" style={{ color: this.props.currentPhoto.photo.likes.includes(this.props.auth.user._id) ? RED_LIKE : "grey" }}></i>
+                                            </span>
+                                        </div>
+                                        <div className="editIconWrapper">
+                                            <span>
+                                                <Link to={`/photo/update/${photo._id}`}>
+                                                    <i className="fas fa-pencil-alt editIcon"></i>
+                                                </Link>
+                                            </span>
+                                            <span
+                                                id="deletePhoto editIcon"
+                                                onClick={(e) => this.onDeletePhoto(e)}
+                                            >
+                                                <i className="far fa-trash-alt"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             ) : (
@@ -168,6 +187,7 @@ PhotoModal.propTypes = {
     currentPhotoClose: PropTypes.func.isRequired,
     deletePhotoFromFirebase: PropTypes.func.isRequired,
     deletePhotoFromMongo: PropTypes.func.isRequired,
+    updatePhotoMongo: PropTypes.func.isRequired,
     getPhotoById: PropTypes.func.isRequired,
     currentPhoto: PropTypes.object.isRequired,
 };

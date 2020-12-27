@@ -20,7 +20,7 @@
     margin: 0;
     padding: 0;
     img {
-      max-width: 85%;
+      max-width: 70%;
       padding-top: 0px;
       margin-top: -15px;
     }
@@ -35,8 +35,27 @@
       cursor: pointer;
     }
 
-    .edit-icon {
-      padding: 10px;;
+    .iconsWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        .editIconWrapper {
+            .editIcon {
+                padding: 10px;
+              }
+        }
+        .likeIconWrapper {
+            width: 50px;
+            .likeIcon {
+                padding: 5px;
+                border-radius: 25px;
+            }
+            .likeIcon:hover {
+                background-color: #eee;
+            }
+        }
     }
 
     #currentPhotoImg {
@@ -76,7 +95,7 @@
   @media (min-width: #{$screen-lg-min}) {
     #currentPhoto {
       img {
-        max-width: 85%;
+        max-width: 70%;
       }
     }
   }
