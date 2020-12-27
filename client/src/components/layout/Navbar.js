@@ -18,12 +18,12 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/map">
-                    Explore
+                    Map
                     </Link>
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/feed">
-                    Feed
+                    What's New
                     </Link>
             </li>
             <li className="nav-item mr-4">
@@ -49,7 +49,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/feed">
-                    Feed
+                    What's New
                     </Link>
             </li>
             <li className="nav-item">
@@ -84,12 +84,12 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
 
             <div className="collapse navbar-collapse" id="navbarMain">
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <form className="mr-4 mt-2 searchContainer">
                             <i className="fas fa-search"></i>
                             <input type="text" placeholder="Enter a place" />
                         </form>
-                    </li>
+                    </li> */}
                     {!loading && (
                         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
                     )}

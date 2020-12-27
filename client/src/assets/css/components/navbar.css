@@ -31,6 +31,8 @@ nav {
     @media (max-width: 656px) {
       nav ul form {
         visibility: hidden; } }
+  nav li {
+    margin: 10px; }
   nav .btn {
     border-radius: 10px; }
   nav #upload-link {

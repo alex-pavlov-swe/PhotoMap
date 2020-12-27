@@ -20,7 +20,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     getPhotoById: (id) => dispatch(getPhotoById(id)),
     currentPhotoClose: () => dispatch(currentPhotoClose()),
-	deletePhotoFromFirebase: (user, imageName) => dispatch(deletePhotoFromFirebase(user, imageName)),
+    deletePhotoFromFirebase: (user, imageName) => dispatch(deletePhotoFromFirebase(user, imageName)),
     deletePhotoFromMongo: (id) => dispatch(deletePhotoFromMongo(id)),
     currentPhotoProfileGET: (id) => dispatch(currentPhotoProfileGET(id))
 });
@@ -36,18 +36,18 @@ export class PhotoModal extends React.Component {
         this.closeUpdateModal = this.closeUpdateModal.bind(this);
     }
 
-	componentDidMount() {
+    componentDidMount() {
         this.props.getPhotoById(this.props.photoId)
-        .then(() => {
-            this.props.currentPhotoProfileGET(this.props.currentPhoto && this.props.currentPhoto.photo ? this.props.currentPhoto.photo.user : null);
-        });
+            .then(() => {
+                this.props.currentPhotoProfileGET(this.props.currentPhoto && this.props.currentPhoto.photo ? this.props.currentPhoto.photo.user : null);
+            });
     };
 
     componenWillUnmount() {
         this.props.currentPhotoClose();
     }
 
-	onDeletePhoto (e) {
+    onDeletePhoto(e) {
         const { photo } = this.props.currentPhoto;
 
         if (window.confirm('Are you sure you want to delete this photo?')) {
@@ -64,6 +64,10 @@ export class PhotoModal extends React.Component {
         this.props.currentPhotoClose();
     }
 
+    focusOnPhoto() {
+        this.props.close();
+    }
+
     openUpdateModal() {
         this.setState({ showUpdateModal: true });
     }
@@ -72,82 +76,87 @@ export class PhotoModal extends React.Component {
         this.setState({ showUpdateModal: false });
     }
 
-	render() {
+    render() {
         const { photo, profile, loading } = this.props.currentPhoto;
         const { user } = this.props.auth;
         return (
             <Fragment>
                 <br></br>
                 {loading ? (
-                    <Spinner/>
+                    <Spinner />
                 ) : (
-                    <div className="photo-modal d-block full-screen-popup container-fluid" id="currentPhoto">
-                        <div className="row bg-dark">
-                            <div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
-                                <div id="asd" onClick={this.closeModal}>
-                                    <i className="fas fa-times fa-2x"></i>
+                        <div className="photo-modal d-block full-screen-popup container-fluid" id="currentPhoto">
+                            <div className="row bg-dark">
+                                <div className="col-md-10 offset-md-1 text-left ml-3 mt-1">
+                                    <div id="asd" onClick={this.closeModal}>
+                                        <i className="fas fa-times fa-2x"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="row bg-dark" id="currentPhotoImg">
-                            <div className="col-md-10 offset-md-1 text-center">
-                                <img src={photo.url} className="modal-img"/>
-                            </div>
-                        </div>
-                        {user && user._id === photo.user ? (
-                            <div className="row bg-light">
-                                <div className="col-md-10 offset-1 text-left">
-                                    <span>
-                                        <Link to={`/photo/update/${photo._id}`}>
-                                            <i className="fas fa-pencil-alt edit-icon"></i>
-                                        </Link>
-                                    </span>
-                                    <span
-                                        id="deletePhoto edit-icon"
-                                        onClick={(e) => this.onDeletePhoto(e)}
-                                    >
-                                        <i className="far fa-trash-alt"></i>
-                                    </span>
+                            <div className="row bg-dark" id="currentPhotoImg">
+                                <div className="col-md-10 offset-md-1 text-center">
+                                    <img src={photo.url} className="modal-img" />
                                 </div>
                             </div>
-                        ) : (
-                            null
-                        )}
-                        <div className="row bg-light border border-primary">
-                            <div className="col-md-12 text-center border border-warning">
-                                <h1>{photo.title}</h1>
-                                <p>
-                                    <span>
-                                        <Link to={`/profile/${profile ? profile.user._id : ''}`}>
-                                            <img src={profile && profile.avatar ? profile.avatar : NO_AVATAR } className="avatar-show-photo" />
-                                        </Link>
-                                    </span>
-                                    <span>
-                                        <Link to={`/profile/${profile ? profile.user._id : ''}`}>
-                                            {photo.name}
-                                        </Link>
+                            {user && user._id === photo.user ? (
+                                <div className="row bg-light">
+                                    <div className="col-md-10 offset-1 text-left">
+                                        <span>
+                                            <Link to={`/photo/update/${photo._id}`}>
+                                                <i className="fas fa-pencil-alt edit-icon"></i>
+                                            </Link>
                                         </span>
-                                </p>
-                                <p>{photo.description}</p>
-                                <div className="mapLink text-center align-middle">
-                                    <Link to="/mapAddPhoto">Add this photo to the map</Link>
+                                        <span
+                                            id="deletePhoto edit-icon"
+                                            onClick={(e) => this.onDeletePhoto(e)}
+                                        >
+                                            <i className="far fa-trash-alt"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
+                            ) : (
+                                    null
+                                )}
+                            <div className="row bg-light border border-primary">
+                                <div className="col-md-12 text-center border border-warning">
+                                    <h1>{photo.title}</h1>
+                                    <p>
+                                        <span>
+                                            <Link to={`/profile/${profile ? profile.user._id : ''}`}>
+                                                <img src={profile && profile.avatar ? profile.avatar : NO_AVATAR} className="avatar-show-photo" />
+                                            </Link>
+                                        </span>
+                                        <span>
+                                            <Link to={`/profile/${profile ? profile.user._id : ''}`}>
+                                                {photo.name}
+                                            </Link>
+                                        </span>
+                                    </p>
+                                    <p>{photo.description}</p>
+                                    <div className="mapLink text-center align-middle">
+                                        {user && user._id === photo.user ? (
+                                            <Link to="/mapAddPhoto">Add this photo to the map</Link>
+                                        ) : (
+                                                <Link to="/map" onClick={() => this.focusOnPhoto()}>View this photo on the map</Link>
+                                            )}
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )
+                }
             </Fragment>
         );
     }
@@ -157,7 +166,7 @@ PhotoModal.propTypes = {
     getPhotoById: PropTypes.func.isRequired,
     currentPhotoProfileGET: PropTypes.func.isRequired,
     currentPhotoClose: PropTypes.func.isRequired,
-	deletePhotoFromFirebase: PropTypes.func.isRequired,
+    deletePhotoFromFirebase: PropTypes.func.isRequired,
     deletePhotoFromMongo: PropTypes.func.isRequired,
     getPhotoById: PropTypes.func.isRequired,
     currentPhoto: PropTypes.object.isRequired,

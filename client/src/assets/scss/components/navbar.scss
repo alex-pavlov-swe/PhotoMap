@@ -44,6 +44,9 @@ nav {
       }
     }
   }
+  li {
+      margin: 10px;
+  }
   .btn {
     border-radius: 10px;
   }
@@ -57,7 +60,6 @@ nav {
     margin: 10px;
   }
 }
-
 
 @media (max-width: #{$screen-sm-min}) {
     .navbar-nav {

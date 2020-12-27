@@ -19,9 +19,10 @@
 .profile-photo-items-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  justify-content: center; }
   .profile-photo-items-container img {
-    width: 200px;
+    height: 150px;
     margin: 10px;
     border-radius: 5px;
     border: 1px solid grey; }

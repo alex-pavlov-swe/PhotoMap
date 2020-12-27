@@ -14,13 +14,17 @@ export class PhotosPreview extends React.Component {
         const { photosOverview, loading } = this.props;
         if (loading) {
             return (<Spinner />)
-        } else {
+        } else if (this.props.mapState.photosOverview && this.props.mapState.photosOverview.length > 0) {
             return (
                 <div className="photos-preview" onClick={this.open}>
                     {photosOverview.map((photo) => (
-                        <PhotosPreviewItem photo={photo} key={photo._id}/>
+                        <PhotosPreviewItem photo={photo} key={photo._id} />
                     ))}
                 </div>
+            )
+        } else {
+            return (
+                null
             )
         }
     }

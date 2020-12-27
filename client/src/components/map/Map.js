@@ -6,6 +6,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
+import { currentPhotoClose } from '../../actions/photo/currentPhotoClose';
 import { mapboxConfig } from '../../firebase/config';
 import PhotosPreview from './PhotosPreview';
 import Modal from 'react-modal';
@@ -13,13 +14,21 @@ import PhotoModal from '../../modals/PhotoModal';
 
 const Map = ({
     mapState: { photosOverview, loading },
+    currentPhoto: { photo },
     updatePhotoMongo,
     fetchPhotosOverview,
-    history,
+    currentPhotoClose,
 }) => {
-    //var currentPosition = [-122.7, 49.2];
     var currentPosition = [0, 0];
-    var currentZoom = 2;
+    var currentZoom = 3;
+
+    if (!photo) {
+        currentPosition = [-122.7, 49.2];
+        currentZoom = 3;
+    } else {
+        currentPosition = [photo.lngLat.lng, photo.lngLat.lat];
+        currentZoom = 12;
+    }
 
     var map;
     var markers = [];
@@ -41,6 +50,10 @@ const Map = ({
     }
 
     const closeModal = () => {
+        if (photo) {
+            initMap();
+            currentPhotoClose();
+        }
         setShowModal(false);
         let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
         for (let i = 0; i < itemsToHide.length; i++) {
@@ -81,18 +94,6 @@ const Map = ({
             html += "<div class='text-center'>";
             html += "<img src=" + url;
             html += " id='" + photoId + "'";
-            html += " width='100'/></div>";
-            //html += "<p>" + feature.properties.description + "</p>";
-            return html;
-        }
-
-
-        function htmlMarker() {
-            var html = "";
-            html += "<div class='text-center'>";
-            html += "<img src=" + url;
-            html += " id='" + photoId + "' ";
-            html += " style='background-image: url('https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/photos%2F5fac80a1c8bdf22cf26ce876%2F609580504?alt=media');'";
             html += " width='100'/></div>";
             //html += "<p>" + feature.properties.description + "</p>";
             return html;
@@ -183,15 +184,19 @@ const Map = ({
 
 Map.propTypes = {
     mapState: PropTypes.object.isRequired,
+    currentPhoto: PropTypes.object,
     updatePhotoMongo: PropTypes.func.isRequired,
     fetchPhotosOverview: PropTypes.func.isRequired,
+    currentPhotoClose: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     mapState: state.mapState,
+    currentPhoto: state.currentPhoto,
 });
 
 export default connect(mapStateToProps, {
     updatePhotoMongo,
     fetchPhotosOverview,
+    currentPhotoClose,
 })(Map);
