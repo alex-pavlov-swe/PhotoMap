@@ -3,6 +3,7 @@ client/src/firebase/config.js
 client/build
 client/assets/css
 client/package-lock.json
+client/.eslintcache
 !/client/assets/css/index.css
 
 api/node_modules/
