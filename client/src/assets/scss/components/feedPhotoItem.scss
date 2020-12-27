@@ -5,7 +5,7 @@
   border-top: 2px solid #eee;
   padding-top: 15px;
   img {
-    max-width: 75%;
+    max-width: 65%;
     border-radius: 25px;
     box-shadow: 10px 10px 5px $COLOR_GREY_300;
   }
@@ -15,7 +15,7 @@
 }
   @media (min-width: #{$screen-lg-min}) {
     img {
-      max-width: 40%;
+      max-width: 65%;
     }
   }
 }

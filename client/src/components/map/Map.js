@@ -171,7 +171,7 @@ const Map = ({
     return (
         <div className="mapWrapper">
             <div id="mapViewContainer" />
-            <PhotosPreview />
+            {window.innerWidth > 600 ? (<PhotosPreview />) : null}
             <Modal
                 isOpen={showModal}
                 className="photo-modal d-block"

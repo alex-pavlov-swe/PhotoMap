@@ -68,7 +68,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-0">
             <Link className="navbar-brand" to="/">
-                Photomap
+                Photomap.io
             </Link>
             <button
                 className="navbar-toggler"

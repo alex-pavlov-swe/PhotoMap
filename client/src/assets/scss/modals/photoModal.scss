@@ -20,7 +20,7 @@
     margin: 0;
     padding: 0;
     img {
-      max-width: 80%;
+      max-width: 85%;
       padding-top: 0px;
       margin-top: -15px;
     }
@@ -76,7 +76,7 @@
   @media (min-width: #{$screen-lg-min}) {
     #currentPhoto {
       img {
-        max-width: 70%;
+        max-width: 85%;
       }
     }
   }
