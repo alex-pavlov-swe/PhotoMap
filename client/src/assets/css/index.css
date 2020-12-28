@@ -178,7 +178,6 @@ nav {
   .navbar-nav {
     background-color: #343A40;
     padding: 10px;
-    margin: 0px;
     z-index: 2; } }
 
 footer {
@@ -251,12 +250,11 @@ Map {
   height: 100vh;
   overflow-y: scroll;
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1050;
-  outline: 0; }
+  top: 80px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 10; }
 
 #currentPhoto {
   margin: 0;

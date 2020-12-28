@@ -27,7 +27,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
                     </Link>
             </li>
             <li className="nav-item mr-4">
-                <Link className="nav-link" onClick={logout} to="/" onClick={() => closeMobileMenu()}>
+                <Link className="nav-link" onClick={() => handleLogout()} to="/">
                     Logout
                 </Link>
             </li>
@@ -67,6 +67,11 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
 
     const closeMobileMenu = () => {
         document.getElementById('navbarMain').classList.remove('show');
+    }
+
+    const handleLogout = () => {
+        closeMobileMenu();
+        logout();
     }
 
     return (
