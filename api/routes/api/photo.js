@@ -49,6 +49,7 @@ router.post('/', [auth], async (req, res) => {
         avatar,
         title,
         description,
+        tips,
         camera,
         focalLength,
         shutterSpeed,
@@ -69,6 +70,7 @@ router.post('/', [auth], async (req, res) => {
     if (avatar) photoFields.avatar = avatar;
     if (title) photoFields.title = title;
     if (description) photoFields.description = description;
+    if (tips) photoFields.tips = tips;
     if (camera) photoFields.camera = camera;
     if (focalLength) photoFields.focalLength = focalLength;
     if (shutterSpeed) photoFields.shutterSpeed = shutterSpeed;

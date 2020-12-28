@@ -41,6 +41,8 @@
         border-radius: 25px; }
       #currentPhoto .iconsWrapper .likeIconWrapper .likeIcon:hover {
         background-color: #eee; }
+  #currentPhoto .photoModalLink {
+    color: #656565; }
   #currentPhoto #currentPhotoImg {
     padding: 10px;
     padding-bottom: 30px; }

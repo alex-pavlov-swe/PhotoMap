@@ -8,7 +8,7 @@
   margin-top: -80px; }
   #login .form {
     background-color: white;
-    border-radius: 5px;
+    border-radius: 15px;
     width: 300px;
     padding: 20px; }
     #login .form input {
@@ -133,14 +133,17 @@ nav {
   font-weight: bold;
   font-size: 1.1rem;
   height: 80px;
-  border-bottom: 1px solid white; }
+  border-bottom: 1px solid white;
+  z-index: 5; }
   nav .navbar-brand {
     color: white;
     font-weight: bold;
     font-size: 1.5rem; }
   nav ul form {
     background-color: white;
-    border-radius: 10px; }
+    border-radius: 10px;
+    position: relative;
+    z-index: -1; }
     nav ul form input {
       border-radius: 10px;
       padding-left: 10px;
@@ -174,7 +177,9 @@ nav {
 @media (max-width: 576px) {
   .navbar-nav {
     background-color: #343A40;
-    padding: 10px; } }
+    padding: 10px;
+    margin: 0px;
+    z-index: 2; } }
 
 footer {
   position: absolute;
@@ -282,6 +287,8 @@ Map {
         border-radius: 25px; }
       #currentPhoto .iconsWrapper .likeIconWrapper .likeIcon:hover {
         background-color: #eee; }
+  #currentPhoto .photoModalLink {
+    color: #656565; }
   #currentPhoto #currentPhotoImg {
     padding: 10px;
     padding-bottom: 30px; }

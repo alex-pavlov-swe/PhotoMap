@@ -10,29 +10,29 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
             <li>
                 {user && profile && (
                     <span>
-                        <Link to={`/profile/${profile.user._id}`}>
+                        <Link to={`/profile/${profile.user._id}`} onClick={() => closeMobileMenu()}>
                             <img src={profile.avatar ? profile.avatar : user.avatar} className="avatar-show-photo" />
                         </Link>
                     </span>
                 )}
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/map">
+                <Link className="nav-link" to="/map" onClick={() => closeMobileMenu()}>
                     Map
                     </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/feed">
+                <Link className="nav-link" to="/feed" onClick={() => closeMobileMenu()}>
                     What's New
                     </Link>
             </li>
             <li className="nav-item mr-4">
-                <Link className="nav-link" onClick={logout} to="/">
+                <Link className="nav-link" onClick={logout} to="/" onClick={() => closeMobileMenu()}>
                     Logout
                 </Link>
             </li>
             <li>
-                <Link className="btn btn-light" to="/upload" id="upload-link">
+                <Link className="btn btn-light" to="/upload" id="upload-link" onClick={() => closeMobileMenu()}>
                     <i className="fas fa-arrow-up"></i>
                         Upload
                     </Link>
@@ -43,31 +43,35 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
     const guestLinks = (
         <Fragment>
             <li className="nav-item">
-                <Link className="nav-link" to="/map">
+                <Link className="nav-link" to="/map" onClick={() => closeMobileMenu()}>
                     Map
                     </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/feed">
+                <Link className="nav-link" to="/feed" onClick={() => closeMobileMenu()}>
                     What's New
                     </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/register">
+                <Link className="nav-link" to="/register" onClick={() => closeMobileMenu()}>
                     Register
                     </Link>
             </li>
             <li className="nav-item mr-4">
-                <Link className="nav-link" to="/login">
+                <Link className="nav-link" to="/login" onClick={() => closeMobileMenu()}>
                     Login
                     </Link>
             </li>
         </Fragment>
     );
 
+    const closeMobileMenu = () => {
+        document.getElementById('navbarMain').classList.remove('show');
+    }
+
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-0">
-            <Link className="navbar-brand" to="/">
+            <Link className="navbar-brand" to="/" onClick={() => closeMobileMenu()}>
                 Photomap.io
             </Link>
             <button

@@ -30,6 +30,7 @@ const UpdatePhoto = ({
         avatar: user.avatar,
         title: photo.title,
         description: photo.description,
+        tips: photo.tips,
         camera: '',
         focalLength: '',
         shutterSpeed: '',
@@ -48,6 +49,7 @@ const UpdatePhoto = ({
         shutterSpeed,
         ISO,
         keywords,
+        tips
     } = formData;
 
     const uploadHandle = (e) => {
@@ -89,6 +91,18 @@ const UpdatePhoto = ({
                                     name="description"
                                     rows="5"
                                     placeholder="e.g. Early April, Sequoia road in Burnaby, British Columbia, beautiful cherry blossoms."
+                                    onChange={(e) => onChange(e)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="tips">Photo Tips</label>
+                                <textarea
+                                    value={tips}
+                                    type="text"
+                                    className="form-control"
+                                    name="tips"
+                                    rows="5"
+                                    placeholder="e.g. The best time to shoot this scene is just before sunset"
                                     onChange={(e) => onChange(e)}
                                 />
                             </div>

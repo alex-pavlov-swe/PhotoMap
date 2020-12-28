@@ -146,15 +146,18 @@ export class PhotoModal extends React.Component {
                                             </Link>
                                         </span>
                                         <span>
-                                            <Link to={`/profile/${profile ? profile.user._id : ''}`}>
+                                            <Link to={`/profile/${profile ? profile.user._id : ''}`} className="photoModalLink">
                                                 {photo.name}
                                             </Link>
                                         </span>
                                     </p>
                                     <p>{photo.description}</p>
+                                    {photo.tips ? (
+                                        <p><strong>Photo Tips</strong> - {photo.tips}</p>
+                                    ) : null}
                                     <div className="mapLink text-center align-middle">
                                         {user && user._id === photo.user ? (
-                                            <Link to="/mapAddPhoto">Add this photo to the map</Link>
+                                            <Link to="/mapAddPhoto" >Add this photo to the map</Link>
                                         ) : (
                                                 <Link to="/map" onClick={() => this.focusOnPhoto()}>View this photo on the map</Link>
                                             )}

@@ -19,6 +19,7 @@ const PhotoSchema = new Schema({
     },
     title: String,
     description: String,
+    tips: String,
     camera: String,
     focalLength: String,
     shutterSpeed: String,

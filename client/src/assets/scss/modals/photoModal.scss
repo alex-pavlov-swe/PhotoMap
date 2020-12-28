@@ -1,4 +1,5 @@
 @import '../constants/screenSizes.scss';
+@import '../constants/colors.scss';
 
 .d-block {
     display: block!important;
@@ -19,11 +20,13 @@
 #currentPhoto {
     margin: 0;
     padding: 0;
+
     img {
       max-width: 70%;
       padding-top: 0px;
       margin-top: -15px;
     }
+
     i {
       color: black;
       padding: 0;
@@ -56,6 +59,10 @@
                 background-color: #eee;
             }
         }
+    }
+
+    .photoModalLink {
+        color: $COLOR_GREY_650;
     }
 
     #currentPhotoImg {
