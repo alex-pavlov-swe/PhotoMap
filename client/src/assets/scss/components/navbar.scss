@@ -2,22 +2,20 @@
 
 nav {
   margin: 0px;
-  //opacity: 70%;
-  //position: absolute;
-  //top: 0;
   position: relative;
   font-family: 'Lato', sans-serif;
   font-weight: bold;
   font-size: 1.1rem;
   height: $navbar-height;
   border-bottom: 1px solid white;
-  z-index: 5;
   .navbar-brand {
     color: white;
     font-weight: bold;
     font-size: 1.5rem;
   }
   ul {
+      position: relative;
+      z-index: 20;
     form {
       background-color: white;
       border-radius: 10px;
@@ -68,7 +66,8 @@ nav {
     .navbar-nav {
         background-color: #343A40;
         padding: 10px;
-        z-index: 2;
+        position: relative;
+        z-index: 20;
     }
   }
 

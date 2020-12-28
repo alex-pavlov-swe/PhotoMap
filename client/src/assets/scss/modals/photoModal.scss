@@ -9,12 +9,12 @@
     height: 100vh;
     overflow-y: scroll;
     position: fixed;
-    top: $navbar-height;
+    top: 0;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    z-index: 10;
-    //outline: 0;
+    z-index: 100;
+    outline: 0;
 }
 
 #currentPhoto {
