@@ -12,7 +12,6 @@ const mapboxgl = require('mapbox-gl');
 // @access Public
 
 router.post('/', async (req, res) => {
-
     try {
         const output = [];
 
@@ -24,16 +23,18 @@ router.post('/', async (req, res) => {
         const photos = await Photo.find();
 
         photos.forEach(photo => {
-            var photoLngLat = new mapboxgl.LngLat(parseFloat(photo.lngLat.lng), parseFloat(photo.lngLat.lat));
-            if (bounds.contains(photoLngLat)) {
-                output.push(photo);
+            if (photo.lngLat && photo.lngLat.lng && photo.lngLat.lat) {
+                var photoLngLat = new mapboxgl.LngLat(parseFloat(photo.lngLat.lng), parseFloat(photo.lngLat.lat));
+                if (bounds.contains(photoLngLat)) {
+                    output.push(photo);
+                }
             }
         });
 
         res.json(output);
 
     } catch (error) {
-        console.error('error getting photos information from Mongo', error.message);
+        console.error('error getting photos information from Mongo. ', error.message);
         res.status(500).send('Server Error');
     }
 });
