@@ -32,7 +32,7 @@ export class PhotosPreviewItem extends React.Component {
     render() {
         return (
             <Fragment>
-                <img onClick={this.open} src={this.props.photo.url} alt="photo"/>
+                <img onClick={this.open} src={this.props.photo.url} alt="photo" />
                 <Modal
                     isOpen={this.state.showModal}
                     className="photo-modal d-block"

@@ -119,7 +119,7 @@ const UpdatePhoto = ({
                                 />
                             </div>
                             <div className="mapLink text-center align-middle">
-                                <Link to="/mapAddPhoto">Add this photo to the map</Link>
+                                <Link to="/mapAddPhoto" >This photo on the map</Link>
                             </div>
                             <div className="form-group">
                                 <button

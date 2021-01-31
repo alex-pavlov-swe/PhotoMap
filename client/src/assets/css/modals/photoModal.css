@@ -49,24 +49,25 @@
   #currentPhoto #deletePhoto:hover {
     text-decoration: underline;
     cursor: pointer; }
-  #currentPhoto .mapLink {
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2FmapLink.png?alt=media&token=cdc6e859-63ca-4f42-bb0e-2a9e5f5c14f5");
-    width: 300px;
-    height: 150px;
-    border: 1px solid black;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 50%;
-    font-size: 20px;
-    color: black;
-    font-weight: 800; }
   #currentPhoto .avatar-show-photo {
     width: 40px;
     border-radius: 25px;
     margin: 10px; }
+
+.mapLink {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2FmapLink.png?alt=media&token=cdc6e859-63ca-4f42-bb0e-2a9e5f5c14f5");
+  width: 300px;
+  height: 150px;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 50%;
+  font-size: 20px;
+  color: black;
+  font-weight: 800; }
 
 @media (min-width: 992px) {
   #currentPhoto img {
