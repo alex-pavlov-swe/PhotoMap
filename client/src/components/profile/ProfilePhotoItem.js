@@ -1,40 +1,22 @@
 import React, { Fragment } from 'react';
-import Modal from 'react-modal';
 import PhotoModal from '../../modals/PhotoModal';
+import EventEmitter from '../../utils/events';
 import './styles.css';
 
 export class ProfilePhotoItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showModal: false
-        };
-        this.open = this.open.bind(this);
-        this.close = this.close.bind(this);
-    }
-
-    open() {
-        this.setState({ showModal: true });
-    }
-
-    close() {
-        this.setState({ showModal: false });
     }
 
     render() {
         const { photo } = this.props;
         return (
             <Fragment>
-                <img onClick={this.open} src={this.props.photo.url} alt="photo"/>
-                <Modal
-                    isOpen={this.state.showModal}
-                    className="photo-modal d-block"
-                >
-                    <PhotoModal photoId={this.props.photo._id} close={this.close}></PhotoModal>
-                </Modal>
+                <img onClick={() => this.photoModal.openModal()} src={this.props.photo.url} alt="photo" />
+                <PhotoModal onRef={ref => (this.photoModal = ref)} photoId={this.props.photo._id}></PhotoModal>
             </Fragment>
         )
     }
 }
 
-export default ProfilePhotoItem
+export default ProfilePhotoItem;

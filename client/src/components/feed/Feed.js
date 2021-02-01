@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { getPhotos, loadingCompleted } from '../../actions/photo/feedPhotosGET';
 import Spinner from '../layout/Spinner';
 import FeedPhotoItem from '../feedPhotoItem/FeedPhotoItem';
-import FeedPhotoItemNew from '../feedPhotoItem/FeedPhotoItemNew';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const mapStateToProps = (state) => ({
@@ -46,7 +45,7 @@ export class Feed extends React.Component {
 
             for (let i = 0; i < initialPhotosCount; i++) {
                 initialPhotos.push(
-                    <FeedPhotoItemNew photo={photos[i]} key={photos[i].imageName} />
+                    <FeedPhotoItem photo={photos[i]} key={photos[i].imageName} />
                 );
             }
             this.setState({
@@ -62,7 +61,7 @@ export class Feed extends React.Component {
             setTimeout(() => {
                 this.setState({
                     items: this.state.items.concat(
-                        <FeedPhotoItemNew
+                        <FeedPhotoItem
                             photo={photos[this.state.next]}
                             key={photos[this.state.next].imageName}
                         />

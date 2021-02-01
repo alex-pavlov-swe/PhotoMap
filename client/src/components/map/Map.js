@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
@@ -7,10 +7,10 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
 import { currentPhotoClose } from '../../actions/photo/currentPhotoClose';
+import { getPhotoById } from '../../actions/photo/currentPhotoGET';
 import { mapboxConfig } from '../../firebase/config';
 import PhotosPreview from './PhotosPreview';
-import Modal from 'react-modal';
-import PhotoModal from '../../modals/PhotoModal';
+import EventEmitter from '../../utils/events';
 
 const Map = ({
     mapState: { photosOverview, loading },
@@ -18,48 +18,29 @@ const Map = ({
     updatePhotoMongo,
     fetchPhotosOverview,
     currentPhotoClose,
+    getPhotoById,
 }) => {
-    var currentPosition = [0, 0];
+    var currentPosition = [-122.7, 49.2];
     var currentZoom = 3;
-
-    if (!photo) {
-        currentPosition = [-122.7, 49.2];
-        currentZoom = 3;
-    } else {
-        currentPosition = [photo.lngLat.lng, photo.lngLat.lat];
-        currentZoom = 12;
-    }
 
     var map;
     var markers = [];
 
+    const [photoId, setPhotoId] = useState(null);
+    //const [position, setPosition] = useState([[-122.7, 49.2]]);
+    const [zoom, setZoom] = useState(3);
+
     useEffect(() => {
         initMap();
+
+        EventEmitter.addEventListener("PHOTO_ON_MAP_CLICKED", () => {
+            if (photo) {
+                currentPosition = [photo.lngLat.lng, photo.lngLat.lat];
+                currentZoom = 12;
+                //currentPhotoClose();
+            }
+        });
     }, []);
-
-    const [showModal, setShowModal] = useState(false);
-    const [photoId, setPhotoId] = useState(null);
-
-    const openModal = (id) => {
-        setPhotoId(id);
-        setShowModal(true);
-        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
-        for (let i = 0; i < itemsToHide.length; i++) {
-            itemsToHide[i].style.display = 'none';
-        }
-    }
-
-    const closeModal = () => {
-        if (photo) {
-            initMap();
-            currentPhotoClose();
-        }
-        setShowModal(false);
-        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
-        for (let i = 0; i < itemsToHide.length; i++) {
-            itemsToHide[i].style.display = 'block';
-        }
-    }
 
     const showAllMarkers = function () {
         photosOverview.forEach((photo) => {
@@ -113,14 +94,12 @@ const Map = ({
             .setLngLat(lngLat)
             .setPopup(popup);
 
-        newMarker.getElement().addEventListener("click", () => {
-            //newMarker.togglePopup();
+        newMarker.getElement()?.addEventListener("click", () => {
             setTimeout(() => {
-                if (popup.getElement()) {
-                    popup.getElement().addEventListener("click", () => {
-                        openModal(photoId);
-                    })
-                }
+                popup.getElement()?.addEventListener("click", () => {
+                    EventEmitter.emit("PHOTO_MARKER_CLICKED");
+                    getPhotoById(photoId);
+                });
             }, 300);
         });
 
@@ -162,7 +141,7 @@ const Map = ({
     const fetchPhotos = (center, zoom) => {
         fetchPhotosOverview(map.getBounds())
             .then(function (res) {
-                res.data.forEach((photo) => {
+                res?.data.forEach((photo) => {
                     showMarker(photo.lngLat, photo.url, photo._id);
                 });
             });
@@ -172,12 +151,6 @@ const Map = ({
         <div className="mapWrapper">
             <div id="mapViewContainer" />
             {window.innerWidth > 600 ? (<PhotosPreview />) : null}
-            <Modal
-                isOpen={showModal}
-                className="photo-modal d-block"
-            >
-                <PhotoModal photoId={photoId} close={closeModal}></PhotoModal>
-            </Modal>
         </div>
     );
 };
@@ -188,6 +161,7 @@ Map.propTypes = {
     updatePhotoMongo: PropTypes.func.isRequired,
     fetchPhotosOverview: PropTypes.func.isRequired,
     currentPhotoClose: PropTypes.func.isRequired,
+    getPhotoById: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -199,4 +173,5 @@ export default connect(mapStateToProps, {
     updatePhotoMongo,
     fetchPhotosOverview,
     currentPhotoClose,
+    getPhotoById,
 })(Map);

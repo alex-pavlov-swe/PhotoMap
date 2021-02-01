@@ -1,4 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
+import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -10,9 +11,9 @@ import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import { updatePhotoMongo } from '../actions/photoUpload/photoUpdateMongo';
 import Spinner from '../components/layout/Spinner';
 import { NO_AVATAR } from '../constants/links';
-import Modal from 'react-modal';
 import { UpdatePhotoModal } from './UpdatePhotoModal';
 import { RED_LIKE } from '../constants/colors';
+import EventEmitter from '../utils/events';
 
 const mapStateToProps = (state) => ({
     currentPhoto: state.currentPhoto,
@@ -33,21 +34,20 @@ export class PhotoModal extends React.Component {
         super(props);
         this.closeModal = this.closeModal.bind(this);
         this.state = {
-            showUpdateModal: false
+            showModal: false,
+            showUpdateModal: false,
         };
         this.openUpdateModal = this.openUpdateModal.bind(this);
         this.closeUpdateModal = this.closeUpdateModal.bind(this);
     }
 
     componentDidMount() {
-        this.props.getPhotoById(this.props.photoId)
-            .then(() => {
-                this.props.currentPhotoProfileGET(this.props.currentPhoto && this.props.currentPhoto.photo ? this.props.currentPhoto.photo.user : null);
-            });
+        this.props.onRef(this);
     };
 
     componenWillUnmount() {
         this.props.currentPhotoClose();
+        this.props.onRef(undefined);
     }
 
     onDeletePhoto(e) {
@@ -62,13 +62,35 @@ export class PhotoModal extends React.Component {
         }
     };
 
+    openModal() {
+        this.props.getPhotoById(this.props.photoId)
+            .then(() => {
+                this.props.currentPhotoProfileGET(this.props.currentPhoto && this.props.currentPhoto.photo ? this.props.currentPhoto.photo.user : null);
+            });
+        this.setState({ showModal: true });
+        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
+        for (let i = 0; i < itemsToHide.length; i++) {
+            itemsToHide[i].style.display = 'none';
+        }
+    }
+
+    unhideMapControls() {
+        let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
+        for (let i = 0; i < itemsToHide.length; i++) {
+            itemsToHide[i].style.display = 'block';
+        }
+    }
+
     closeModal() {
-        this.props.close();
-        //this.props.currentPhotoClose();
+        this.setState({ showModal: false });
+        this.props.currentPhotoClose();
+        this.unhideMapControls();
     }
 
     focusOnPhoto() {
-        this.props.close();
+        this.setState({ showModal: false });
+        this.unhideMapControls();
+        EventEmitter.emit("PHOTO_ON_MAP_CLICKED");
     }
 
     openUpdateModal() {
@@ -89,12 +111,16 @@ export class PhotoModal extends React.Component {
     }
 
     render() {
+        const { showModal } = this.state;
         const { photo, profile, loading } = this.props.currentPhoto;
         const { user } = this.props.auth;
         return (
-            <Fragment>
+            <Modal
+                isOpen={showModal}
+                className="photo-modal d-block"
+            >
                 <br></br>
-                {loading ? (
+                {loading || photo == null ? (
                     <Spinner />
                 ) : (
                         <div className="photo-modal d-block full-screen-popup container-fluid" id="currentPhoto">
@@ -175,7 +201,7 @@ export class PhotoModal extends React.Component {
                         </div>
                     )
                 }
-            </Fragment>
+            </Modal>
         );
     }
 };
