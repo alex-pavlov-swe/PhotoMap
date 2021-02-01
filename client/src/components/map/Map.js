@@ -22,27 +22,29 @@ const Map = ({
 }) => {
     const [position, setPosition] = useState([-122.7, 49.2]);
     const [zoom, setZoom] = useState(3);
-    const [listener, setLstener] = useState(null);
+    const [listener, setListener] = useState(null);
 
     var map;
     var markers = [];
 
     useEffect(() => {
         initMap();
-
-        setLstener(EventEmitter.addEventListener("PHOTO_ON_MAP_CLICKED", () => {
-            console.log("!!!!!", photo);
+        console.log('______mounted');
+        setListener(EventEmitter.addEventListener("PHOTO_ON_MAP_CLICKED", () => {
+            console.log("________event_clicked", photo);
             if (photo) {
                 setPosition([photo.lngLat.lng, photo.lngLat.lat]);
                 setZoom(12);
                 setTimeout(() => {
                     currentPhotoClose();
                 }, 1000);
+                initMap();
             }
         }));
 
         return () => {
             // This executes on unmount
+            console.log('______UNmounted');
             EventEmitter.removeListener("PHOTO_ON_MAP_CLICKED", listener);
         }
     }, []);
