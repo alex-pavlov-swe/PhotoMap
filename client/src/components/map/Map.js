@@ -20,26 +20,31 @@ const Map = ({
     currentPhotoClose,
     getPhotoById,
 }) => {
-    var currentPosition = [-122.7, 49.2];
-    var currentZoom = 3;
+    const [position, setPosition] = useState([-122.7, 49.2]);
+    const [zoom, setZoom] = useState(3);
+    const [listener, setLstener] = useState(null);
 
     var map;
     var markers = [];
 
-    const [photoId, setPhotoId] = useState(null);
-    //const [position, setPosition] = useState([[-122.7, 49.2]]);
-    const [zoom, setZoom] = useState(3);
-
     useEffect(() => {
         initMap();
 
-        EventEmitter.addEventListener("PHOTO_ON_MAP_CLICKED", () => {
+        setLstener(EventEmitter.addEventListener("PHOTO_ON_MAP_CLICKED", () => {
+            console.log("!!!!!", photo);
             if (photo) {
-                currentPosition = [photo.lngLat.lng, photo.lngLat.lat];
-                currentZoom = 12;
-                //currentPhotoClose();
+                setPosition([photo.lngLat.lng, photo.lngLat.lat]);
+                setZoom(12);
+                setTimeout(() => {
+                    currentPhotoClose();
+                }, 1000);
             }
-        });
+        }));
+
+        return () => {
+            // This executes on unmount
+            EventEmitter.removeListener("PHOTO_ON_MAP_CLICKED", listener);
+        }
     }, []);
 
     const showAllMarkers = function () {
@@ -114,8 +119,8 @@ const Map = ({
         map = new mapboxgl.Map({
             container: document.getElementById('mapViewContainer'),
             style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
-            center: currentPosition, // starting position [lng, lat]
-            zoom: currentZoom, // starting zoom
+            center: position, // starting position [lng, lat]
+            zoom: zoom, // starting zoom
         });
 
         map.addControl(
@@ -130,8 +135,8 @@ const Map = ({
         map.addControl(nav, 'top-left');
 
         map.on('moveend', function () {
-            currentZoom = map.getZoom();
-            currentPosition = map.getCenter();
+            setZoom(map.getZoom());
+            setPosition(map.getCenter());
             fetchPhotos();
         });
 
