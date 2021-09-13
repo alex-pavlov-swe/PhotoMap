@@ -24,6 +24,7 @@ class EventEmitter {
     }
 
     emit(event, ...args) {
+        console.log("Event emitted");
         if (typeof this.events[event] === 'object') {
             this.events[event].forEach((listener) => {
                 try {

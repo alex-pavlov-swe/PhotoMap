@@ -19,11 +19,14 @@
     background-color: $COLOR_GREY_300;
     scroll-behavior: auto;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 90vh;
+    padding: 5px;
     img {
         border: 5px solid #eee;
-        margin: 10px;
         width: 180px;
+        margin-right: 25px;
+        margin-bottom: 5px;
         border-radius: 25px;
         box-shadow: 2px 2px 5px $COLOR_GREY_300;
     }

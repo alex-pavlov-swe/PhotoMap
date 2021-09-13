@@ -115,11 +115,14 @@
   background-color: #E0E0E0;
   scroll-behavior: auto;
   overflow-y: scroll;
-  height: 90vh; }
+  overflow-x: hidden;
+  height: 90vh;
+  padding: 5px; }
   .photos-preview img {
     border: 5px solid #eee;
-    margin: 10px;
     width: 180px;
+    margin-right: 25px;
+    margin-bottom: 5px;
     border-radius: 25px;
     box-shadow: 2px 2px 5px #E0E0E0; }
   .photos-preview img:hover {

@@ -6,47 +6,40 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { updatePhotoMongo } from '../../actions/photoUpload/photoUpdateMongo';
 import { fetchPhotosOverview } from '../../actions/map/fetchPhotosOverview';
-import { currentPhotoClose } from '../../actions/photo/currentPhotoClose';
-import { getPhotoById } from '../../actions/photo/currentPhotoGET';
+import {
+    getPhotoById,
+    currentPhotoClose,
+    showPhotoOnMapFinish,
+} from '../../actions/currentPhoto';
 import { mapboxConfig } from '../../firebase/config';
 import PhotosPreview from './PhotosPreview';
 import EventEmitter from '../../utils/events';
+import currentPhoto from '../../reducers/currentPhoto';
+
+const mapStateToProps = (state) => ({
+    mapState: state.mapState,
+    currentPhoto: state.currentPhoto,
+});
 
 const Map = ({
     mapState: { photosOverview, loading },
-    currentPhoto: { photo },
+    currentPhoto: { photo, showOnMap },
     updatePhotoMongo,
     fetchPhotosOverview,
     currentPhotoClose,
     getPhotoById,
+    showPhotoOnMap,
+    showPhotoOnMapFinish,
 }) => {
     const [position, setPosition] = useState([-122.7, 49.2]);
     const [zoom, setZoom] = useState(3);
-    const [listener, setListener] = useState(null);
 
     var map;
     var markers = [];
 
     useEffect(() => {
         initMap();
-        console.log('______mounted');
-        setListener(EventEmitter.addEventListener("PHOTO_ON_MAP_CLICKED", () => {
-            console.log("________event_clicked", photo);
-            if (photo) {
-                setPosition([photo.lngLat.lng, photo.lngLat.lat]);
-                setZoom(12);
-                setTimeout(() => {
-                    currentPhotoClose();
-                }, 1000);
-                initMap();
-            }
-        }));
-
-        return () => {
-            // This executes on unmount
-            console.log('______UNmounted');
-            EventEmitter.removeListener("PHOTO_ON_MAP_CLICKED", listener);
-        }
+        EventEmitter.addEventListener('PHOTOS_PREVIEW_ITEM_CLICKED', () => { console.log("PHOTOS_PREVIEW_ITEM_CLICKED") });
     }, []);
 
     const showAllMarkers = function () {
@@ -91,7 +84,7 @@ const Map = ({
             offset: popupOffsets,
             className: 'my-class',
             closeButton: false,
-            closeOnMove: true
+            closeOnMove: false
         })
             .setHTML(htmlPopup())
             .setMaxWidth('300px')
@@ -118,11 +111,16 @@ const Map = ({
     const initMap = function () {
         mapboxgl.accessToken = mapboxConfig.accessToken;
 
+        if (showOnMap == true && photo) {
+            setPosition(photo.lngLat);
+            setZoom(12);
+        }
+
         map = new mapboxgl.Map({
             container: document.getElementById('mapViewContainer'),
             style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
-            center: position, // starting position [lng, lat]
-            zoom: zoom, // starting zoom
+            center: showOnMap == true && photo ? photo.lngLat : position, // starting position
+            zoom: showOnMap == true ? 12 : 3, // starting zoom
         });
 
         map.addControl(
@@ -142,7 +140,8 @@ const Map = ({
             fetchPhotos();
         });
 
-        fetchPhotos()
+        fetchPhotos();
+        setTimeout(() => showPhotoOnMapFinish(), 1000);
     };
 
     const fetchPhotos = (center, zoom) => {
@@ -169,16 +168,13 @@ Map.propTypes = {
     fetchPhotosOverview: PropTypes.func.isRequired,
     currentPhotoClose: PropTypes.func.isRequired,
     getPhotoById: PropTypes.func.isRequired,
+    showPhotoOnMapFinish: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-    mapState: state.mapState,
-    currentPhoto: state.currentPhoto,
-});
 
 export default connect(mapStateToProps, {
     updatePhotoMongo,
     fetchPhotosOverview,
     currentPhotoClose,
     getPhotoById,
+    showPhotoOnMapFinish,
 })(Map);

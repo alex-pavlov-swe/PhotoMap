@@ -14,7 +14,7 @@ export const fetchPhotosOverview = (bounds) => async (dispatch) => {
     const body = JSON.stringify({ bounds });
 
     try {
-        const res = await axios.post(`/api/map/photos/overview/web`, body, config);
+        const res = await axios.post(`/api/map/photos/overview`, body, config);
 
         dispatch({
             type: MAP_PHOTOS_OVERVIEW_LOADED,

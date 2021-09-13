@@ -3,30 +3,32 @@ import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPhotoById } from '../actions/photo/currentPhotoGET';
-import { currentPhotoProfileGET } from '../actions/photo/currentPhotoProfileGET';
-import { currentPhotoClose } from '../actions/photo/currentPhotoClose';
+import { getPhotoById } from '../actions/currentPhoto';
+import { currentPhotoProfileGET } from '../actions/currentPhoto';
+import { currentPhotoClose } from '../actions/currentPhoto';
 import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import { updatePhotoMongo } from '../actions/photoUpload/photoUpdateMongo';
+import { showPhotoOnMap, showPhotoOnMapFinish, } from '../actions/currentPhoto';
 import Spinner from '../components/layout/Spinner';
 import { NO_AVATAR } from '../constants/links';
 import { UpdatePhotoModal } from './UpdatePhotoModal';
 import { RED_LIKE } from '../constants/colors';
-import EventEmitter from '../utils/events';
 
 const mapStateToProps = (state) => ({
+    auth: state.auth,
     currentPhoto: state.currentPhoto,
-    auth: state.auth
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getPhotoById: (id) => dispatch(getPhotoById(id)),
     currentPhotoClose: () => dispatch(currentPhotoClose()),
+    currentPhotoProfileGET: (id) => dispatch(currentPhotoProfileGET(id)),
     deletePhotoFromFirebase: (user, imageName) => dispatch(deletePhotoFromFirebase(user, imageName)),
     deletePhotoFromMongo: (id) => dispatch(deletePhotoFromMongo(id)),
+    getPhotoById: (id) => dispatch(getPhotoById(id)),
+    showPhotoOnMap: () => dispatch(showPhotoOnMap()),
+    showPhotoOnMapFinish: () => dispatch(showPhotoOnMapFinish()),
     updatePhotoMongo: (data) => dispatch(updatePhotoMongo(data)),
-    currentPhotoProfileGET: (id) => dispatch(currentPhotoProfileGET(id))
 });
 
 export class PhotoModal extends React.Component {
@@ -62,12 +64,17 @@ export class PhotoModal extends React.Component {
         }
     };
 
-    openModal() {
+    openModal(onClose = null) {
         this.props.getPhotoById(this.props.photoId)
             .then(() => {
                 this.props.currentPhotoProfileGET(this.props.currentPhoto && this.props.currentPhoto.photo ? this.props.currentPhoto.photo.user : null);
             });
         this.setState({ showModal: true });
+        this.onClose = onClose;
+        this.hideMapControls();
+    }
+
+    hideMapControls() {
         let itemsToHide = document.getElementsByClassName('mapboxgl-ctrl');
         for (let i = 0; i < itemsToHide.length; i++) {
             itemsToHide[i].style.display = 'none';
@@ -83,14 +90,16 @@ export class PhotoModal extends React.Component {
 
     closeModal() {
         this.setState({ showModal: false });
-        this.props.currentPhotoClose();
         this.unhideMapControls();
+        this.props.currentPhotoClose();
     }
 
     focusOnPhoto() {
+        if (this.onClose) { this.onClose(); }
         this.setState({ showModal: false });
         this.unhideMapControls();
-        EventEmitter.emit("PHOTO_ON_MAP_CLICKED");
+        this.props.showPhotoOnMap();
+        setTimeout(() => this.props.showPhotoOnMapFinish(), 2000);
     }
 
     openUpdateModal() {
@@ -207,14 +216,15 @@ export class PhotoModal extends React.Component {
 };
 
 PhotoModal.propTypes = {
-    getPhotoById: PropTypes.func.isRequired,
+    currentPhoto: PropTypes.object.isRequired,
     currentPhotoProfileGET: PropTypes.func.isRequired,
     currentPhotoClose: PropTypes.func.isRequired,
     deletePhotoFromFirebase: PropTypes.func.isRequired,
     deletePhotoFromMongo: PropTypes.func.isRequired,
-    updatePhotoMongo: PropTypes.func.isRequired,
     getPhotoById: PropTypes.func.isRequired,
-    currentPhoto: PropTypes.object.isRequired,
+    showPhotoOnMap: PropTypes.func.isRequired,
+    showPhotoOnMapFinish: PropTypes.func.isRequired,
+    updatePhotoMongo: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhotoModal);

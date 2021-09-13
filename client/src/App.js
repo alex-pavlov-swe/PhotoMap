@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import Navbar from './components/layout/Navbar';
+// import Navbar from './components/layout/Navbar';
 import Home from './components/layout/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -24,6 +24,7 @@ import Feed from './components/feed/Feed';
 import FeedCl from './components/feed/FeedCl';
 import UpdatePhoto from './components/photo/UpdatePhoto';
 import Auth from './components/auth/Auth';
+import Navbar from './components/layout/Navbar';
 
 // Photomap MAP
 import Map from './components/map/Map';

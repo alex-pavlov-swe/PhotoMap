@@ -9,7 +9,9 @@ import {
     MONGO_PHOTO_DELETING_ERROR,
     FIREBASE_PHOTO_DELETED,
     FIREBASE_PHOTO_DELETING_ERROR,
-    CURRENT_PHOTO_CLOSED
+    CURRENT_PHOTO_CLOSED,
+    CURRENT_PHOTO_SHOW_ON_MAP,
+    CURRENT_PHOTO_SHOW_ON_MAP_FINISH,
 } from '../actions/types';
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
     profile: null,
     loading: true,
     error: {},
+    showOnMap: false,
 };
 
 export default function (state = initialState, action) {
@@ -35,7 +38,7 @@ export default function (state = initialState, action) {
                 ...state,
                 profile: payload,
                 loading: false,
-            }
+            };
         case CURRENT_PHOTO_FETCHING_ERROR:
         case MONGO_PHOTO_DELETING_ERROR:
         case FIREBASE_PHOTO_DELETING_ERROR:
@@ -57,11 +60,22 @@ export default function (state = initialState, action) {
                 ...state,
                 photo: null,
                 loading: true,
+                showOnMap: false,
             };
         case FIREBASE_PHOTO_DELETED:
             return {
                 ...state,
                 loading: false,
+            };
+        case CURRENT_PHOTO_SHOW_ON_MAP:
+            return {
+                ...state,
+                showOnMap: true,
+            };
+        case CURRENT_PHOTO_SHOW_ON_MAP_FINISH:
+            return {
+                ...state,
+                showOnMap: false,
             };
         default:
             return state;

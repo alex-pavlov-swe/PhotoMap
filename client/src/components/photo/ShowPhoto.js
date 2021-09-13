@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPhotoById } from '../../actions/photo/currentPhotoGET';
+import { getPhotoById } from '../../actions/currentPhoto';
 import { deletePhotoFromFirebase } from '../../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../../actions/photoUpload/photoDeleteMongo';
 import Spinner from '../layout/Spinner';

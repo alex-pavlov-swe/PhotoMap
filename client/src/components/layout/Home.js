@@ -1,8 +1,12 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import Footer from './Footer';
+// import PropTypes from 'prop-types';
+// import Footer from './Footer';
+
+
+const PropTypes = require('prop-types');
+const Footer = require('./Footer');
 
 function Home({ auth: { isAuthenticated, loading } }) {
     return (

@@ -6,7 +6,7 @@ import Spinner from '../layout/Spinner';
 import PhotosPreviewItem from './PhotosPreviewItem';
 import PhotoModal from '../../modals/PhotoModal';
 import EventEmitter from '../../utils/events';
-import { getPhotoById } from '../../actions/photo/currentPhotoGET';
+import { getPhotoById } from '../../actions/currentPhoto';
 
 export class PhotosPreview extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export class PhotosPreview extends React.Component {
 
     openModal(photo) {
         this.props.getPhotoById(photo._id);
-        this.photoModal.openModal();
+        this.photoModal.openModal(this.props?.onPhotoModalClose);
     }
 
     render() {

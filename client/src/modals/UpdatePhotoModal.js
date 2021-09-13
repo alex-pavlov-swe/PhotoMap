@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPhotoById } from '../actions/photo/currentPhotoGET';
+import { getPhotoById } from '../actions/currentPhoto';
 import { deletePhotoFromFirebase } from '../actions/photoUpload/photoDeleteFirebase';
 import { deletePhotoFromMongo } from '../actions/photoUpload/photoDeleteMongo';
 import { updatePhotoMongo } from '../actions/photoUpload/photoUpdateMongo';
