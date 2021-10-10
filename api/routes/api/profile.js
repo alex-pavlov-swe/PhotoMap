@@ -74,6 +74,8 @@ router.post('/', [auth], async (req, res) => {
     youtube,
     web,
     avatar,
+    wallet,
+    balance
   } = req.body;
 
   // Build Profile object
@@ -89,6 +91,10 @@ router.post('/', [auth], async (req, res) => {
   profileFields.social.facebook = facebook ? facebook : '';
   profileFields.social.instagram = instagram ? instagram : '';
   profileFields.social.youtube = youtube ? youtube : '';
+
+  // Build token object
+  profileFields.wallet = wallet ? wallet : '';
+  profileFields.balance = balance ? balance : 0;
 
   try {
     let profile = await Profile.findOne({ user: req.user.id });

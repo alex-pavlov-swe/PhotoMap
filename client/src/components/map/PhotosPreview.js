@@ -8,13 +8,24 @@ import PhotoModal from '../../modals/PhotoModal';
 import EventEmitter from '../../utils/events';
 import { getPhotoById } from '../../actions/currentPhoto';
 
+const PHOTOS_PER_PAGE = 5;
+
 export class PhotosPreview extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            pages: 1,
+        };
     }
 
     componentDidMount() {
+        const { photosOverview } = this.props;
+
         EventEmitter.addEventListener("PHOTO_MARKER_CLICKED", () => { this.photoModal.openModal(); });
+
+        this.setState({
+            pages: Math.round(photosOverview?.length / PHOTOS_PER_PAGE),
+        });
     }
 
     openModal(photo) {
@@ -24,6 +35,8 @@ export class PhotosPreview extends React.Component {
 
     render() {
         const { photosOverview, loading } = this.props;
+        const { pages } = this.state;
+
         if (loading) {
             return (<Spinner />)
         } else if (this.props.mapState.photosOverview && this.props.mapState.photosOverview.length > 0) {
@@ -37,6 +50,9 @@ export class PhotosPreview extends React.Component {
                                 onClick={() => this.openModal(photo)}
                             />
                         ))}
+                        {pages > 1 ? (
+                            <div> Page 1 </div>
+                        ) : null}
                     </div>
                     <PhotoModal onRef={ref => (this.photoModal = ref)}></PhotoModal>
                 </React.Fragment>

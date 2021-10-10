@@ -33,6 +33,8 @@ const ProfileSchema = new mongoose.Schema({
       ref: 'photo',
     },
   ],
+  wallet: { type: String },
+  balance: { type: Number }
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

@@ -19,6 +19,9 @@ function Home({ auth: { isAuthenticated, loading } }) {
                             <h4>
                                 Find the exact locations where amazing photos have been taken
 							</h4>
+                            <h4>
+                                Earn crypto for posting your locations
+                            </h4>
                             <Link className="btn btn-light mt-3" to="/map">
                                 Explore
 							</Link>

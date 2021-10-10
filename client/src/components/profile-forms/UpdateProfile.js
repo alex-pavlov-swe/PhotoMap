@@ -26,6 +26,8 @@ const UpdateProfile = ({
         instagram: profile ? profile.social.instagram : '',
         web: profile ? profile.social.web : '',
         avatar: profile ? profile.avatar : '',
+        wallet: profile ? profile.wallet : '',
+        balance: profile ? profile.balance : 0,
     });
 
     //const [displaySocialInputs, toggleSocialInputs] = useState(false);
@@ -39,6 +41,8 @@ const UpdateProfile = ({
         youtube,
         web,
         avatar,
+        wallet,
+        balance
     } = formData;
 
     const onChange = (e) =>
@@ -160,6 +164,27 @@ const UpdateProfile = ({
                                         onChange={(e) => onChange(e)}
                                     />
                                     <small>A link to your instagram account if you have one</small>
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        name="wallet"
+                                        placeholder="Solana wallet public address"
+                                        value={wallet}
+                                        onChange={(e) => onChange(e)}
+                                    />
+                                    <small>Your Solana wallet public address</small>
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        name="balance"
+                                        placeholder="0"
+                                        value={balance}
+                                        onChange={(e) => onChange(e)}
+                                        readOnly={true}
+                                    />
+                                    <small>Your PM token balance</small>
                                 </div>
                                 <button type="submit" className="btn btn-info mt-2 mr-2">
                                     Save Changes
