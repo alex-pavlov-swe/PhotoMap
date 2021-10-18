@@ -128,6 +128,18 @@
   .photos-preview img:hover {
     cursor: pointer;
     box-shadow: 0 0 5px 5px rgba(0, 140, 186, 0.5); }
+  .photos-preview .change-page-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    padding-right: 15px; }
+    .photos-preview .change-page-wrapper i {
+      color: #BDBDBD; }
+    .photos-preview .change-page-wrapper i.active {
+      color: #424242; }
+      .photos-preview .change-page-wrapper i.active:hover {
+        cursor: pointer; }
 
 nav {
   margin: 0px;

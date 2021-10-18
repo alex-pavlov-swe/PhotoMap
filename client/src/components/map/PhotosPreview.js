@@ -14,7 +14,7 @@ export class PhotosPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pages: 1,
+            currentPage: 1
         };
     }
 
@@ -22,10 +22,6 @@ export class PhotosPreview extends React.Component {
         const { photosOverview } = this.props;
 
         EventEmitter.addEventListener("PHOTO_MARKER_CLICKED", () => { this.photoModal.openModal(); });
-
-        this.setState({
-            pages: Math.round(photosOverview?.length / PHOTOS_PER_PAGE),
-        });
     }
 
     openModal(photo) {
@@ -33,9 +29,27 @@ export class PhotosPreview extends React.Component {
         this.photoModal.openModal(this.props?.onPhotoModalClose);
     }
 
+    firstPhotoToShow() {
+        const { currentPage } = this.state;
+        return (currentPage - 1) * PHOTOS_PER_PAGE;
+    }
+
+    pageRight() {
+        this.setState({
+            currentPage: this.state.currentPage + 1
+        });
+    }
+
+    pageLeft() {
+        this.setState({
+            currentPage: this.state.currentPage - 1
+        });
+    }
+
     render() {
         const { photosOverview, loading } = this.props;
-        const { pages } = this.state;
+        const { currentPage } = this.state;
+        const pages = Math.ceil(photosOverview?.length / PHOTOS_PER_PAGE)
 
         if (loading) {
             return (<Spinner />)
@@ -43,7 +57,7 @@ export class PhotosPreview extends React.Component {
             return (
                 <React.Fragment>
                     <div className="photos-preview" onClick={this.open}>
-                        {photosOverview.map((photo) => (
+                        {photosOverview.slice(this.firstPhotoToShow(), this.firstPhotoToShow() + PHOTOS_PER_PAGE).map((photo) => (
                             <PhotosPreviewItem
                                 key={photo._id}
                                 photo={photo}
@@ -51,7 +65,17 @@ export class PhotosPreview extends React.Component {
                             />
                         ))}
                         {pages > 1 ? (
-                            <div> Page 1 </div>
+                            <div className="change-page-wrapper">
+                                <i
+                                    className={`fas fa-2x fa-backward ${currentPage > 1 ? 'active' : ''}`}
+                                    onClick={() => currentPage > 1 ? this.pageLeft(): null}
+                                ></i>
+                                Page {currentPage} of {pages}
+                                <i
+                                    className={`fas fa-2x fa-forward ${currentPage < pages ? 'active' : ''}`}
+                                    onClick={() => currentPage < pages ? this.pageRight(): null}
+                                ></i>
+                            </div>
                         ) : null}
                     </div>
                     <PhotoModal onRef={ref => (this.photoModal = ref)}></PhotoModal>

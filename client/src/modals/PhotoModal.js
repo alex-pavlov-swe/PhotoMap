@@ -99,7 +99,7 @@ export class PhotoModal extends React.Component {
         this.setState({ showModal: false });
         this.unhideMapControls();
         this.props.showPhotoOnMap();
-        setTimeout(() => this.props.showPhotoOnMapFinish(), 2000);
+        // setTimeout(() => this.props.showPhotoOnMapFinish(), 2000);
     }
 
     openUpdateModal() {
@@ -190,9 +190,11 @@ export class PhotoModal extends React.Component {
                                     {photo.tips ? (
                                         <p><strong>Photo Tips</strong> - {photo.tips}</p>
                                     ) : null}
-                                    <div className="mapLink text-center align-middle">
-                                        <Link to="/map" onClick={() => this.focusOnPhoto()}>This photo on the map</Link>
-                                    </div>
+                                    {photo.lngLat ? (
+                                        <div className="mapLink text-center align-middle">
+                                            <Link to="/map" onClick={() => this.focusOnPhoto()}>This photo on the map</Link>
+                                        </div>
+                                    ) : null }
                                     <br />
                                     <br />
                                     <br />

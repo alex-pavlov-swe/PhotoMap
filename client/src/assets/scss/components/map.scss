@@ -34,4 +34,23 @@
         cursor: pointer;
         box-shadow: 0 0 5px 5px rgba(0, 140, 186, 0.5);
     }
+    .change-page-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        padding-right: 15px;
+
+        i {
+            color: $COLOR_GREY_400;
+        }
+
+        i.active {
+            color: $COLOR_GREY_800;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 }

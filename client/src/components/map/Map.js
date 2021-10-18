@@ -40,7 +40,7 @@ const Map = ({
     useEffect(() => {
         initMap();
         EventEmitter.addEventListener('PHOTOS_PREVIEW_ITEM_CLICKED', () => { console.log("PHOTOS_PREVIEW_ITEM_CLICKED") });
-    }, []);
+    }, [showOnMap]);
 
     const showAllMarkers = function () {
         photosOverview.forEach((photo) => {
@@ -141,7 +141,7 @@ const Map = ({
         });
 
         fetchPhotos();
-        setTimeout(() => showPhotoOnMapFinish(), 1000);
+        // setTimeout(() => showPhotoOnMapFinish(), 1000);
     };
 
     const fetchPhotos = (center, zoom) => {
