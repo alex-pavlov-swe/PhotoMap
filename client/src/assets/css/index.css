@@ -76,21 +76,40 @@
 
 #homeImage {
   color: white;
-  background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page2.jpg?alt=media&token=e93707c5-4ac6-4feb-91aa-f7758171bf6a");
+  background-color: black;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page3.jpg?alt=media&token=470113fa-b4f9-489b-8951-e5376325bb92");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  background-position: top;
+  height: calc(100vh - 80px);
   width: 100%;
-  margin-top: -80px;
   display: flex;
-  align-items: center; }
+  align-items: flex-end;
+  padding-bottom: 65px; }
   #homeImage span h1 {
-    font-size: 4rem; }
-  #homeImage span .btn {
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 12px; }
+    font-size: 3.2rem;
+    font-weight: 600; }
+  #homeImage span .button-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    #homeImage span .button-wrapper span {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-right: 20px; }
+    #homeImage span .button-wrapper .btn {
+      font-weight: bold;
+      font-size: 1.3rem;
+      padding: 8px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-radius: 25px;
+      margin: 10px; }
   @media (max-width: 576px) {
     #homeImage {
       background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page.jpg?alt=media&token=3dc44167-b4f4-4e04-8970-b96aaacf460f");
@@ -148,11 +167,11 @@ nav {
   font-weight: bold;
   font-size: 1.1rem;
   height: 80px;
-  border-bottom: 1px solid white; }
+  background-color: black; }
   nav .navbar-brand {
     color: white;
     font-weight: bold;
-    font-size: 1.5rem; }
+    font-size: 1.8rem; }
   nav ul {
     position: relative; }
     nav ul form {
@@ -198,12 +217,31 @@ nav {
     z-index: 20; } }
 
 footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   color: white;
   font-size: 1.35rem;
-  margin: 0; }
+  margin: 0;
+  opacity: 75%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; }
+  footer .social-wrapper {
+    margin: 0;
+    margin-right: 30px; }
+  footer i {
+    margin: 8px;
+    margin-right: 15px;
+    opacity: 65%; }
+    footer i:hover {
+      opacity: 150%;
+      cursor: pointer; }
+
+.relative {
+  position: relative; }
+
+.absolute {
+  position: absolute; }
 
 #update-profile-container input,
 #update-profile-container textarea {
@@ -259,6 +297,29 @@ Map {
   z-index: -1;
   margin: 0;
   padding: 0; }
+
+.about-wrapper {
+  margin: 20px;
+  margin-bottom: 35px;
+  margin-left: 50px;
+  margin-right: 50px;
+  color: #3B454E;
+  font-family: gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .about-wrapper h1 {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E0E0E0; }
+  .about-wrapper .team-wrapper {
+    display: flex;
+    flex-direction: row; }
+    .about-wrapper .team-wrapper .team-photo img {
+      max-width: 150px;
+      margin: 0;
+      margin-right: 25px; }
+      .about-wrapper .team-wrapper .team-photo img:hover {
+        cursor: auto; }
+    .about-wrapper .team-wrapper i {
+      margin-right: 5px; }
 
 .d-block {
   display: block !important; }

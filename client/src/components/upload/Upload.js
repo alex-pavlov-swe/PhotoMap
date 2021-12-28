@@ -57,7 +57,7 @@ const Upload = ({
 					</div>
 				</div>
 			</div>
-			<Footer />
+			<Footer positionClass={'absolute'}/>
 		</Fragment>
 	);
 };

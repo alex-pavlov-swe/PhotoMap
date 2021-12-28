@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 // import Navbar from './components/layout/Navbar';
 import Home from './components/layout/Home';
+import HomeMobile from './components/layout/HomeMobile';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
@@ -25,10 +26,13 @@ import FeedCl from './components/feed/FeedCl';
 import UpdatePhoto from './components/photo/UpdatePhoto';
 import Auth from './components/auth/Auth';
 import Navbar from './components/layout/Navbar';
+import AboutPage from './components/about/AboutPage';
 
 // Photomap MAP
 import Map from './components/map/Map';
 import MapAddPhoto from './components/map/MapAddPhoto';
+
+import useWindowDimensions from './components/helpers/hooks';
 
 function App() {
     useEffect(() => {
@@ -37,7 +41,9 @@ function App() {
         });
     }, []);
 
-    return (
+    const { windowWidth } = useWindowDimensions();
+
+    return windowWidth > 575 ? (
         <Provider store={store}>
             <Router>
                 <Navbar />
@@ -58,12 +64,20 @@ function App() {
                     <PrivateRoute exact path="/upload" component={Upload} />
                     <PrivateRoute exact path="/uploadDetails" component={UploadDetails} />
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/about" component={AboutPage} />
                     <PrivateRoute
                         exact
                         path="/update_profile"
                         component={UpdateProfile}
                     />
                 </Switch>
+            </Router>
+        </Provider>
+    ) : (
+        <Provider store={store}>
+            <Router>
+                <Navbar />
+                <Route exact path="/" component={HomeMobile} />
             </Router>
         </Provider>
     );

@@ -21,11 +21,16 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
                     Map
                     </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
                 <Link className="nav-link" to="/feed" onClick={() => closeMobileMenu()}>
                     What's New
                     </Link>
-            </li>
+            </li> */}
+            {/* <li className="nav-item">
+                <Link className="nav-link" to="/about" onClick={() => closeMobileMenu()}>
+                    About
+                    </Link>
+            </li> */}
             <li className="nav-item mr-4">
                 <Link className="nav-link" onClick={() => handleLogout()} to="/">
                     Logout
@@ -47,20 +52,20 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, profile: { profile }
                     Map
                     </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
                 <Link className="nav-link" to="/feed" onClick={() => closeMobileMenu()}>
                     What's New
+                </Link>
+            </li> */}
+            {/* <li className="nav-item">
+                <Link className="nav-link" to="/about" onClick={() => closeMobileMenu()}>
+                    About
                     </Link>
-            </li>
-            <li className="nav-item">
-                <Link className="nav-link" to="/register" onClick={() => closeMobileMenu()}>
-                    Register
-                    </Link>
-            </li>
+            </li> */}
             <li className="nav-item mr-4">
                 <Link className="nav-link" to="/login" onClick={() => closeMobileMenu()}>
-                    Login
-                    </Link>
+                    Sing In
+                </Link>
             </li>
         </Fragment>
     );

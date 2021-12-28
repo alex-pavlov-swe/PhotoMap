@@ -113,9 +113,10 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
                                     }
                                 />
                             </div>
-                            <button className="btn btn-primary mt-1 mb-4" type="submit">
+                            <button className="btn btn-primary mt-1 mb-4" type="submit" disabled={true}>
                                 {lang === 'rus' ? 'Зарегистрироваться' : 'Sign up'}
                             </button>
+                            <p>Sign up temporary unavailable</p>
                             <p>
                                 {lang === 'rus'
                                     ? 'Уже есть аккаунт?'

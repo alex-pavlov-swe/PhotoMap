@@ -1,20 +1,39 @@
 #homeImage {
   color: white;
-  background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page2.jpg?alt=media&token=e93707c5-4ac6-4feb-91aa-f7758171bf6a");
+  background-color: black;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page3.jpg?alt=media&token=470113fa-b4f9-489b-8951-e5376325bb92");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  background-position: top;
+  height: calc(100vh - 80px);
   width: 100%;
-  margin-top: -80px;
   display: flex;
-  align-items: center; }
+  align-items: flex-end;
+  padding-bottom: 65px; }
   #homeImage span h1 {
-    font-size: 4rem; }
-  #homeImage span .btn {
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 12px; }
+    font-size: 3.2rem;
+    font-weight: 600; }
+  #homeImage span .button-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    #homeImage span .button-wrapper span {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-right: 20px; }
+    #homeImage span .button-wrapper .btn {
+      font-weight: bold;
+      font-size: 1.3rem;
+      padding: 8px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-radius: 25px;
+      margin: 10px; }
   @media (max-width: 576px) {
     #homeImage {
       background: url("https://firebasestorage.googleapis.com/v0/b/photomap-9caa6.appspot.com/o/img_main%2Fhome_page.jpg?alt=media&token=3dc44167-b4f4-4e04-8970-b96aaacf460f");

@@ -13,22 +13,7 @@ function Home({ auth: { isAuthenticated, loading } }) {
             <div id="homeImage">
                 <div className="container-fluid text-center">
                     <div className="row justify-content-center">
-                        <span>
-                            <h1>
-                                Find locations where amazing photos have been taken
-							</h1>
-                            <div className="button-wrapper">
-                                <span>
-                                    Earn rewards for posting your photos
-                                </span>
-                                <Link className="btn btn-light lift" to="/map">
-                                    Explore the map
-                                </Link>
-                                <Link className="btn btn-light" to="/">
-                                    Read the docs
-                                </Link>
-                            </div>
-                        </span>
+                        <h3>Currently unavailable on mobile</h3>
                     </div>
                 </div>
             </div>
