@@ -222,7 +222,7 @@ footer {
   color: white;
   font-size: 1.35rem;
   margin: 0;
-  opacity: 75%;
+  opacity: 0.75;
   display: flex;
   flex-direction: row;
   justify-content: flex-end; }
@@ -387,7 +387,7 @@ Map {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* opacity: 55%; */
+  opacity: 0.5;
   font-size: 20px;
   color: black;
   font-weight: 800; }

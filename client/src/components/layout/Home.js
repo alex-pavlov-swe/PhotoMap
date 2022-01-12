@@ -19,7 +19,7 @@ function Home({ auth: { isAuthenticated, loading } }) {
 							</h1>
                             <div className="button-wrapper">
                                 <span>
-                                    Earn rewards for posting your photos
+                                    {/* Earn rewards for posting your photos */}
                                 </span>
                                 <Link className="btn btn-light lift" to="/map">
                                     Explore the map
